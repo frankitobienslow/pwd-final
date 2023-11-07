@@ -60,15 +60,6 @@ CREATE TABLE `compraestadotipo` (
   `cetdetalle` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `compraestadotipo`
---
-
-INSERT INTO `compraestadotipo` (`idcompraestadotipo`, `cetdescripcion`, `cetdetalle`) VALUES
-(1, 'iniciada', 'cuando el usuario : cliente inicia la compra de uno o mas productos del carrito'),
-(2, 'aceptada', 'cuando el usuario administrador da ingreso a uno de las compras en estado = 1 '),
-(3, 'enviada', 'cuando el usuario administrador envia a uno de las compras en estado =2 '),
-(4, 'cancelada', 'un usuario administrador podra cancelar una compra en cualquier estado y un usuario cliente solo en estado=1 ');
 
 -- --------------------------------------------------------
 
@@ -97,6 +88,7 @@ CREATE TABLE `menu` (
   `medeshabilitado` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha en la que el menu fue deshabilitado por ultima vez'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `menu`
 --
@@ -114,6 +106,8 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (63, 'eliminar', './menu/index.php', 6, NULL);
 
 -- --------------------------------------------------------
+=======
+>>>>>>> cfb6ab89634496c956dd803e5e9346e6fcdb7e83
 
 --
 -- Estructura de tabla para la tabla `menurol`
@@ -343,6 +337,93 @@ ALTER TABLE `usuariorol`
   ADD CONSTRAINT `fkmovimiento_1` FOREIGN KEY (`idrol`) REFERENCES `rol` (`idrol`) ON UPDATE CASCADE,
   ADD CONSTRAINT `usuariorol_ibfk_2` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON UPDATE CASCADE;
 COMMIT;
+--
+-- Volcado de datos a cada tabla 
+--
+-- Insertar datos en la tabla 'usuario'
+INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`) VALUES
+(1, 'pepe', '11111', 'usuario1@example.com'),
+(2, 'lolo', '22222', 'usuario2@example.com'),
+(3, 'pedro', '33333', 'usuario3@example.com'),
+(4, 'rulo', '44444', 'usuario4@example.com'),
+(5, 'toto', '55555', 'usuario5@example.com');
+
+-- Insertar datos en la tabla 'rol'
+INSERT INTO `rol` (`idrol`, `rodescripcion`) VALUES
+(1, 'admin'),
+(2, 'deposito'),
+(3, 'cliente'),
+
+-- Insertar datos en la tabla 'usuariorol' para relacionar usuarios y roles
+INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 1),
+(2, 2),
+(3, 3),
+(4, 3),
+(5, 1);
+
+-- Insertar datos en la tabla 'producto'
+INSERT INTO `producto` (`idproducto`, `pronombre`, `prodetalle`, `procantstock`) VALUES
+(1, 'Producto1', 'Descripción del Producto 1', 7),
+(2, 'Producto2', 'Descripción del Producto 2', 2),
+(3, 'Producto3', 'Descripción del Producto 3', 65),
+(4, 'Producto4', 'Descripción del Producto 4', 23),
+(5, 'Producto5', 'Descripción del Producto 5', 5);
+
+-- Insertar datos en la tabla 'compra'
+INSERT INTO `compra` (`idcompra`, `cofecha`, `idusuario`) VALUES
+(1, '2023-01-22 10:00:00', 1),
+(2, '2023-04-07 11:30:00', 1),
+(3, '2023-05-12 13:45:00', 3),
+(4, '2023-11-03 15:20:00', 2),
+(5, '2023-12-30 16:50:00', 4);
+
+-- Insertar datos en la tabla 'compraestado'
+INSERT INTO `compraestado` (`idcompraestado`, `idcompra`, `idcompraestadotipo`, `cefechaini`, `cefechafin`) VALUES
+(1, 2, 1, '2023-01-22 10:00:00', NULL),
+(2, 1, 2, '2023-04-07 11:30:00', '2023-04-07 14:15:00'),
+(3, 3, 1, '2023-05-12 13:45:00', NULL),
+(4, 5, 3, '2023-11-03 15:20:00', '2023-11-03 17:30:00'),
+(5, 4, 2, '2023-12-30 16:50:00', '2023-12-31 10:05:00');
+
+-- Insertar datos en la tabla 'compraestadotipo'
+INSERT INTO `compraestadotipo` (`idcompraestadotipo`, `cetdescripcion`, `cetdetalle`) VALUES
+(1, 'Inicio', 'Momento en el que se inica la compra'),
+(2, 'Pagado', 'El pedido fue pagado'),
+(3, 'En Preparacion', 'El pedido está siendo preparado'),
+(4, 'En camino', 'Se envia el pedido'),
+(5, 'Cancelar', 'Se cancela el pedido');
+
+-- Insertar datos en la tabla 'compraitem'
+INSERT INTO `compraitem` (`idcompraitem`, `idproducto`, `idcompra`, `cicantidad`) VALUES
+(1, 1, 1, 1),
+(2, 2, 2, 2),
+(3, 3, 3, 55),
+(4, 4, 4, 12),
+(5, 5, 5, 2);
+
+-- Insertar datos en la tabla 'rol' para relacionar menús con roles
+INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
+(1, 1),
+(2, 3),
+(3, 2),
+(4, 3),
+(5, 2);
+
+-- Insertar datos en la tabla 'menu'
+INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
+(1, 'Menú1', 'Descripción del Menú 1', NULL, NULL),
+(2, 'Menú2', 'Descripción del Menú 2', NULL, NULL),
+(3, 'Menú3', 'Descripción del Menú 3', NULL, NULL),
+(4, 'Menú4', 'Descripción del Menú 4', NULL, NULL),
+(5, 'Menú5', 'Descripción del Menú 5', NULL, NULL);
+
+
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
