@@ -102,11 +102,16 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
-(7, 'nuevo', 'kkkkk', NULL, NULL),
-(8, 'nuevo', 'kkkkk', NULL, NULL),
-(9, 'nuevo', 'kkkkk', 7, NULL),
-(10, 'nuevo', 'kkkkk', NULL, NULL),
-(11, 'nuevo', 'kkkkk', NULL, NULL);
+(1,'producto','Productos Disponibles', NULL, NULL),
+(11, 'nuevo', './producto/index.php', 1, NULL),
+(12, 'editar', './producto/index.php',1,NULL),
+(2, 'usuario', 'Administracion de Usuarios', NULL, NULL),
+(3, 'compras', 'Administracion de Compras', NULL, NULL),
+(31, 'edicion', './compras/index.php', 3, NULL),
+(6, 'rol', 'Administracion de Roles', NULL, NULL),
+(61, 'nuevo', './menu/index.php', 6, NULL),
+(62, 'editar', './menu/index.php', 6, NULL),
+(63, 'eliminar', './menu/index.php', 6, NULL);
 
 -- --------------------------------------------------------
 
