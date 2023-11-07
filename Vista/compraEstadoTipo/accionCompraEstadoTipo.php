@@ -1,40 +1,30 @@
 <?php
     include_once '../../configuracion.php';
-    $Titulo = "Lista de Compras";
+    $Titulo = "Lista de ComprasET";
     include_once '../estructura/header.php';
-    $hoja = "Compras";
-    
+
 
     $resp=false; 
-    $objCompra=new AbmCompra();
-    $listaObj = $objCompra->buscar(null);
+    $objCompraET=new AbmCompraEstadoTipo();
+    $listaObj = $objCompraET->buscar(null);
     $datos=data_submitted();
     
     if(isset($datos['accion'])){
         if(($datos['accion']=='Cambiar')){
-            $datos["idCompra"] = intval($datos["idCompra"]);
-            $datos["idMarca"] = intval($datos["idMarca"]); 
-            $datos["idTipo"] = intval($datos["idTipo"]);
-            $datos["precio"] = floatval($datos["precio"]);
-            var_dump($datos);
-            if($objCompra->modificacion($datos)){
+            $dato["idcompraestadotipo"] = intval($datos["Id"]);
+            $dato["cetdescripcion"] = $datos["cetdescripcion"]; 
+            $dato["cetdetalle"] = $datos["cetdetalle"];
+            if($objCompraET->modificacion($dato)){
                 $resp=true; 
             }// fin if 
         }// fin if
-        if($datos['accion']=='Borrar'){
-            if($objCompra->baja($datos)){
-                $resp=true; 
 
-            }// fin if 
-
-        }// fin if 
         if($datos['accion']=='Nuevo'){
-            //echo("<br> nuevo");
-            $datos["idCompra"] = intval($datos["idCompra"]);
-            $datos["idMarca"] = intval($datos["idMarca"]); 
-            $datos["idTipo"] = intval($datos["idTipo"]);
-            $datos["precio"] = floatval($datos["precio"]);
-            if($objCompra->alta($datos)){
+
+            $dato["idCompraestadotipo"] = intval($datos["Id"]);
+            $dato["cetdescripcion"] = $datos["cetdescripcion"]; 
+            $dato["cetdetalle"] = $datos["cetdetalle"];
+            if($objCompraET->alta($dato)){
                 $resp=true;
             }// fin if 
 
@@ -59,7 +49,7 @@
     echo($mensaje);
     ?>
 </div>
-<a href="indexCompra.php">Volver</a>
+<a href="indexCompraEstadoTipo.php">Volver</a>
 
 <?php
 include_once("../estructura/footer.php");

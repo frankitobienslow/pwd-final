@@ -1,13 +1,14 @@
 <?php
 include_once '../../configuracion.php';
-$Titulo = "Compras";
+$Titulo = "Estados de Compras";
 include_once '../estructura/header.php';
 
-$objAbmUsuario = new AbmUsuario();
-$listaUsuario = $objAbmUsuario->buscar(null);
+$objAbmCompra = new AbmCompra();
+$listaCompra = $objAbmCompra->buscar(null);
+$objAbmCompraEstadoTipo = new AbmCompraEstadoTipo();
+$listaCompraEstadoTipo = $objAbmCompraEstadoTipo->buscar(null);
 
-
-$objCompra=new AbmCompra();
+$objCompraEstado=new AbmCompraEstado();
 $datos=data_submitted();
 $obj=null; 
 if(isset($datos['idCompra'])){

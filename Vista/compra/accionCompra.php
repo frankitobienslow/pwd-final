@@ -12,28 +12,21 @@
     
     if(isset($datos['accion'])){
         if(($datos['accion']=='Cambiar')){
-            $datos["idCompra"] = intval($datos["idCompra"]);
-            $datos["idMarca"] = intval($datos["idMarca"]); 
-            $datos["idTipo"] = intval($datos["idTipo"]);
-            $datos["precio"] = floatval($datos["precio"]);
-            var_dump($datos);
+            $datos["idcompra"] = intval($datos["idCompra"]);
+            $datos["cofecha"] = intval($datos["fechaCompra"]); 
+            $datos["idusuario"] = intval($datos["idUsuario"]);
+
             if($objCompra->modificacion($datos)){
                 $resp=true; 
-            }// fin if 
-        }// fin if
-        if($datos['accion']=='Borrar'){
-            if($objCompra->baja($datos)){
-                $resp=true; 
+            }
+        }
 
-            }// fin if 
-
-        }// fin if 
+        
         if($datos['accion']=='Nuevo'){
             //echo("<br> nuevo");
             $datos["idCompra"] = intval($datos["idCompra"]);
-            $datos["idMarca"] = intval($datos["idMarca"]); 
-            $datos["idTipo"] = intval($datos["idTipo"]);
-            $datos["precio"] = floatval($datos["precio"]);
+            $datos["cofecha"] = intval($datos["fechaCompra"]); 
+            $datos["idusuario"] = intval($datos["idUsuario"]);
             if($objCompra->alta($datos)){
                 $resp=true;
             }// fin if 

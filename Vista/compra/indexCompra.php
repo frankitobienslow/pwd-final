@@ -9,14 +9,14 @@ $listaCompra = $objAbmCompra->buscar(null);
 
 <div class="container mt-3">
   <h2 style="text-align: center; color:dodgerblue;">Tabla Compra</h2>
-  <h5 style="text-align: left; color:dodgerblue;">Compras disponibles</h5>            
+  <h5 style="text-align: left; color:dodgerblue;">Compras Realizadas</h5>            
   <form action="editarCompra.php" method="post">
     <table class="table-striped">
         <tr>
-            <th style="width:10%">Id</th>
-            <th style="width:40%">Id Compra</th>
-            <th style="width:20%">Fecha</th>
+            <th style="width:20%">Id Compra</th>
+            <th style="width:40%">Fecha</th>
             <th style="width:20%">Id Usuario</th>
+            <th style="width:40%">Usuario</th>
         
         </tr>
         

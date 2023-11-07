@@ -24,11 +24,9 @@ if(isset($datos['idCompra'])){
         <form action="accionCompra.php" method="post">
             <label for="id" style="width:120px">Codigo ID</label>
             <input type="number" name="idCompra" id="idCompra" readonly value="<?php echo($obj->getidCompra()) ?>"><br>
-            <label for="nombreCompra" style="width:120px"> Compra</label>
-            <input type="text" name="nombreCompra" id="nombreCompra" value="<?php echo($obj->getnombreCompra()) ?>"><br>
-            <label for="precio" style="width:120px"> Precio</label>
-            <input type="text" name="precio" id="precio" value="<?php echo($obj->getprecio()) ?>"><br>
-            <label for="Usuario" style="width:120px"> Id Usuario</label>
+            <label for="fecha" style="width:120px"> Compra</label>
+            <input type="text" name="fecha" id="fechaCompra" value="<?php echo($obj->getfechaCompra()) ?>"><br>
+            <label for="nombreUsuario" style="width:120px"> Nombre Usuario</label>
       
             <select id="idUsuario" name="idUsuario">
                 <option value="<?php echo($obj->getobjUsuario()->getidUsuario())?>"><?php echo($obj->getobjUsuario()->getnombreUsuario()) ?></option>
@@ -38,12 +36,6 @@ if(isset($datos['idCompra'])){
                 </select><br>
             <label for="Tipo" style="width:120px"> Id Tipo </label>
 
-            <select id="idTipo" name="idTipo">
-                <option value="<?php echo($obj->getobjTipo()->getIdTipo()) ?>"><?php echo($obj->getobjTipo()->getnombreTipo()) ?></option>
-                <?php foreach($listaTipo as $tipo){?>
-                    <option value="<?php echo($tipo->getIdTipo()) ?>"> <?php echo ($tipo->getnombreTipo()); ?></option>
-                    <?php } ?>      
-                </select><br>
             <br><br>
             <input type="submit" name="accion" id="borrar" class="btn btn-danger" value="Borrar">
             <input type="submit" name="accion" id="editar" class="btn btn-info" value="Cambiar">

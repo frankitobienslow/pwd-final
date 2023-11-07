@@ -1,34 +1,33 @@
 <?php
-$Titulo = "Lista Compras";
+$Titulo = "Lista Estados de Compra";
 include_once("../estructura/header.php");
-$objAbmCompra = new AbmCompra();
+$objAbmCompraEstadoTipo = new AbmCompraEstadoTipo();
 
-$listaCompra = $objAbmCompra->buscar(null);
-//var_dump($listaCompra);
+$listaCompraEstadoTipo = $objAbmCompraEstadoTipo->buscar(null);
+
 ?>	
 
 <div class="container mt-3">
-  <h2 style="text-align: center; color:dodgerblue;">Tabla Compra</h2>
-  <h5 style="text-align: left; color:dodgerblue;">Compras disponibles</h5>            
-  <form action="editarCompra.php" method="post">
+  <h2 style="text-align: center; color:dodgerblue;">Tabla CompraEstadoTipo</h2>
+  <h5 style="text-align: left; color:dodgerblue;">CompraEstadoTipos disponibles</h5>            
+  <form action="editarCompraEstadoTipo.php" method="post">
     <table class="table-striped">
         <tr>
             <th style="width:10%">Id</th>
-            <th style="width:40%">Id Compra</th>
-            <th style="width:20%">Fecha</th>
-            <th style="width:20%">Id Usuario</th>
+            <th style="width:40%">Descripcion</th>
+            <th style="width:40%">Detalle</th>
+
         
         </tr>
         
-            <?php if(count($listaCompra)>0){
-                foreach($listaCompra as $Compra){?>
+            <?php if(count($listaCompraEstadoTipo)>0){
+                foreach($listaCompraEstadoTipo as $CompraEstadoTipo){?>
                     <tr>
-                    <td> <?php echo($Compra->getidCompra()) ?></td>
-                    <td> <?php echo($Compra->getfecha())?></td>
-                    <td> <?php echo($Compra->getobjUsuario()->getidUsuario())?></td>
-                    <td> <?php echo($Compra->getobjUsuario()->getnombreUsuario())?></td>
-                    
-                    <td><a href="editarCompra.php?idCompra=<?php echo($Compra->getidCompra()) ?>" class="btn btn-info">Editar</a></td>
+                    <td> <?php echo($CompraEstadoTipo->getId()) ?></td>
+                    <td> <?php echo($CompraEstadoTipo->getDescripcion())?></td>
+                    <td> <?php echo($CompraEstadoTipo->getDetalle())?></td>
+                                    
+                    <td><a href="editarCompraEstadoTipo.php?Id=<?php echo($CompraEstadoTipo->getId()) ?>" class="btn btn-info">Editar</a></td>
                 </tr>
                 <?php    
                 }// fin for 

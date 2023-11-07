@@ -24,7 +24,7 @@ class Compra extends BaseDatos{
     }// fin function 
 
     // METODOS GET
-    public function getID(){
+    public function getId(){
         return $this->idCompra;
     }// fin metodo get
 

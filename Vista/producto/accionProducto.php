@@ -1,28 +1,27 @@
 <?php
     include_once '../../configuracion.php';
-    $Titulo = "Lista de Compras";
+    $Titulo = "Lista de Productos";
     include_once '../estructura/header.php';
-    $hoja = "Compras";
     
 
     $resp=false; 
-    $objCompra=new AbmCompra();
-    $listaObj = $objCompra->buscar(null);
+    $objProducto=new AbmProducto();
+    $listaObj = $objProducto->buscar(null);
     $datos=data_submitted();
     
     if(isset($datos['accion'])){
         if(($datos['accion']=='Cambiar')){
-            $datos["idCompra"] = intval($datos["idCompra"]);
-            $datos["idMarca"] = intval($datos["idMarca"]); 
-            $datos["idTipo"] = intval($datos["idTipo"]);
-            $datos["precio"] = floatval($datos["precio"]);
+            $dato["idproducto"] = intval($datos["Id"]);
+            $dato["pronombre"] = $datos["pronombre"]; 
+            $dato["prodetalle"] = $datos["prodetalle"];
+            $dato["stock"] = intval($datos["stock"]);
             var_dump($datos);
-            if($objCompra->modificacion($datos)){
+            if($objProducto->modificacion($dato)){
                 $resp=true; 
             }// fin if 
         }// fin if
         if($datos['accion']=='Borrar'){
-            if($objCompra->baja($datos)){
+            if($objProducto->baja($datos)){
                 $resp=true; 
 
             }// fin if 
@@ -30,11 +29,11 @@
         }// fin if 
         if($datos['accion']=='Nuevo'){
             //echo("<br> nuevo");
-            $datos["idCompra"] = intval($datos["idCompra"]);
-            $datos["idMarca"] = intval($datos["idMarca"]); 
-            $datos["idTipo"] = intval($datos["idTipo"]);
-            $datos["precio"] = floatval($datos["precio"]);
-            if($objCompra->alta($datos)){
+            $dato["idProducto"] = intval($datos["Id"]);
+            $dato["pronombre"] = $datos["pronombre"]; 
+            $dato["prodetalle"] = $datos["prodetalle"];
+            $dato["stock"] = floatval($datos["stock"]);
+            if($objProducto->alta($dato)){
                 $resp=true;
             }// fin if 
 
@@ -59,7 +58,7 @@
     echo($mensaje);
     ?>
 </div>
-<a href="indexCompra.php">Volver</a>
+<a href="indexProducto.php">Volver</a>
 
 <?php
 include_once("../estructura/footer.php");
