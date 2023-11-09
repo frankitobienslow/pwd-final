@@ -1,34 +1,34 @@
 <?php
-$Titulo = "Lista Compras";
+$Titulo = "Lista Usuariorols";
 include_once("../estructura/header.php");
-$objAbmCompra = new AbmCompra();
+$objAbmUsuariorol = new AbmUsuariorol();
 
-$listaCompra = $objAbmCompra->buscar(null);
-//var_dump($listaCompra);
+$listaUsuariorol = $objAbmUsuariorol->buscar(null);
+//var_dump($listaUsuariorol);
 ?>	
 
 <div class="container mt-3">
-  <h2 style="text-align: center; color:dodgerblue;">Tabla Compra</h2>
-  <h5 style="text-align: left; color:dodgerblue;">Compras disponibles</h5>            
-  <form action="editarCompra.php" method="post">
+  <h2 style="text-align: center; color:dodgerblue;">Tabla </h2>
+  <h5 style="text-align: left; color:dodgerblue;">Usuariorols disponibles</h5>            
+  <form action="editarUsuariorol.php" method="post">
     <table class="table-striped">
         <tr>
             <th style="width:10%">Id</th>
-            <th style="width:40%">Id Compra</th>
+            <th style="width:40%">Id Usuariorol</th>
             <th style="width:20%">Fecha</th>
             <th style="width:20%">Id Usuario</th>
         
         </tr>
         
-            <?php if(count($listaCompra)>0){
-                foreach($listaCompra as $Compra){?>
+            <?php if(count($listaUsuariorol)>0){
+                foreach($listaUsuariorol as $Usuariorol){?>
                     <tr>
-                    <td> <?php echo($Compra->getidCompra()) ?></td>
-                    <td> <?php echo($Compra->getfecha())?></td>
-                    <td> <?php echo($Compra->getobjUsuario()->getidUsuario())?></td>
-                    <td> <?php echo($Compra->getobjUsuario()->getnombreUsuario())?></td>
+                    <td> <?php echo($Usuariorol->getidUsuariorol()) ?></td>
+                    <td> <?php echo($Usuariorol->getfecha())?></td>
+                    <td> <?php echo($Usuariorol->getobjUsuario()->getidUsuario())?></td>
+                    <td> <?php echo($Usuariorol->getobjUsuario()->getnombreUsuario())?></td>
                     
-                    <td><a href="editarCompra.php?idCompra=<?php echo($Compra->getidCompra()) ?>" class="btn btn-info">Editar</a></td>
+                    <td><a href="editarUsuariorol.php?idUsuariorol=<?php echo($Usuariorol->getidUsuariorol()) ?>" class="btn btn-info">Editar</a></td>
                 </tr>
                 <?php    
                 }// fin for 

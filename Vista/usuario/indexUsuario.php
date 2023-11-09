@@ -1,34 +1,37 @@
 <?php
-$Titulo = "Lista Compras";
+$Titulo = "Lista Usuarios";
 include_once("../estructura/header.php");
-$objAbmCompra = new AbmCompra();
+$objAbmUsuario = new AbmUsuario();
 
-$listaCompra = $objAbmCompra->buscar(null);
-//var_dump($listaCompra);
+$listaUsuario = $objAbmUsuario->buscar(null);
+//var_dump($listaUsuario);
 ?>	
 
 <div class="container mt-3">
-  <h2 style="text-align: center; color:dodgerblue;">Tabla Compra</h2>
-  <h5 style="text-align: left; color:dodgerblue;">Compras disponibles</h5>            
-  <form action="editarCompra.php" method="post">
+  <h2 style="text-align: center; color:dodgerblue;">Tabla Usuario</h2>
+  <h5 style="text-align: left; color:dodgerblue;">Usuarios disponibles</h5>            
+  <form action="editarUsuario.php" method="post">
     <table class="table-striped">
         <tr>
-            <th style="width:10%">Id</th>
-            <th style="width:40%">Id Compra</th>
-            <th style="width:20%">Fecha</th>
+          <th style="width:10%">Id Usuario</th>
+            <th style="width:10%">Nombre</th>
+            <th style="width:20%">Mail</th>
             <th style="width:20%">Id Usuario</th>
+            <th style="width:20%">Habilitado</th>
         
         </tr>
         
-            <?php if(count($listaCompra)>0){
-                foreach($listaCompra as $Compra){?>
+            <?php if(count($listaUsuario)>0){
+                foreach($listaUsuario as $Usuario){
+                  if ($Usuario->getDeshabilitado() === '0'){$check = "Habilitado";}
+                    else{$check = "Deshabilitado";}?>
                     <tr>
-                    <td> <?php echo($Compra->getidCompra()) ?></td>
-                    <td> <?php echo($Compra->getfecha())?></td>
-                    <td> <?php echo($Compra->getobjUsuario()->getidUsuario())?></td>
-                    <td> <?php echo($Compra->getobjUsuario()->getnombreUsuario())?></td>
+                    <td> <?php echo($Usuario->getId()) ?></td>
+                    <td> <?php echo($Usuario->getNombre())?></td>
+                    <td> <?php echo($Usuario->getMail())?></td>
+                    <td> <?php echo($check)?></td>
                     
-                    <td><a href="editarCompra.php?idCompra=<?php echo($Compra->getidCompra()) ?>" class="btn btn-info">Editar</a></td>
+                    <td><a href="editarUsuario.php?Id=<?php echo($Usuario->getidUsuario()) ?>" class="btn btn-info">Editar</a></td>
                 </tr>
                 <?php    
                 }// fin for 
