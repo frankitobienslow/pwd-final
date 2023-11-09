@@ -1,28 +1,25 @@
 <?php
     include_once '../../configuracion.php';
     $Titulo = "Lista de Compras";
-    include_once '../estructura/header.php';
+    include_once '../estructura/headPrivado.php';
     $hoja = "Compras";
     
 
     $resp=false; 
-    $objCompra=new AbmCompra();
-    $listaObj = $objCompra->buscar(null);
+    $objUsuario=new AbmUsuario();
+    $listaObj = $objUsuario->buscar(null);
     $datos=data_submitted();
     
     if(isset($datos['accion'])){
         if(($datos['accion']=='Cambiar')){
-            $datos["idCompra"] = intval($datos["idCompra"]);
-            $datos["idMarca"] = intval($datos["idMarca"]); 
-            $datos["idTipo"] = intval($datos["idTipo"]);
-            $datos["precio"] = floatval($datos["precio"]);
-            var_dump($datos);
-            if($objCompra->modificacion($datos)){
+            $datos["idusuario"] = intval($datos["idusuario"]);
+            echo "estoyaqui";
+            if($objUsuario->modificacion($datos)){
                 $resp=true; 
             }// fin if 
         }// fin if
         if($datos['accion']=='Borrar'){
-            if($objCompra->baja($datos)){
+            if($objUsuario->baja($datos)){
                 $resp=true; 
 
             }// fin if 
@@ -34,7 +31,7 @@
             $datos["idMarca"] = intval($datos["idMarca"]); 
             $datos["idTipo"] = intval($datos["idTipo"]);
             $datos["precio"] = floatval($datos["precio"]);
-            if($objCompra->alta($datos)){
+            if($objUsuario->alta($datos)){
                 $resp=true;
             }// fin if 
 
