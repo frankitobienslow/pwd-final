@@ -1,34 +1,30 @@
 <?php
-$Titulo = "Lista Compras";
+$Titulo = "Lista";
 include_once("../estructura/header.php");
-$objAbmCompra = new AbmCompra();
+$objAbmMenuRol = new AbmMenurol();
 
-$listaCompra = $objAbmCompra->buscar(null);
-//var_dump($listaCompra);
+$listaMenuRol= $objAbmMenuRol->buscar(null);
+
 ?>	
 
 <div class="container mt-3">
-  <h2 style="text-align: center; color:dodgerblue;">Tabla Compra</h2>
-  <h5 style="text-align: left; color:dodgerblue;">Compras disponibles</h5>            
-  <form action="editarCompra.php" method="post">
+  <h2 style="text-align: center; color:dodgerblue;">Tabla</h2>
+  <h5 style="text-align: left; color:dodgerblue;">Menu y rol</h5>            
+  <form action="editarMenuRol.php" method="post">
     <table class="table-striped">
         <tr>
-            <th style="width:10%">Id</th>
-            <th style="width:40%">Id Compra</th>
-            <th style="width:20%">Fecha</th>
-            <th style="width:20%">Id Usuario</th>
-        
+            <th style="width:10%">Id menu</th>
+            <th style="width:40%">Id Rol</th>
         </tr>
         
-            <?php if(count($listaCompra)>0){
-                foreach($listaCompra as $Compra){?>
+            <?php if(count($listaMenuRol)>0){
+                foreach($listaMenuRol as $MenuRol){?>
                     <tr>
-                    <td> <?php echo($Compra->getidCompra()) ?></td>
-                    <td> <?php echo($Compra->getfecha())?></td>
-                    <td> <?php echo($Compra->getobjUsuario()->getidUsuario())?></td>
-                    <td> <?php echo($Compra->getobjUsuario()->getnombreUsuario())?></td>
-                    
-                    <td><a href="editarCompra.php?idCompra=<?php echo($Compra->getidCompra()) ?>" class="btn btn-info">Editar</a></td>
+                    <td> <?php echo($MenuRol->getObjMenu()->getId()) ?></td>
+                    <td> <?php echo($MenuRol->getObjMenu()->getNombre()) ?></td>
+                    <td> <?php echo($MenuRol->getObjRol()->getId())?></td>
+                    <td> <?php echo($MenuRol->getObjRol()->getNombre())?></td>
+                    <td><a href="editarMenuRol.php?id=<?php echo($MenuRol->getObjUsuario()->getId()) ?>" class="btn btn-info">Editar</a></td>
                 </tr>
                 <?php    
                 }// fin for 

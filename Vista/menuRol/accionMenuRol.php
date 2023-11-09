@@ -1,28 +1,23 @@
 <?php
     include_once '../../configuracion.php';
-    $Titulo = "Lista de Compras";
+    $Titulo = "Lista";
     include_once '../estructura/header.php';
-    $hoja = "Compras";
-    
 
     $resp=false; 
-    $objCompra=new AbmCompra();
-    $listaObj = $objCompra->buscar(null);
+    $objMenuRol=new AbmMenuRol();
+    $listaObj = $objMenuRol->buscar(null);
     $datos=data_submitted();
     
     if(isset($datos['accion'])){
         if(($datos['accion']=='Cambiar')){
-            $datos["idCompra"] = intval($datos["idCompra"]);
-            $datos["idMarca"] = intval($datos["idMarca"]); 
-            $datos["idTipo"] = intval($datos["idTipo"]);
-            $datos["precio"] = floatval($datos["precio"]);
-            var_dump($datos);
-            if($objCompra->modificacion($datos)){
+            $datos["idusuario"] = intval($datos["idusuario"]);
+            $datos["idrol"] = intval($datos["idrol"]); 
+            if($objMenuRol->modificacion($datos)){
                 $resp=true; 
             }// fin if 
         }// fin if
         if($datos['accion']=='Borrar'){
-            if($objCompra->baja($datos)){
+            if($objMenuRol->baja($datos)){
                 $resp=true; 
 
             }// fin if 
@@ -30,11 +25,9 @@
         }// fin if 
         if($datos['accion']=='Nuevo'){
             //echo("<br> nuevo");
-            $datos["idCompra"] = intval($datos["idCompra"]);
-            $datos["idMarca"] = intval($datos["idMarca"]); 
-            $datos["idTipo"] = intval($datos["idTipo"]);
-            $datos["precio"] = floatval($datos["precio"]);
-            if($objCompra->alta($datos)){
+            $datos["idusuario"] = intval($datos["idusuario"]);
+            $datos["idrol"] = intval($datos["idrol"]); 
+            if($objMenuRol->alta($datos)){
                 $resp=true;
             }// fin if 
 
@@ -59,7 +52,7 @@
     echo($mensaje);
     ?>
 </div>
-<a href="indexCompra.php">Volver</a>
+<a href="indexMenuRol.php">Volver</a>
 
 <?php
 include_once("../estructura/footer.php");
