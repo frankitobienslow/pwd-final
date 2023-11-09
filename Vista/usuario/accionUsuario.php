@@ -27,10 +27,10 @@
         }// fin if 
         if($datos['accion']=='Nuevo'){
             //echo("<br> nuevo");
-            $datos["idCompra"] = intval($datos["idCompra"]);
-            $datos["idMarca"] = intval($datos["idMarca"]); 
-            $datos["idTipo"] = intval($datos["idTipo"]);
-            $datos["precio"] = floatval($datos["precio"]);
+            $datos["idusuario"] = intval($datos["idUsuario"]);
+            $datos["usnombre"] = intval($datos["nombreUsuario"]); 
+            $datos["usmail"] = intval($datos["mail"]);
+            $datos["usdeshabilitado"] = floatval($datos["deshabilitado"]);
             if($objUsuario->alta($datos)){
                 $resp=true;
             }// fin if 
@@ -56,7 +56,7 @@
     echo($mensaje);
     ?>
 </div>
-<a href="indexCompra.php">Volver</a>
+<a href="indexUsuario.php">Volver</a>
 
 <?php
 include_once("../estructura/footer.php");

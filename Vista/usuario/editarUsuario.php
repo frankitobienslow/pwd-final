@@ -3,9 +3,6 @@ include_once '../../configuracion.php';
 $Titulo = "Compras";
 include_once '../estructura/headPrivado.php';
 
-$objAbmUsuario = new AbmUsuario();
-$listaUsuario = $objAbmUsuario->buscar(null);
-
 
 $objUsuario=new AbmUsuario();
 $datos=data_submitted();
@@ -34,7 +31,7 @@ if(isset($datos['idusuario'])){
             <br><br>
             <input type="submit" name="accion" id="borrar" class="btn btn-danger" value="Borrar">
             <input type="submit" name="accion" id="editar" class="btn btn-info" value="Cambiar">
-            <a href="indexCompra.php" class="btn btn-secondary">Volver</a>
+            <a href="indexUsuario.php" class="btn btn-secondary">Volver</a>
         </form>
     
 <?php } else{

@@ -1,34 +1,37 @@
 <?php
-$Titulo = "Lista Compras";
+$Titulo = "Lista Menu";
 include_once("../estructura/header.php");
-$objAbmCompra = new AbmCompra();
+$objAbmMenu = new AbmMenu();
 
-$listaCompra = $objAbmCompra->buscar(null);
-//var_dump($listaCompra);
+$listaMenu = $objAbmMenu->buscar(null);
+//var_dump($listaMenu);
 ?>	
 
 <div class="container mt-3">
-  <h2 style="text-align: center; color:dodgerblue;">Tabla Compra</h2>
-  <h5 style="text-align: left; color:dodgerblue;">Compras disponibles</h5>            
+  <h2 style="text-align: center; color:dodgerblue;">Tabla Menu</h2>
+  <h5 style="text-align: left; color:dodgerblue;">Menu disponibles</h5>            
   <form action="editarCompra.php" method="post">
     <table class="table-striped">
         <tr>
             <th style="width:10%">Id</th>
-            <th style="width:40%">Id Compra</th>
-            <th style="width:20%">Fecha</th>
-            <th style="width:20%">Id Usuario</th>
+            <th style="width:40%">Nombre</th>
+            <th style="width:20%">Descripcion</th>
+            <th style="width:20%">Id Padre</th>
+            <th style="width:20%">Habilitado</th>
         
         </tr>
         
-            <?php if(count($listaCompra)>0){
-                foreach($listaCompra as $Compra){?>
+            <?php if(count($listaMenu)>0){
+                foreach($listaMenu as $Menu){?>
                     <tr>
-                    <td> <?php echo($Compra->getidCompra()) ?></td>
-                    <td> <?php echo($Compra->getfecha())?></td>
-                    <td> <?php echo($Compra->getobjUsuario()->getidUsuario())?></td>
-                    <td> <?php echo($Compra->getobjUsuario()->getnombreUsuario())?></td>
+                    <td> <?php echo($Menu->getId()) ?></td>
+                    <td> <?php echo($Menu->getNombre())?></td>
+                    <td> <?php echo($Menu->getDescripcion())?></td>
+                    <td> <?php echo($Menu->getObjMenu()->getId())?></td>
+                    <td> <?php echo($Menu->getObjMenu()->getNombre())?></td>
+                    <td> <?php echo($Menu->getDeshabilitado())?></td>
                     
-                    <td><a href="editarCompra.php?idCompra=<?php echo($Compra->getidCompra()) ?>" class="btn btn-info">Editar</a></td>
+                    <td><a href="editarCompra.php?id=<?php echo($Menu->getId()) ?>" class="btn btn-info">Editar</a></td>
                 </tr>
                 <?php    
                 }// fin for 
