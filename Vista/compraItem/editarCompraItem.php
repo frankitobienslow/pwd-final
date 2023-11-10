@@ -1,19 +1,20 @@
 <?php
 include_once '../../configuracion.php';
-$Titulo = "Compras";
+$Titulo = "Ittem Compras ";
 include_once '../estructura/header.php';
 
-$objAbmUsuario = new AbmUsuario();
-$listaUsuario = $objAbmUsuario->buscar(null);
+$objAbmProducto = new AbmProducto();
+$listaProducto = $objAbmProducto->buscar(null);
+$objAbmCompra = new AbmCompra();
+$listaCompra = $objAbmCompra->buscar(null);
 
-
-$objCompra=new AbmCompra();
+$objCompraItem=new AbmCompraItem();
 $datos=data_submitted();
 $obj=null; 
-if(isset($datos['idCompra'])){
-    $listaCompras=$objCompra->buscar($datos);
-    if(count($listaCompras)==1){
-        $obj=$listaCompras[0];
+if(isset($datos['idcompraitem'])){
+    $listaCompraItem=$objCompraItem->buscar($datos);
+    if(count($listaCompraItem)==1){
+        $obj=$listaCompraItem[0];
     }// fin if 
 
 }// fin if 
@@ -21,18 +22,19 @@ if(isset($datos['idCompra'])){
 
 <?php  if($obj!=null){?>
     <div class="container mt-3">
-        <form action="accionCompra.php" method="post">
+        <form action="accionCompraItem.php" method="post">
             <label for="id" style="width:120px">Codigo ID</label>
-            <input type="number" name="idCompra" id="idCompra" readonly value="<?php echo($obj->getidCompra()) ?>"><br>
-            <label for="nombreCompra" style="width:120px"> Compra</label>
-            <input type="text" name="nombreCompra" id="nombreCompra" value="<?php echo($obj->getnombreCompra()) ?>"><br>
-            <label for="precio" style="width:120px"> Precio</label>
-            <input type="text" name="precio" id="precio" value="<?php echo($obj->getprecio()) ?>"><br>
+            <input type="number" name="idcompraitem" id="idcompraitem" readonly value="<?php echo($obj->getId()) ?>"><br>
+            <label for="idproducto" style="width:120px"> Producto</label>
+            <input type="text" name="nombreproducto" id="nombreproducto" value="<?php echo($obj->getObjProducto->getId()) ?>"><br>            <label for="nombreCompra" style="width:120px"> Compra</label>
+            <input type="text" name="nombreproducto" id="nombreproducto" value="<?php echo($obj->getObjProducto->getNombre()) ?>"><br>
+            <label for="idcompra" style="width:120px"> Id Compra</label>
+            <input type="text" name="precio" id="idcompra" value="<?php echo($obj->getObjCompra()->getId()) ?>"><br>
             <label for="Usuario" style="width:120px"> Id Usuario</label>
       
             <select id="idUsuario" name="idUsuario">
                 <option value="<?php echo($obj->getobjUsuario()->getidUsuario())?>"><?php echo($obj->getobjUsuario()->getnombreUsuario()) ?></option>
-                <?php foreach($listaUsuario as $Usuario){?>
+                <?php foreach($listaProducto as $Usuario){?>
                     <option value="<?php echo($Usuario->getIdUsuario()) ?>"> <?php echo ($Usuario->getnombreUsuario()); ?></option>
                     <?php } ?>      
                 </select><br>

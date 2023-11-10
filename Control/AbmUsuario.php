@@ -31,7 +31,7 @@ class AbmUsuario{
     /**
      * Espera un Array asociativo y devuelve el obj de la tabla
      * @param array $datos
-     * @return object
+     * @return Usuario
      */
     private function cargarObjeto($datos){
         $obj=null; 
@@ -47,7 +47,7 @@ class AbmUsuario{
     /**
      * Espera como parametro un array asociativo donde las claves coinciden  con los atributos 
      * @param array $datos
-     * @return obj
+     * @return Usuario
      */
     private function cargarObjetoConClave($datos){
         $obj=null;
@@ -63,7 +63,7 @@ class AbmUsuario{
     /**
      * corrobora que dentro del array asociativo estan seteados los campos
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     private function setadosCamposClaves($datos){
         $resp=false;
@@ -98,7 +98,7 @@ class AbmUsuario{
     /**
      * METODO ELIMINAR
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     public function baja($datos){
         $resp=false;
@@ -106,10 +106,7 @@ class AbmUsuario{
             $objUsuario=$this->cargarObjetoConClave($datos);
             if($objUsuario!=null && $objUsuario->eliminar()){
                 $resp=true;
-
             }// fin if 
-
-
         }// fin if 
 
         return $resp; 

@@ -54,7 +54,7 @@ class AbmCompra{
     /**
      * Espera como parametro un array asociativo donde las claves coinciden  con los atributos 
      * @param array $datos
-     * @return obj
+     * @return Compra
      */
     private function cargarObjetoConClave($datos){
         $obj=null;
@@ -75,7 +75,7 @@ class AbmCompra{
     /**
      * corrobora que dentro del array asociativo estan seteados los campos
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     private function setadosCamposClaves($datos){
         $resp=false;
@@ -106,7 +106,7 @@ class AbmCompra{
     /**
      * PERMITE ELIMINAR UN OBJ 
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     public function baja($datos){
         $resp=false;
@@ -176,9 +176,9 @@ class AbmCompra{
         /** METODO MODIFICAR ESTADO DE LA COMPRA
      * En funcion del id de la tabla cambio de estado tipo al que quiero ir  y el obj compra 
     * realiza la modifcacion 
-     * @param obj compra
+     * @param Compra
      * @param int idCET
-     *@return booelan 
+     *@return boolean 
      */
     public function modificarEstadoCompra($objCompra,$idCET){
         $idCompra = $objCompra->getId();
@@ -248,7 +248,7 @@ public function iniciarCompra($productosUsuario){
 
 /**
  * METODO FINALIZAR COMPRA 
- * @param obj compra
+ * @param Compra
  * @param array productos (array de  idproductos y cantidad )
  * @return int   (id compra )
  */

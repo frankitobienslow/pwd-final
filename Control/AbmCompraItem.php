@@ -31,7 +31,7 @@ class AbmCompraItem{
     /**
      * Espera un Array asociativo y devuelve el obj de la tabla
      * @param array $datos
-     * @return object
+     * @return CompraItem
      */
     private function cargarObjeto($datos){
         $obj=null; 
@@ -61,7 +61,7 @@ class AbmCompraItem{
     /**
      * Espera como parametro un array asociativo donde las claves coinciden  con los atributos 
      * @param array $datos
-     * @return obj
+     * @return CompraItem
      */
     private function cargarObjetoConClave($datos){
         $obj=null;
@@ -87,7 +87,7 @@ class AbmCompraItem{
     /**
      * corrobora que dentro del array asociativo estan seteados los campos
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     private function setadosCamposClaves($datos){
         $resp=false;
@@ -120,7 +120,7 @@ class AbmCompraItem{
     /**
      * PERMITE ELIMINAR UN OBJ AUTO
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     public function baja($datos){
         $resp=false;

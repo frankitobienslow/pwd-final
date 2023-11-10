@@ -30,7 +30,7 @@ class AbmRol{
     /**
      * Espera un Array asociativo y devuelve el obj de la tabla
      * @param array $datos
-     * @return object
+     * @return Rol
      */
     private function cargarObjeto($datos){
         $obj=null; 
@@ -50,7 +50,7 @@ class AbmRol{
     /**
      * Espera como parametro un array asociativo donde las claves coinciden  con los atributos 
      * @param array $datos
-     * @return obj
+     * @return Rol
      */
     private function cargarObjetoConClave($datos){
         $obj=null;
@@ -66,9 +66,9 @@ class AbmRol{
     /**
      * corrobora que dentro del array asociativo estan seteados los campos
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
-    private function setadosCamposClaves($datos){
+    private function seteadosCamposClaves($datos){
         $resp=false;
         if(isset($datos['idrol'])){
             $resp=true;
@@ -99,11 +99,11 @@ class AbmRol{
     /**
      * METODO ELIMINAR 
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     public function baja($datos){
         $resp=false;
-        if($this->setadosCamposClaves($datos)){
+        if($this->seteadosCamposClaves($datos)){
             $objRol=$this->cargarObjetoConClave($datos);
             if($objRol!=null && $objRol->eliminar()){
                 $resp=true;
@@ -124,7 +124,7 @@ class AbmRol{
      */
     public function modificacion($datos){
         $resp=false;
-        if($this->setadosCamposClaves($datos)){
+        if($this->seteadosCamposClaves($datos)){
             $objRol=$this->cargarObjeto($datos);
             if($objRol!=null && $objRol->modificar()){
                 $resp=true; 

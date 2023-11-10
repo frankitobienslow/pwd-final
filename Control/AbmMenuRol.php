@@ -8,7 +8,7 @@ class AbmMenuRol
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
      * @param array $param
-     * @return object
+     * @return MenuRol
      */
 
     private function cargarObjeto($param)
@@ -31,7 +31,7 @@ class AbmMenuRol
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto que son claves
      * @param array $param
-     * @return object
+     * @return MenuRol
      */
     private function cargarObjetoConClave($param)
     {
@@ -63,6 +63,7 @@ class AbmMenuRol
     /**
      *
      * @param array $param
+     * @return boolean
      */
     public function alta($param)
     {
@@ -141,7 +142,7 @@ class AbmMenuRol
     public function darDescripcionRoles($arrayMenus){
         $rolesUs = [];
         foreach ($arrayMenus as $us) {
-            $param['idmenu'] = $us->getidmenu();
+            $param['idmenu'] = $us->getId();
             array_push($rolesUs, $this->buscar($param)); 
         }
         $rolesDesc = [];
@@ -149,7 +150,7 @@ class AbmMenuRol
             $roles = [];
             //aca me devuelve el array de roles de cada Menu:
             foreach ($rolUs as $rolU) {
-                $rol = $rolU->getRol()->getRolDescripcion();
+                $rol = $rolU->getRol()->getDescripcion();
                 array_push($roles, $rol);
             }
             array_push($rolesDesc, $roles);
@@ -160,7 +161,7 @@ class AbmMenuRol
     public function daridroles($arrayMenus){
         $rolesUs = [];
         foreach ($arrayMenus as $us) {
-            $param['idmenu'] = $us->getidmenu();
+            $param['idmenu'] = $us->getId();
             array_push($rolesUs, $this->buscar($param)); //esto me devuelve un array de objetos Menu +rol
         }
         $rolesId = [];
@@ -168,7 +169,7 @@ class AbmMenuRol
             $roles = [];
             //aca me devuelve el array de roles de cada Menu:
             foreach ($rolUs as $rolU) {
-                $rol = $rolU->getRol()->getidrol();
+                $rol = $rolU->getRol()->getId();
                 array_push($roles, $rol);
             }
             array_push($rolesId, $roles);

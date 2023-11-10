@@ -32,7 +32,7 @@ class AbmCompraEstado{
     /**
      * Espera un Array asociativo y devuelve el obj de la tabla
      * @param array $datos
-     * @return object
+     * @return CompraEstado
      */
     private function cargarObjeto($datos){
         $obj=null; 
@@ -63,7 +63,7 @@ class AbmCompraEstado{
     /**
      * Espera como parametro un array asociativo donde las claves coinciden  con los atributos 
      * @param array $datos
-     * @return obj
+     * @return CompraEstado
      */
     private function cargarObjetoConClave($datos){
         $obj=null;
@@ -90,7 +90,7 @@ class AbmCompraEstado{
     /**
      * corrobora que dentro del array asociativo estan seteados los campos
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     private function setadosCamposClaves($datos){
         $resp=false;
@@ -122,7 +122,7 @@ class AbmCompraEstado{
     /**
      * METODO ELIMINAR 
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     public function baja($datos){
         $resp=false;

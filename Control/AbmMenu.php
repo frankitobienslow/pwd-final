@@ -6,7 +6,7 @@ class AbmMenu{
      * Espera como parametro un arreglo asociativo donde 
      * las claves coinciden con los nombres de las variables instancias del objeto
      * @param array $param
-     * @return object
+     * @return Menu
      */
     private function cargarObjeto($param){
         $obj = null;
@@ -34,7 +34,7 @@ class AbmMenu{
      * Espera como parametro un arreglo asociativo donde las 
      * claves coinciden con los nombres de las variables instancias del objeto que son claves
      * @param array $param
-     * @return Tabla
+     * @return Menu
      */
     private function cargarObjetoConClave($param){
         $obj = null;
@@ -63,6 +63,7 @@ class AbmMenu{
     /**
      * METODO ALTA
      * @param array $param
+     * @return boolean
      */
     public function alta($param){
         $resp = false;
@@ -85,8 +86,8 @@ class AbmMenu{
         $resp = false;
       
         if ($this->seteadosCamposClaves($param)){
-            $$ObjMenu = $this->cargarObjetoConClave($param);
-            if ($ObjMenu!=null and $ObjMenu->eliminar()){
+            $objMenu = $this->cargarObjetoConClave($param);
+            if ($objMenu!=null and $objMenu->eliminar()){
                 $resp = true;
             }
         }
@@ -103,7 +104,7 @@ class AbmMenu{
        
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
-            $$ObjMenu = $this->cargarObjeto($param);
+            $ObjMenu = $this->cargarObjeto($param);
             if($ObjMenu!=null and $ObjMenu->modificar()){
                 $resp = true;
             }
@@ -147,7 +148,7 @@ class AbmMenu{
      * @return array
      */
     public function listarMenuRol($param){
-        $$objMenuRol=new MenuRol();
+        $objMenuRol=new MenuRol();
         $where=' true '; 
         if($param!=null){
             if(isset($param['idmenu'])){
