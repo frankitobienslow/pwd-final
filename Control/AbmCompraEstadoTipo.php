@@ -36,7 +36,8 @@ class AbmCompraEstadoTipo{
     private function cargarObjeto($datos){
         $obj=null; 
         
-        if(array_key_exists('idcompraestadotipo',$datos) && array_key_exists('cetdescripcion',$datos) && array_key_exists('cetdetalle',$datos) && array_key_exists('procantstock',$datos)){
+        if(array_key_exists('idcompraestadotipo',$datos) && array_key_exists('cetdescripcion',$datos) 
+        && array_key_exists('cetdetalle',$datos)){
             
             $obj=new CompraEstadoTipo();
             $obj->setear($datos['idcompraestadotipo'],$datos['cetdescripcion'],$datos['cetdetalle']);
@@ -85,7 +86,9 @@ class AbmCompraEstadoTipo{
      */
     public function alta($datos){
         $resp=false;
+        $datos['idcompraestadotipo']=null; 
         $objCI=$this->cargarObjeto($datos);
+        //var_dump($this->cargarObjeto($datos));
         if($objCI!=null && $objCI->insertar()){
             $resp=true;
 

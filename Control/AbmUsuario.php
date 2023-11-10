@@ -83,9 +83,8 @@ class AbmUsuario{
      */
     public function alta($datos){
         $resp=false;
-        //$datos['idrol'] = 1;
         $datos['idusuario'] =null;
-        $datos['usdeshabilitado'] =0;
+        $datos['usdeshabilitado'] =null;
         $objUsuario=$this->cargarObjeto($datos);
         
         if($objUsuario!=null && $objUsuario->insertar()){

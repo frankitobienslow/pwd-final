@@ -1,6 +1,6 @@
 <?php
 
-class CompraEstado extends BaseDatos{
+class CompraEstado{
     private $idCompraEstado;
     private $objCompra;
     private $objCompraEstadoTipo;
@@ -87,12 +87,13 @@ class CompraEstado extends BaseDatos{
     public function cargar(){
         $salida=false;
         $sql="SELECT * FROM compraestado WHERE idcompraestado=".$this->getId();
-        if($this->Iniciar()){// inicializa la conexion
-            $salida=$this->Ejecutar($sql); 
+        $baseDatos=new BaseDatos();
+        if($baseDatos->Iniciar()){// inicializa la conexion
+            $salida=$baseDatos->Ejecutar($sql); 
             if($salida>-1){
                 if($salida>0){
                     $salida=true; 
-                    $R=$this->Registro(); // recupera los registros de la tabla  con la ID dada
+                    $R=$baseDatos->Registro(); // recupera los registros de la tabla  con la ID dada
                     $objCE=new CompraEstado(); // carga del obj con su id
                     $objCE->setId($R['idcompraestado']);
                     $objCE->cargar();
@@ -110,7 +111,7 @@ class CompraEstado extends BaseDatos{
 
         }// fin if 
         else{
-            $this->setMensaje("Error en la Tabla compraestado").$this->getError();
+            $this->setMensaje("Error en la Tabla compraestado").$baseDatos->getError();
         }// fin else
 
         return $salida; 
@@ -122,23 +123,23 @@ class CompraEstado extends BaseDatos{
      */
     public function insertar(){
         $salida=false; // inicializacion del valor de retorno
-        $id=$this->getId();// id de compra 
+        $baseDatos=new BaseDatos();
         $idCompra=$this->getObjCompra()->getId();
         $idCompraEstadoTipo=$this->getObjCompraEstadoTipo()->getId();
-        $sql="INSERT INTO compraestado (idcompraestado,idcompra,idcompraestadotipo,cefechaini,cefechafin)
-        VALUES ($id,$idCompra,$idCompraEstadoTipo,'".$this->getFechaInicio()."','".$this->getFechaFin()."');"; 
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        $sql="INSERT INTO compraestado (idcompra,idcompraestadotipo,cefechaini,cefechafin)
+        VALUES ($idCompra,$idCompraEstadoTipo,'".$this->getFechaInicio()."','".$this->getFechaFin()."');"; 
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if 
             else{
-                $this->setMensaje("compraestado - > Insertar").$this->getError();
+                $this->setMensaje("compraestado - > Insertar").$baseDatos->getError();
             }// fin else
 
         }// fin if 
         else{
-            $this->setMensaje("compraestado - > Insertar").$this->getError();
+            $this->setMensaje("compraestado - > Insertar").$baseDatos->getError();
 
         }// fin else
 
@@ -155,23 +156,24 @@ class CompraEstado extends BaseDatos{
         $salida=false;
         $idCompra=$this->getObjCompra()->getId();
         $idCompraEstadoTipo=$this->getObjCompraEstadoTipo()->getId();
+        $baseDatos=new BaseDatos();
 
         $sql="UPDATE compraestado SET idcompra=$idCompra, idcompraestadotipo=$idCompraEstadoTipo, cefechaini='".$this->getFechaInicio()."', cefechafin='".$this->getFechaFin()."' WHERE idcompraestado=".$this->getId();
 
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if 
             else{
-                $this->setMensaje("Tabla compraestado Modificar ").$this->getError();
+                $this->setMensaje("Tabla compraestado Modificar ").$baseDatos->getError();
 
             }// fin else
 
 
         } // fin if
         else{
-            $this->setMensaje("Tabla compraestado Modificar ").$this->getError();
+            $this->setMensaje("Tabla compraestado Modificar ").$baseDatos->getError();
 
         } // fin else
 
@@ -186,18 +188,19 @@ class CompraEstado extends BaseDatos{
     public function eliminar(){
         $salida=false;
         $sql="DELETE FROM compraestado WHERE idcompraestado=".$this->getId();
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        $baseDatos=new BaseDatos();
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if
             else{
-                $this->setMensaje("Tabla compraestado-> eliminar".$this->getError()); 
+                $this->setMensaje("Tabla compraestado-> eliminar".$baseDatos->getError()); 
             }// fin else
 
         }// fin if
         else{
-            $this->setMensaje("Tabla compraestado-> eliminar".$this->getError());
+            $this->setMensaje("Tabla compraestado-> eliminar".$baseDatos->getError());
         }// fin else
 
         return $salida; 
@@ -211,16 +214,17 @@ class CompraEstado extends BaseDatos{
      */
     public function listar($parametro=""){
         $arrayComprasEstados=array();
+        $baseDatos=new BaseDatos();
         $sql="SELECT * FROM compraestado";
         if($parametro!=""){
             $sql.=' WHERE'.$parametro;
         }// fin if 
-        if($this->Iniciar()){
-            $respuesta=$this->Ejecutar($sql);
+        if($baseDatos->Iniciar()){
+            $respuesta=$baseDatos->Ejecutar($sql);
             if($respuesta>-1){
                 if($respuesta>0){
                 // creo y cargo  obj usuario
-                    while($row=$this->Registro()){
+                    while($row=$baseDatos->Registro()){
                     // seteo el obj Compra
                     $objC=new Compra();
                     $objC->setId($row['idcompra']);

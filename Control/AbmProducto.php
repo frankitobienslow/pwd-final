@@ -37,10 +37,10 @@ class AbmProducto{
         $obj=null; 
         
         if(array_key_exists('idproducto',$datos) && array_key_exists('pronombre',$datos) 
-        && array_key_exists('prodetalle',$datos) && array_key_exists('procantstock',$datos) && array_key_exists('precio',$datos)){
+        && array_key_exists('prodetalle',$datos) && array_key_exists('procantstock',$datos)){
             
             $obj=new Producto();
-            $obj->setear($datos['idproducto'],$datos['pronombre'],$datos['prodetalle'],$datos['procantstock'],$datos['precio']);
+            $obj->setear($datos['idproducto'],$datos['pronombre'],$datos['prodetalle'],$datos['procantstock']);
             
         }// fin if 
         return $obj; 
@@ -56,7 +56,7 @@ class AbmProducto{
         $obj=null;
         if(isset($datos['idproducto'])){
             $obj=new Producto();
-            $obj->setear($datos['idproducto'],$datos['pronombre'],$datos['prodetalle'],$datos['procantstock'],$datos['precio']);
+            $obj->setear($datos['idproducto'],$datos['pronombre'],$datos['prodetalle'],$datos['procantstock']);
 
         }// fin if 
         return $obj;
@@ -70,7 +70,7 @@ class AbmProducto{
      */
     private function setadosCamposClaves($datos){
         $resp=false;
-        if(isset($datos['idproducto'],$datos['pronombre'],$datos['prodetalle'],$datos['procantstock'],$datos['precio'])){
+        if(isset($datos['idproducto'],$datos['pronombre'],$datos['prodetalle'],$datos['procantstock'])){
             $resp=true;
 
         }// fin if 
@@ -86,7 +86,9 @@ class AbmProducto{
      */
     public function alta($datos){
         $resp=false;
+        $datos['idproducto']=null;
         $objProducto=$this->cargarObjeto($datos);
+        //var_dump($datos);
         if($objProducto!=null && $objProducto->insertar()){
             $resp=true;
 

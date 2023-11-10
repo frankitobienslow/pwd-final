@@ -13,16 +13,18 @@ class AbmUsuarioRol
 
     private function cargarObjeto($param)
     {
-        //verEstructura($param);
+        //var_dump($param);
         $objUsuarioRol = null;
         $objRol = null;
         $objUsuario = null;
         //print_r($param);
-        if (array_key_exists('idRol', $param) && array_key_exists('idUsuario', $param)) {
+        if (array_key_exists('idrol', $param) && array_key_exists('idusuario', $param)) {
             $objRol = new Rol();
-            $objRol->setId($param['idRol']);
+            $objRol->setId($param['idrol']);
+            $objRol->cargar();
             $objUsuario = new Usuario();
-            $objUsuario->setId($param['idUsuario']);
+            $objUsuario->setId($param['idusuario']);
+            $objUsuario->cargar();
             $objUsuarioRol = new UsuarioRol();
             $objUsuarioRol->setear($objUsuario, $objRol);
         }
@@ -37,9 +39,9 @@ class AbmUsuarioRol
     {
         $objUsuarioRol = null;
         //print_R ($param);
-        if (isset($param['idUsuario']) && isset($param['idRol'])) {
+        if (isset($param['idusuario']) && isset($param['idrol'])) {
             $objUsuarioRol = new UsuarioRol();
-            $objUsuarioRol->setear($param['idUsuario'], $$param['idRol']);
+            $objUsuarioRol->setear($param['idusuario'], $$param['idrol']);
         }
         return $objUsuarioRol;
     }
@@ -55,10 +57,10 @@ class AbmUsuarioRol
     {
 
         $resp = false;
-        if (isset($param['idUsuario']) && isset($param['idRol']));
+        if (isset($param['idusuario']) && isset($param['idrol']));
         $resp = true;
         return $resp;
-    }
+    }// fin metodo
 
     /**
      *
@@ -69,15 +71,13 @@ class AbmUsuarioRol
         //  echo "entramos a alta";
         $resp = false;
         $objUsuarioRol = $this->cargarObjeto($param);
-        // verEstructura($elObjtAuto);
-        //print_r($objUsuarioRol);
         if ($objUsuarioRol != null) {
             if ($objUsuarioRol->insertar()) {
                 $resp = true;
             }
         }
         return $resp;
-    }
+    }// fin metodo 
 
     /**
      * permite eliminar un objeto
@@ -121,7 +121,7 @@ class AbmUsuarioRol
     /**
      * permite buscar un objeto
      * @param array $param
-     * @return boolean
+     * @return array
      */
 
     public function buscar($param)
@@ -138,42 +138,6 @@ class AbmUsuarioRol
         return $arreglo;
     }
 
-    public function darDescripcionRoles($arrayUsuarios){
-        $rolesUs = [];
-        foreach ($arrayUsuarios as $us) {
-            $param['idUsuario'] = $us->getIdUsuario();
-            array_push($rolesUs, $this->buscar($param)); 
-        }
-        $rolesDesc = [];
-        foreach ($rolesUs as $rolUs) {
-            $roles = [];
-            //aca me devuelve el array de roles de cada usuario:
-            foreach ($rolUs as $rolU) {
-                $rol = $rolU->getRol()->getRolDescripcion();
-                array_push($roles, $rol);
-            }
-            array_push($rolesDesc, $roles);
-        }
-        return $rolesDesc;
-    }
+  
 
-    public function darIdRoles($arrayUsuarios){
-        $rolesUs = [];
-        foreach ($arrayUsuarios as $us) {
-            $param['idUsuario'] = $us->getIdUsuario();
-            array_push($rolesUs, $this->buscar($param)); //esto me devuelve un array de objetos usuario +rol
-        }
-        $rolesId = [];
-        foreach ($rolesUs as $rolUs) {
-            $roles = [];
-            //aca me devuelve el array de roles de cada usuario:
-            foreach ($rolUs as $rolU) {
-                $rol = $rolU->getRol()->getIdRol();
-                array_push($roles, $rol);
-            }
-            array_push($rolesId, $roles);
-        }
-        return $rolesId;
-    }
-
-}
+}// fin clase AbmUsuarioRol

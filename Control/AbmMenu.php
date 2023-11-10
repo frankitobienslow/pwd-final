@@ -11,7 +11,7 @@ class AbmMenu{
     private function cargarObjeto($param){
         $obj = null;
            
-        if( array_key_exists('idmenu',$param) and array_key_exists('menombre',$param)){
+        if( array_key_exists('idmenu',$param) and array_key_exists('menombre',$param) and array_key_exists('medescripcion',$param) ){
             $obj = new Menu();
             $objmenu = null;
             if (isset($param['idpadre'])){
@@ -28,7 +28,7 @@ class AbmMenu{
             $obj->setear($param['idmenu'], $param['menombre'],$param['medescripcion'],$objmenu,$param['medeshabilitado']); 
         }
         return $obj;
-    }
+    }// fin metodo
     
     /**
      * Espera como parametro un arreglo asociativo donde las 
@@ -70,7 +70,7 @@ class AbmMenu{
         $param['medeshabilitado'] = null;
         $ObjMenu = $this->cargarObjeto($param);
 //        verEstructura($elObjtTabla);
-        if ($$ObjMenu!=null and $ObjMenu->insertar()){
+        if ($ObjMenu!=null and $ObjMenu->insertar()){
             $resp = true;
         }
       return $resp;
@@ -85,7 +85,7 @@ class AbmMenu{
         $resp = false;
       
         if ($this->seteadosCamposClaves($param)){
-            $$ObjMenu = $this->cargarObjetoConClave($param);
+            $ObjMenu = $this->cargarObjetoConClave($param);
             if ($ObjMenu!=null and $ObjMenu->eliminar()){
                 $resp = true;
             }
@@ -103,8 +103,11 @@ class AbmMenu{
        
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
-            $$ObjMenu = $this->cargarObjeto($param);
+            $ObjMenu = $this->cargarObjeto($param);
+            
+            //var_dump($ObjMenu->modificar());
             if($ObjMenu!=null and $ObjMenu->modificar()){
+                //echo("Entro al modificar");
                 $resp = true;
             }
         }
@@ -142,26 +145,7 @@ class AbmMenu{
     }// fin metodo buscar 
 
 
-        /** METODO USUARIO-ROL
-         * devueve los obj de menu y rol dentro de un array 
-     * @return array
-     */
-    public function listarMenuRol($param){
-        $$objMenuRol=new MenuRol();
-        $where=' true '; 
-        if($param!=null){
-            if(isset($param['idmenu'])){
-                $where.=" and idmenu='".$param['idmenu']."'";
-            }// fin if 
-            if(isset($param['idrol'])){
-                $where.=" and idrol='".$param['idrol']."'";
-            }// fin if 
 
-        }// fin if 
-        $arrayMenuRol=$objMenuRol->listar($where);
-        return $arrayMenuRol; 
-    }// fin function 
-    
 
 }// fin clase 
 

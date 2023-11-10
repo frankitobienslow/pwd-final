@@ -1,13 +1,13 @@
 <?php
 
-class MenuRol extends BaseDatos{
+class MenuRol{
     private $objMenu; 
     private $objRol; 
     private $mensaje; 
 
     // CONSTRUCTOR 
     public function __construct(){
-        parent::__construct(); 
+
         $this->objRol=new Rol();
         $this->objMenu=new Usuario();
     }// fin constructor 
@@ -45,24 +45,20 @@ class MenuRol extends BaseDatos{
         $this->mensaje=$msj;
     }// fin metodo set
 
-    // METODO SET CLAVE
-    /**Setea los id de rol y usuario dados por parametro */
-    public function setClave($idUsuario,$idRol){
-        $this->getObjRol()->setId($idRol);
-        $this->getObjMenu()->setId($idUsuario);
-    }// fin metodo setClave
+
 
     /**METODO CARGAR 
      * @return boolean
      */
     public function cargar(){
         $salida=false;
+        $baseDatos=new BaseDatos();
         $sql="SELECT * FROM menurol WHERE idrol=".$this->getObjRol()->getId()." AND idusuraio=".$this->getObjMenu()->getId().";";
-        if($this->Iniciar()){
-            $salida=$this->Ejecutar($sql);
+        if($baseDatos->Iniciar()){
+            $salida=$baseDatos->Ejecutar($sql);
             if($salida>-1){
                 if($salida>0){
-                    $row=$this->Registro();
+                    $row=$baseDatos->Registro();
                     $objM=new Menu();
                     $objM->setId($row['idmenu']);
                     $objM->cargar(); 
@@ -77,12 +73,41 @@ class MenuRol extends BaseDatos{
 
         }// fin if 
         else{
-            $this->setMensaje($this->getError());
+            $this->setMensaje($baseDatos->getError());
         }// fin else
 
         return $salida; 
 
     }// fin metodo cargar 
+
+        /** METODO INSERTAR 
+     * Ingresa un registro en la base de datos 
+     * @return boolean
+     */
+    public function insertar(){
+        $salida=false; // inicializacion del valor de retorno
+        $baseDatos=new BaseDatos();
+        $sql="INSERT INTO menurol (idmenu, idrol) VALUES (".$this->getObjMenu()->getId().",".$this->getObjRol()->getId().");";
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
+                $salida=true;
+
+            }// fin if 
+            else{
+                $this->setMensaje("menurol - > Insertar").$baseDatos->getError();
+            }// fin else
+
+        }// fin if 
+        else{
+            $this->setMensaje("menurol - > Insertar").$baseDatos->getError();
+
+        }// fin else
+
+        return $salida; 
+
+
+    }// fin function insertar 
+
 
     /** METODO MODIFICAR
      * La clase usuarioROl al ser un entidad debil en el modelo , no puede modificar a usuario o rol 
@@ -98,18 +123,19 @@ class MenuRol extends BaseDatos{
      */
     public function eliminar(){
         $salida=false;
+        $baseDatos=new BaseDatos();
         $sql="DELETE FROM menurol WHERE idrol=".$this->getObjRol()->getId()." AND idmenu=".$this->getObjMenu()->getId().";";
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
             }// fin if 
             else{
-                $this->setMensaje("Menu ->eliminar ".$this->getError()); 
+                $this->setMensaje("Menu ->eliminar ".$baseDatos->getError()); 
             }// fin else
 
         }// fin if 
         else{
-            $this->setMensaje("Menu ->eliminar ".$this->getError()); 
+            $this->setMensaje("Menu ->eliminar ".$baseDatos->getError()); 
 
         }// fin else
 
@@ -125,15 +151,16 @@ class MenuRol extends BaseDatos{
      */
     public function listar($parametro=""){
         $arrayUusarioRol=array();
+        $baseDatos=new BaseDatos();
         $sql="SELECT * FROM menurol";
         if($parametro!=""){
             $sql.=' WHERE '.$parametro; 
         }// fin if 
-        if($this->Iniciar()){
-            $salida=$this->Ejecutar($sql);
+        if($baseDatos->Iniciar()){
+            $salida=$baseDatos->Ejecutar($sql);
             if($salida>-1){
                 if($salida>0){
-                    while($row=$this->Registro()){
+                    while($row=$baseDatos->Registro()){
                         $obj=new MenuRol();
                         $obj->getObjMenu()->setId($row['idmenu']);
                         $obj->getObjRol()->setId($row['idrol']);
@@ -147,7 +174,7 @@ class MenuRol extends BaseDatos{
 
         }// fin if
         else{
-            $this->setMensaje("Menu -> listar: ".$this->getError());
+            $this->setMensaje("Menu -> listar: ".$baseDatos->getError());
         }// fin else
 
         return $arrayUusarioRol; 

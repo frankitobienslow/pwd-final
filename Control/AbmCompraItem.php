@@ -107,6 +107,7 @@ class AbmCompraItem{
      */
     public function alta($datos){
         $resp=false;
+        $datos['idcompraitem']=null;
         $objCI=$this->cargarObjeto($datos);
         if($objCI!=null && $objCI->insertar()){
             $resp=true;

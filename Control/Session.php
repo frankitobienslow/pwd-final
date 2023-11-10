@@ -34,7 +34,7 @@ class Session{
      */
     public function validar(){
         $salida=false; 
-        if(isset($_SESSION['idUser'])){ // pregunta si esta seteado el id del usuario para validarlo
+        if(isset($_SESSION['idUser']) && $this->activa()){ // pregunta si esta seteado el id del usuario para validarlo
             $salida=true; 
         }// fin if 
         return $salida; 
@@ -76,7 +76,7 @@ class Session{
         if($this->getUsuario()!=null){
             $userLog=$this->getUsuario(); // almacena el obj usuario  
             $datos['idusuario']=$userLog->getId(); // guarda el id de usuario 
-            $objRolUsuario=new AbmRolUsuario();
+            $objRolUsuario=new AbmUsuarioRol();
             $objRolesUsuarios=$objRolUsuario->buscar($datos); // busca en la tabla usuarioRol los roles que coincide con el id del usuario
         }// fin if 
         return $objRolesUsuarios;  // puede devolver una lista de usuarios con distintos roles o un solo usuario con un unico rol

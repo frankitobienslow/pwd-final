@@ -1,6 +1,6 @@
 <?php
 
-class CompraItem extends BaseDatos{
+class CompraItem{
 
     private $idItem;
     private $objProducto; 
@@ -73,12 +73,13 @@ class CompraItem extends BaseDatos{
     public function cargar(){
         $salida=false; 
         $sql="SELECT * FROM compraitem WHERE idcompraitem=".$this->getId();
-        if($this->Iniciar()){// inicializa la conexion
-            $salida=$this->Ejecutar($sql); 
+        $baseDatos=new BaseDatos();
+        if($baseDatos->Iniciar()){// inicializa la conexion
+            $salida=$baseDatos->Ejecutar($sql); 
             if($salida>-1){
                 if($salida>0){
                     $salida=true; 
-                    $R=$this->Registro(); // recupera los registros de la tabla  con la ID dada
+                    $R=$baseDatos->Registro(); // recupera los registros de la tabla  con la ID dada
                     $objC=new Compra(); // carga del obj con su id
                     $objC->setId($R['idcompra']);
                     $objC->cargar();
@@ -94,7 +95,7 @@ class CompraItem extends BaseDatos{
 
         }// fin if 
         else{
-            $this->setMensaje("Error en la Tabla compraitem").$this->getError();
+            $this->setMensaje("Error en la Tabla compraitem").$baseDatos->getError();
         }// fin else
 
         return $salida; 
@@ -107,23 +108,24 @@ class CompraItem extends BaseDatos{
      */
     public function insertar(){
         $salida=false; // inicializacion del valor de retorno
-        $id=$this->getId();// id de compra 
+         
         $idProducto=$this->getObjProducto()->getId();
         $idCompra=$this->getObjCompra()->getId();
-        $sql="INSERT INTO compraitem (idcompraitem,idproducto,idcompra,cicantidad)
-        VALUES ($id,$idProducto,$idCompra,".$this->getCantidad().");"; 
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        $baseDatos=new BaseDatos();
+        $sql="INSERT INTO compraitem (idproducto,idcompra,cicantidad)
+        VALUES ($idProducto,$idCompra,".$this->getCantidad().");"; 
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if 
             else{
-                $this->setMensaje("compraitem - > Insertar").$this->getError();
+                $this->setMensaje("compraitem - > Insertar").$baseDatos->getError();
             }// fin else
 
         }// fin if 
         else{
-            $this->setMensaje("compraitem - > Insertar").$this->getError();
+            $this->setMensaje("compraitem - > Insertar").$baseDatos->getError();
 
         }// fin else
 
@@ -142,22 +144,23 @@ class CompraItem extends BaseDatos{
         $salida=false;
         $idProducto=$this->getObjProducto()->getId();
         $idCompra=$this->getObjCompra()->getId();
+        $baseDatos=new BaseDatos();
         $sql="UPDATE compraitem SET idproducto=$idProducto, idcompra=$idCompra, cicantidad=".$this->getCantidad()." WHERE idcompraitem=".$this->getId();
 
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if 
             else{
-                $this->setMensaje("Tabla compraitem Modificar ").$this->getError();
+                $this->setMensaje("Tabla compraitem Modificar ").$baseDatos->getError();
 
             }// fin else
 
 
         } // fin if
         else{
-            $this->setMensaje("Tabla compraitem Modificar ").$this->getError();
+            $this->setMensaje("Tabla compraitem Modificar ").$baseDatos->getError();
 
         } // fin else
 
@@ -173,18 +176,19 @@ class CompraItem extends BaseDatos{
     public function eliminar(){
         $salida=false;
         $sql="DELETE FROM compraitem WHERE idcompraitem=".$this->getId();
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        $baseDatos=new BaseDatos();
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if
             else{
-                $this->setMensaje("Tabla compraitem-> eliminar".$this->getError()); 
+                $this->setMensaje("Tabla compraitem-> eliminar".$baseDatos->getError()); 
             }// fin else
 
         }// fin if
         else{
-            $this->setMensaje("Tabla compraitem-> eliminar".$this->getError());
+            $this->setMensaje("Tabla compraitem-> eliminar".$baseDatos->getError());
         }// fin else
 
         return $salida; 
@@ -199,16 +203,17 @@ class CompraItem extends BaseDatos{
      */
     public function listar($parametro=""){
         $arrayComprasItem=array();
+        $baseDatos=new BaseDatos();
         $sql="SELECT * FROM compraitem";
         if($parametro!=""){
             $sql.=' WHERE'.$parametro;
         }// fin if 
-        if($this->Iniciar()){
-            $respuesta=$this->Ejecutar($sql);
+        if($baseDatos->Iniciar()){
+            $respuesta=$baseDatos->Ejecutar($sql);
             if($respuesta>-1){
                 if($respuesta>0){
                 // creo y cargo  obj usuario
-                    while($row=$this->Registro()){
+                    while($row=$baseDatos->Registro()){
                     $objP=new Producto();
                     $objC=new Compra();
 

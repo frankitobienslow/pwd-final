@@ -1,6 +1,6 @@
 <?php
 
-class UsuarioRol extends BaseDatos{
+class UsuarioRol{
 
     private $objUsuario; 
     private $objRol; 
@@ -8,7 +8,7 @@ class UsuarioRol extends BaseDatos{
 
     // CONSTRUCTOR 
     public function __construct(){
-        parent::__construct(); 
+     
         $this->objRol=new Rol();
         $this->objUsuario=new Usuario();
     }// fin constructor 
@@ -58,12 +58,13 @@ class UsuarioRol extends BaseDatos{
      */
     public function cargar(){
         $salida=false;
+        $baseDatos=new BaseDatos();
         $sql="SELECT * FROM usuariorol WHERE idrol=".$this->getObjRol()->getId()." AND idusuario=".$this->getObjUsuario()->getId().";";
-        if($this->Iniciar()){
-            $salida=$this->Ejecutar($sql);
+        if($baseDatos->Iniciar()){
+            $salida=$baseDatos->Ejecutar($sql);
             if($salida>-1){
                 if($salida>0){
-                    $row=$this->Registro();
+                    $row=$baseDatos->Registro();
                     $objU=new Usuario();
                     $objU->setId($row['idusuario']);
                     $objU->cargar(); 
@@ -78,12 +79,46 @@ class UsuarioRol extends BaseDatos{
 
         }// fin if 
         else{
-            $this->setMensaje($this->getError());
+            $this->setMensaje($baseDatos->getError());
         }// fin else
 
         return $salida; 
 
     }// fin metodo cargar 
+
+
+    /** METODO INSERTAR 
+     * Ingresa un registro en la base de datos 
+     * @return boolean
+     */
+    public function insertar(){
+        $salida=false; // inicializacion del valor de retorno
+        $baseDatos=new BaseDatos();
+        $sql="INSERT INTO usuariorol (idusuario, idrol) 
+        VALUES (".$this->getObjUsuario()->getId().",".$this->getObjRol()->getId().");";
+        //echo($sql);
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
+                $salida=true;
+
+            }// fin if 
+            else{
+                $this->setMensaje("menurol - > Insertar").$baseDatos->getError();
+            }// fin else
+
+        }// fin if 
+        else{
+            $this->setMensaje("menurol - > Insertar").$baseDatos->getError();
+
+        }// fin else
+
+        return $salida; 
+
+
+    }// fin function insertar 
+
+
+
 
     /** METODO MODIFICAR
      * La clase usuarioROl al ser un entidad debil en el modelo , no puede modificar a usuario o rol 
@@ -99,18 +134,19 @@ class UsuarioRol extends BaseDatos{
      */
     public function eliminar(){
         $salida=false;
+        $baseDatos=new BaseDatos();
         $sql="DELETE FROM usuariorol WHERE idrol=".$this->getObjRol()->getId()." AND idusuario=".$this->getObjUsuario()->getId().";";
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
             }// fin if 
             else{
-                $this->setMensaje("Usuario ->eliminar ".$this->getError()); 
+                $this->setMensaje("Usuario ->eliminar ".$baseDatos->getError()); 
             }// fin else
 
         }// fin if 
         else{
-            $this->setMensaje("Usuario ->eliminar ".$this->getError()); 
+            $this->setMensaje("Usuario ->eliminar ".$baseDatos->getError()); 
 
         }// fin else
 
@@ -126,17 +162,18 @@ class UsuarioRol extends BaseDatos{
      */
     public function listar($parametro=""){
         $arrayUusarioRol=array();
+        $baseDatos=new BaseDatos();
         $sql="SELECT * FROM usuariorol";
         if($parametro!=""){
             $sql.=' WHERE '.$parametro; 
         }// fin if 
-        if($this->Iniciar()){
+        if($baseDatos->Iniciar()){
             print_r("entro");
-            $salida=$this->Ejecutar($sql);
-            var_dump($salida);
+            $salida=$baseDatos->Ejecutar($sql);
+            //var_dump($salida);
             if($salida>-1){
                 if($salida>0){
-                    while($row=$this->Registro()){
+                    while($row=$baseDatos->Registro()){
                         $obj=new UsuarioRol();
                         $obj->getObjUsuario()->setId($row['idusuario']);
                         $obj->getObjRol()->setId($row['idrol']);
@@ -150,7 +187,7 @@ class UsuarioRol extends BaseDatos{
 
         }// fin if
         else{
-            $this->setMensaje("Usuario -> listar: ".$this->getError());
+            $this->setMensaje("Usuario -> listar: ".$baseDatos->getError());
         }// fin else
 
         return $arrayUusarioRol; 

@@ -1,6 +1,6 @@
 <?php 
 
-class Menu extends BaseDatos{
+class Menu{
     // ver el ejemplo de menus dinamicos 
     // ATRIBUTOS 
     private $idMenu;
@@ -14,7 +14,7 @@ class Menu extends BaseDatos{
     // CONSTRUCTOR 
     public function __construct()
     {
-        $this->idMenu=0;
+        $this->idMenu="";
         $this->nombreMenu="";
         $this->descripcionMenu="";
         $this->idPadre=0;
@@ -25,11 +25,11 @@ class Menu extends BaseDatos{
     }// fin constructor 
 
     // METODO SETEAR 
-    public function setear($idMenu,$nombre,$descrip,$idPadre,$deshab){
+    public function setear($idMenu,$nombre,$descrip,$objMenu,$deshab){
         $this->idMenu=$idMenu;
         $this->nombreMenu=$nombre;
         $this->descripcionMenu=$descrip;
-        $this->idPadre=$idPadre;
+        $this->objMenu=$objMenu;
         $this->deshabilitado=$deshab;
 
     }// fin metodo setear
@@ -102,16 +102,19 @@ class Menu extends BaseDatos{
     public function cargar(){
         $salida=false; // inicializacion del valor de retorno
         $sql = "SELECT * FROM menu WHERE idmenu=".$this->getId();
-        if($this->Iniciar()){// inicializa la conexion
-            $salida=$this->Ejecutar($sql); 
+        $baseDatos=new BaseDatos();
+        if($baseDatos->Iniciar()){// inicializa la conexion
+            $salida=$baseDatos->Ejecutar($sql); 
             if($salida>-1){
                 if($salida>0){
                     $salida=true; 
-                    $R=$this->Registro(); // recupera los registros de la tabla  con la ID dada
-                    $objMenu=new Menu();
-                    $objMenu->setId($R['idpadre']);
-                    $objMenu->cargar(); 
-                    
+                    $objMenu=null;
+                    $R=$baseDatos->Registro(); // recupera los registros de la tabla  con la ID dada
+                    if($R['idpadre']!=null or $R['idpadre']!=""){
+                        $objMenu=new Menu();
+                        $objMenu->setId($R['idpadre']);
+                        $objMenu->cargar();
+                    }// fin if 
                     $this->setear($R['idmenu'],$R['menombre'],$R['medescripcion'],$objMenu,$R['medeshabilitado']);
 
                 }// fin if 
@@ -121,7 +124,7 @@ class Menu extends BaseDatos{
 
         }// fin if 
         else{
-            $this->setMensaje("Error en la Tabla menu").$this->getError();
+            $this->setMensaje("Error en la Tabla menu").$baseDatos->getError();
         }// fin else
 
         return $salida; 
@@ -167,9 +170,10 @@ class Menu extends BaseDatos{
      */
     public function modificar(){
         $salida=false;
+        $baseDatos=new BaseDatos();
         $sql="UPDATE menu SET menombre='".$this->getNombre()."', medescripcion='".$this->getDescripcion()."'";
         if($this->getObjMenu()!=null){
-            $sql.=" ,idpadre".$this->getObjMenu()->getId();
+            $sql.=" ,idpadre=".$this->getObjMenu()->getId();
 
         }// fin if 
         else{
@@ -184,22 +188,26 @@ class Menu extends BaseDatos{
             $sql.=" WHERE idmenu=".$this->getId();
         }// fin else
 
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        
+        if($baseDatos->Iniciar()){
+            //echo($sql);
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if 
             else{
-                $this->setMensaje("Tabla menu Modificar ").$this->getError();
+                $this->setMensaje("Tabla menu Modificar ").$baseDatos->getError();
 
             }// fin else
 
 
         } // fin if
         else{
-            $this->setMensaje("Tabla menu Modificar ").$this->getError();
+            $this->setMensaje("Tabla menu Modificar ").$baseDatos->getError();
 
         } // fin else
+        //
+        //var_dump($salida);
 
         return $salida; 
 
@@ -214,18 +222,19 @@ class Menu extends BaseDatos{
     public function eliminar(){
         $salida=false;
         $sql="DELETE FROM menu WHERE idmenu=".$this->getId();
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        $baseDatos=new BaseDatos();
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if
             else{
-                $this->setMensaje("Tabla menu-> eliminar".$this->getError()); 
+                $this->setMensaje("Tabla menu-> eliminar".$baseDatos->getError()); 
             }// fin else
 
         }// fin if
         else{
-            $this->setMensaje("Tabla menu-> eliminar".$this->getError());
+            $this->setMensaje("Tabla menu-> eliminar".$baseDatos->getError());
         }// fin else
 
         return $salida; 
@@ -240,18 +249,19 @@ class Menu extends BaseDatos{
      */
     public function listar($parametro=""){
         $arrayMenus=array();
+        $baseDatos=new BaseDatos();
         $sql="SELECT * FROM menu";
         if($parametro!=""){
             $sql.=' WHERE'.$parametro;
         }// fin if 
         
-        if($this->Iniciar()){
+        if($baseDatos->Iniciar()){
            
-            $respuesta=$this->Ejecutar($sql);
+            $respuesta=$baseDatos->Ejecutar($sql);
             if($respuesta>-1){
                 if($respuesta>0){
                     
-                    while($row=$this->Registro()){
+                    while($row=$baseDatos->Registro()){
                     $obj=new Menu();
                     $objPadre=null;
                     if($row['idpadre']!=null){
@@ -269,10 +279,6 @@ class Menu extends BaseDatos{
         }// fin if 
         return $arrayMenus; 
     }// fin function listar
-
-    /**METODO  */
-
-
 
 
 }// fin clase 

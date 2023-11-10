@@ -1,6 +1,6 @@
 <?php
 
-class Usuario extends BaseDatos {
+class Usuario{
     // ATRIBUTOS 
     private $idusuario; 
     private $usnombre; 
@@ -13,7 +13,7 @@ class Usuario extends BaseDatos {
 
     // CONSTRUSTOR 
     public function __construct(){
-        parent::__construct();
+
         $this->idusuario=0;
         $this->usnombre="";
         $this->uspass="";
@@ -97,13 +97,14 @@ class Usuario extends BaseDatos {
      */
     public function cargar(){
         $salida=false; // inicializacion del valor de retorno
+        $baseDatos=new BaseDatos();
         $sql = "SELECT * FROM usuario WHERE idusuario=".$this->getId();
-        if($this->Iniciar()){// inicializa la conexion
-            $salida=$this->Ejecutar($sql); 
+        if($baseDatos->Iniciar()){// inicializa la conexion
+            $salida=$baseDatos->Ejecutar($sql); 
             if($salida>-1){
                 if($salida>0){
                     $salida=true; 
-                    $R=$this->Registro(); // recupera los registros de la tabla  con la ID dada
+                    $R=$baseDatos->Registro(); // recupera los registros de la tabla  con la ID dada
                     
                     $this->setear($R['idusuario'],$R['usnombre'],$R['uspass'],$R['usmail'],$R['usdeshabilitado']);
 
@@ -114,7 +115,7 @@ class Usuario extends BaseDatos {
 
         }// fin if 
         else{
-            $this->setMensaje("Error en la Tabla usuario").$this->getError();
+            $this->setMensaje("Error en la Tabla usuario").$baseDatos->getError();
         }// fin else
 
         return $salida; 
@@ -127,6 +128,7 @@ class Usuario extends BaseDatos {
      */
     public function insertar(){
         $salida=false; // inicializacion del valor de retorno
+        $baseDatos=new BaseDatos();
         $sql="INSERT INTO usuario(usnombre, uspass, usmail, usdeshabilitado) 
             VALUES ('".
                 $this->getNombre()."','".
@@ -135,18 +137,18 @@ class Usuario extends BaseDatos {
                 $this->getDeshabilitado().
                 "');"; 
 
-        if($this->Iniciar()){
-            if($elid = $this->Ejecutar($sql)){
+        if($baseDatos->Iniciar()){
+            if($elid = $baseDatos->Ejecutar($sql)){
                 $this->setId($elid);
                 $salida=true;
             }// fin if 
             else{
-                $this->setMensaje("usuario -> Insertar").$this->getError();
+                $this->setMensaje("usuario -> Insertar").$baseDatos->getError();
             }// fin else
 
         }// fin if 
         else{
-            $this->setMensaje("usuario -> Insertar").$this->getError();
+            $this->setMensaje("usuario -> Insertar").$baseDatos->getError();
 
         }// fin else
 
@@ -161,22 +163,25 @@ class Usuario extends BaseDatos {
      */
     public function modificar(){
         $salida=false;
-        $sql="UPDATE usuario SET usnombre='".$this->getNombre()."', uspass=".$this->getPassword().", usdeshabilitado='".$this->getDeshabilitado()."' WHERE idusuario=".$this->getId();
+        $baseDatos=new BaseDatos();
+        $sql="UPDATE usuario SET usnombre='".$this->getNombre().
+        "', uspass='".$this->getPassword()."', usmail='".$this->getMail()."', usdeshabilitado='".$this->getDeshabilitado().
+        "' WHERE idusuario=".$this->getId();
 
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if 
             else{
-                $this->setMensaje("Tabla usuario Modificar ").$this->getError();
+                $this->setMensaje("Tabla usuario Modificar ").$baseDatos->getError();
 
             }// fin else
 
 
         } // fin if
         else{
-            $this->setMensaje("Tabla usuario Modificar ").$this->getError();
+            $this->setMensaje("Tabla usuario Modificar ").$baseDatos->getError();
 
         } // fin else
 
@@ -191,19 +196,20 @@ class Usuario extends BaseDatos {
      */
     public function eliminar(){
         $salida=false;
+        $baseDatos=new BaseDatos();
         $sql="DELETE FROM usuario WHERE idusuario=".$this->getId();
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if
             else{
-                $this->setMensaje("Tabla usuario-> eliminar".$this->getError()); 
+                $this->setMensaje("Tabla usuario-> eliminar".$baseDatos->getError()); 
             }// fin else
 
         }// fin if
         else{
-            $this->setMensaje("Tabla usuario-> eliminar".$this->getError());
+            $this->setMensaje("Tabla usuario-> eliminar".$baseDatos->getError());
         }// fin else
 
         return $salida; 
@@ -218,18 +224,19 @@ class Usuario extends BaseDatos {
      */
     public function listar($parametro=""){
         $arrayUsuarios=array();
+        $baseDatos=new BaseDatos();
         $sql="SELECT * FROM usuario";
         if($parametro!=""){
             $sql.=' WHERE'.$parametro;
         }// fin if 
         
-        if($this->Iniciar()){
+        if($baseDatos->Iniciar()){
            
-            $respuesta=$this->Ejecutar($sql);
+            $respuesta=$baseDatos->Ejecutar($sql);
             if($respuesta>-1){
                 if($respuesta>0){
                     
-                    while($row=$this->Registro()){
+                    while($row=$baseDatos->Registro()){
                     $obj=new Usuario();
                     $obj->setear($row['idusuario'],$row['usnombre'],$row['uspass'],$row['usmail'],$row['usdeshabilitado']);
                     array_push($arrayUsuarios,$obj);   

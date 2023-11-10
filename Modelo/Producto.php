@@ -1,34 +1,34 @@
 <?php
 
 
-class Producto extends BaseDatos{
+class Producto{
 
     private $idProducto;
     private $nombre; 
     private $detalle; 
     private $cantStock; 
-    private $precio; 
+   // private $precio; 
     private $mensaje; 
 
     // METODO CONSTRUCTOR 
     public function __construct()
     {
-        parent::__construct(); 
+
         $this->idProducto=0;
         $this->nombre=""; 
         $this->detalle="";
         $this->cantStock=0; 
         $this->mensaje=""; 
-        $this->precio=0; 
+        //$this->precio=0; 
     }// fin metodo constructor 
 
     // METODO SETEAR 
-    public function setear ($id,$nombre,$detalle,$stock,$precio){
+    public function setear ($id,$nombre,$detalle,$stock){
         $this->idProducto=$id;
         $this->nombre=$nombre;
         $this->detalle=$detalle;
         $this->setStock($stock); 
-        $this->precio=$precio; 
+        //$this->precio=$precio; 
 
     }// fin metodo setear 
 
@@ -49,9 +49,9 @@ class Producto extends BaseDatos{
         return $this->cantStock; 
     }// fin metodo get
 
-    public function getPrecio(){
-        return $this->precio; 
-    }// fin metodo get
+   // public function getPrecio(){
+     //   return $this->precio; 
+    //}// fin metodo get
 
     public function getMensaje(){
         return $this->mensaje; 
@@ -74,9 +74,9 @@ class Producto extends BaseDatos{
         $this->cantStock=$cant;
     }// fin metodo set
 
-    public function setPrecio($precio){
-        $this->precio=$precio;
-    }// fin metodo set
+    //public function setPrecio($precio){
+      //  $this->precio=$precio;
+    //}// fin metodo set
 
     public function setMensaje($msj){
         $this->mensaje=$msj;
@@ -87,15 +87,16 @@ class Producto extends BaseDatos{
      */
     public function cargar(){
         $salida=false;
+        $baseDatos=new BaseDatos();
         $sql="SELECT * FROM producto WHERE idproducto=".$this->getId();
-        if($this->Iniciar()){// inicializa la conexion
-            $salida=$this->Ejecutar($sql); 
+        if($baseDatos->Iniciar()){// inicializa la conexion
+            $salida=$baseDatos->Ejecutar($sql); 
             if($salida>-1){
                 if($salida>0){
                     $salida=true; 
-                    $R=$this->Registro(); // recupera los registros de la tabla  con la ID dada
+                    $R=$baseDatos->Registro(); // recupera los registros de la tabla  con la ID dada
                     
-                    $this->setear($R['idproducto'],$R['pronombre'],$R['prodetalle'],$R['procantstock0'],$R['precio']);
+                    $this->setear($R['idproducto'],$R['pronombre'],$R['prodetalle'],$R['procantstock']);
 
                 }// fin if 
 
@@ -104,7 +105,7 @@ class Producto extends BaseDatos{
 
         }// fin if 
         else{
-            $this->setMensaje("Error en la Tabla producto").$this->getError();
+            $this->setMensaje("Error en la Tabla producto").$baseDatos->getError();
         }// fin else
 
         return $salida; 
@@ -117,25 +118,26 @@ class Producto extends BaseDatos{
      */
     public function insertar(){
         $salida=false; // inicializacion del valor de retorno
-        $id=$this->getId();
-        $precio=$this->getPrecio(); 
-        $sql="INSERT INTO producto (idproducto,pronombre,prodetalle,procantstock,precio)
-        VALUES ($id,'".$this->getNombre()."','".$this->getDetalle()."',".$this->getStock().",$precio);"; 
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        //$id=$this->getId();
+        $baseDatos=new BaseDatos();
+        
+        $sql="INSERT INTO producto (pronombre,prodetalle,procantstock)
+        VALUES ('".$this->getNombre()."','".$this->getDetalle()."',".$this->getStock().");"; 
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if 
             else{
-                $this->setMensaje("producto - > Insertar").$this->getError();
+                $this->setMensaje("producto - > Insertar").$baseDatos->getError();
             }// fin else
 
         }// fin if 
         else{
-            $this->setMensaje("producto - > Insertar").$this->getError();
+            $this->setMensaje("producto - > Insertar").$baseDatos->getError();
 
         }// fin else
-
+        
         return $salida; 
 
 
@@ -147,23 +149,25 @@ class Producto extends BaseDatos{
      */
     public function modificar(){
         $salida=false;
-        $sql="UPDATE producto SET pronombre='".$this->getNombre()."', prodetalle=".$this->getDetalle().", 
-        procantstock=".$this->getStock().", precio=".$this->getPrecio()."  WHERE idproducto=".$this->getId();
+        $baseDatos=new BaseDatos();
+        var_dump($this->getNombre());
+        $sql="UPDATE producto SET pronombre='".$this->getNombre()."', prodetalle='".$this->getDetalle()."', 
+        procantstock=".$this->getStock()."  WHERE idproducto=".$this->getId();
 
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if 
             else{
-                $this->setMensaje("Tabla producto Modificar ").$this->getError();
+                $this->setMensaje("Tabla producto Modificar ").$baseDatos->getError();
 
             }// fin else
 
 
         } // fin if
         else{
-            $this->setMensaje("Tabla producto Modificar ").$this->getError();
+            $this->setMensaje("Tabla producto Modificar ").$baseDatos->getError();
 
         } // fin else
 
@@ -178,19 +182,20 @@ class Producto extends BaseDatos{
      */
     public function eliminar(){
         $salida=false;
+        $baseDatos=new BaseDatos();
         $sql="DELETE FROM producto WHERE idproducto=".$this->getId();
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if
             else{
-                $this->setMensaje("Tabla producto-> eliminar".$this->getError()); 
+                $this->setMensaje("Tabla producto-> eliminar".$baseDatos->getError()); 
             }// fin else
 
         }// fin if
         else{
-            $this->setMensaje("Tabla producto-> eliminar".$this->getError());
+            $this->setMensaje("Tabla producto-> eliminar".$baseDatos->getError());
         }// fin else
 
         return $salida; 
@@ -205,20 +210,21 @@ class Producto extends BaseDatos{
      */
     public function listar($parametro=""){
         $arrayProductos=array();
+        $baseDatos=new BaseDatos();
         $sql="SELECT * FROM producto ";
         //
         if($parametro!=""){
             $sql.=' WHERE '.$parametro;
         }// fin if 
-        if($this->Iniciar()){
-            $respuesta=$this->Ejecutar($sql);
+        if($baseDatos->Iniciar()){
+            $respuesta=$baseDatos->Ejecutar($sql);
             if($respuesta>-1){
                 if($respuesta>0){
                     
-                    while($row=$this->Registro()){
+                    while($row=$baseDatos->Registro()){
                     $obj=new Producto();
 
-                    $obj->setear($row['idproducto'],$row['pronombre'],$row['prodetalle'],$row['procantstock'],$row['precio']);
+                    $obj->setear($row['idproducto'],$row['pronombre'],$row['prodetalle'],$row['procantstock']);
                      
                     array_push($arrayProductos,$obj); 
                     //var_dump($row['procantstock']);

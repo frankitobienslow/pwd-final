@@ -1,6 +1,6 @@
 <?php
 
-class CompraEstadoTipo extends BaseDatos{
+class CompraEstadoTipo{
 
     private $id; 
     private $descripcion;
@@ -66,13 +66,14 @@ class CompraEstadoTipo extends BaseDatos{
      */
     public function cargar(){
         $salida=false; // inicializacion del valor de retorno
-        $sql = "SELECT * FROM compraestadotiop WHERE idcompraestadotipo=".$this->getId();
-        if($this->Iniciar()){// inicializa la conexion
-            $salida=$this->Ejecutar($sql); 
+        $sql = "SELECT * FROM compraestadotipo WHERE idcompraestadotipo=".$this->getId();
+        $baseDatos=new BaseDatos();
+        if($baseDatos->Iniciar()){// inicializa la conexion
+            $salida=$baseDatos->Ejecutar($sql); 
             if($salida>-1){
                 if($salida>0){
                     $salida=true; 
-                    $R=$this->Registro(); // recupera los registros de la tabla  con la ID dada
+                    $R=$baseDatos->Registro(); // recupera los registros de la tabla  con la ID dada
                     
                     $this->setear($R['idcompraestadotipo'],$R['cetdescripcion'],$R['cetdetalle']);
 
@@ -83,7 +84,7 @@ class CompraEstadoTipo extends BaseDatos{
 
         }// fin if 
         else{
-            $this->setMensaje("Error en la Tabla compraestadotipo").$this->getError();
+            $this->setMensaje("Error en la Tabla compraestadotipo").$baseDatos->getError();
         }// fin else
 
         return $salida; 
@@ -96,21 +97,23 @@ class CompraEstadoTipo extends BaseDatos{
      */
     public function insertar(){
         $salida=false; // inicializacion del valor de retorno
-        $id=$this->getId();
-        $sql="INSERT INTO usuario (idcompraestadotipo,cetdescripcion,cetdetalle)
-        VALUES ($id,'".$this->getDescripcion()."','".$this->getDetalle()."');"; 
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        //$id=$this->getId();
+        $baseDatos=new BaseDatos();
+        $sql="INSERT INTO compraestadotipo (cetdescripcion,cetdetalle)
+        VALUES ('".$this->getDescripcion()."','".$this->getDetalle()."');"; 
+        //echo($sql);
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if 
             else{
-                $this->setMensaje("compraestadotipo - > Insertar").$this->getError();
+                $this->setMensaje("compraestadotipo - > Insertar").$baseDatos->getError();
             }// fin else
 
         }// fin if 
         else{
-            $this->setMensaje("compraestadotipo - > Insertar").$this->getError();
+            $this->setMensaje("compraestadotipo - > Insertar").$baseDatos->getError();
 
         }// fin else
 
@@ -126,21 +129,21 @@ class CompraEstadoTipo extends BaseDatos{
     public function modificar(){
         $salida=false;
         $sql="UPDATE compraestadotipo SET cetdescripcion='".$this->getDescripcion()."', cetdetalle='".$this->getDetalle()."' WHERE idcompraestadotipo=".$this->getId();
-
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        $baseDatos=new BaseDatos();
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if 
             else{
-                $this->setMensaje("Tabla compraestadotipo Modificar ").$this->getError();
+                $this->setMensaje("Tabla compraestadotipo Modificar ").$baseDatos->getError();
 
             }// fin else
 
 
         } // fin if
         else{
-            $this->setMensaje("Tabla compraestadotipo Modificar ").$this->getError();
+            $this->setMensaje("Tabla compraestadotipo Modificar ").$baseDatos->getError();
 
         } // fin else
 
@@ -156,18 +159,19 @@ class CompraEstadoTipo extends BaseDatos{
     public function eliminar(){
         $salida=false;
         $sql="DELETE FROM compraestadotipo WHERE idcompraestadotipo=".$this->getId();
-        if($this->Iniciar()){
-            if($this->Ejecutar($sql)){
+        $baseDatos=new BaseDatos();
+        if($baseDatos->Iniciar()){
+            if($baseDatos->Ejecutar($sql)){
                 $salida=true;
 
             }// fin if
             else{
-                $this->setMensaje("Tabla compraestadotipo-> eliminar".$this->getError()); 
+                $this->setMensaje("Tabla compraestadotipo-> eliminar".$baseDatos->getError()); 
             }// fin else
 
         }// fin if
         else{
-            $this->setMensaje("Tabla compraestadotipo-> eliminar".$this->getError());
+            $this->setMensaje("Tabla compraestadotipo-> eliminar".$baseDatos->getError());
         }// fin else
 
         return $salida; 
@@ -186,14 +190,14 @@ class CompraEstadoTipo extends BaseDatos{
         if($parametro!=""){
             $sql.=' WHERE'.$parametro;
         }// fin if 
-        
-        if($this->Iniciar()){
+        $baseDatos=new BaseDatos();
+        if($baseDatos->Iniciar()){
            
-            $respuesta=$this->Ejecutar($sql);
+            $respuesta=$baseDatos->Ejecutar($sql);
             if($respuesta>-1){
                 if($respuesta>0){
                     
-                    while($row=$this->Registro()){
+                    while($row=$baseDatos->Registro()){
                     $obj=new CompraEstadoTipo();
                     $obj->setear($row['idcompraestadotipo'],$row['cetdescripcion'],$row['cetdetalle']);
                     array_push($arrayUsuarios,$obj);   

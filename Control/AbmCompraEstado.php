@@ -36,7 +36,7 @@ class AbmCompraEstado{
      */
     private function cargarObjeto($datos){
         $obj=null; 
-        
+        //var_dump($datos);
         if(array_key_exists('idcompraestado',$datos) && array_key_exists('idcompra',$datos) 
         && array_key_exists('idcompraestadotipo',$datos) && array_key_exists('cefechaini',$datos) 
         && array_key_exists('cefechafin',$datos) ){
@@ -45,17 +45,18 @@ class AbmCompraEstado{
             $objC=new Compra();
             $objC->setId($datos['idcompra']); 
             $objC->cargar(); 
-
+            
             // creo el obj compraestadotipo
             $objCET=new CompraEstadoTipo();
             $objCET->setId($datos['idcompraestadotipo']);
             $objCET->cargar();
-
+        
             // creo al obj compra 
             $obj=new CompraEstado();
             $obj->setear($datos['idcompraestado'],$objC,$objCET,$datos['cefechaini'],$datos['cefechafin']);
-            
+               
         }// fin if 
+
         return $obj; 
     }// fin function 
 
@@ -94,12 +95,13 @@ class AbmCompraEstado{
      */
     private function setadosCamposClaves($datos){
         $resp=false;
-        if(isset($datos['idcompraestado']) && isset($datos['idcompra']) && isset($datos['compraestadotipo']) 
-        && isset($datos['cefechaini']) && isset($datos['cefechafin'])){
-            $resp=true;
-
-        }// fin if 
-
+        
+        //var_dump(isset($datos['cefechafin'])); // OJO!!!! isset si la variable es null, dará falso 
+        if(array_key_exists('idcompraestado',$datos) && array_key_exists('idcompraestadotipo',$datos)
+        && array_key_exists('idcompra',$datos) && array_key_exists('cefechaini',$datos) && array_key_exists('cefechafin',$datos)){
+            $resp=true; 
+        }
+        
         return $resp;
 
     }// fin function 
@@ -111,7 +113,11 @@ class AbmCompraEstado{
      */
     public function alta($datos){
         $resp=false;
+        
+        $datos['idcompraestado']=null;
+        //var_dump($datos);
         $objCompraEstado=$this->cargarObjeto($datos);
+        
         if($objCompraEstado!=null && $objCompraEstado->insertar()){
             $resp=true;
         }// fin if 
@@ -147,8 +153,10 @@ class AbmCompraEstado{
      */
     public function modificacion($datos){
         $resp=false;
+        
         if($this->setadosCamposClaves($datos)){
             $objCompraEstado=$this->cargarObjeto($datos);
+            
             if($objCompraEstado!=null && $objCompraEstado->modificar()){
                 $resp=true; 
 

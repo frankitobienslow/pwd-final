@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `compra` (
-  `idcompra` bigint(20) NOT NULL,
+  `idcompra` bigint(20) NOT NULL AUTO_INCREMENT
   `cofecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `idusuario` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -105,9 +105,6 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (62, 'editar', './menu/index.php', 6, NULL),
 (63, 'eliminar', './menu/index.php', 6, NULL);
 
--- --------------------------------------------------------
-=======
->>>>>>> cfb6ab89634496c956dd803e5e9346e6fcdb7e83
 
 --
 -- Estructura de tabla para la tabla `menurol`
