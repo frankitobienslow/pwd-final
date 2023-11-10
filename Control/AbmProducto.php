@@ -31,7 +31,7 @@ class AbmProducto{
     /**
      * Espera un Array asociativo y devuelve el obj de la tabla
      * @param array $datos
-     * @return object
+     * @return Producto
      */
     private function cargarObjeto($datos){
         $obj=null; 
@@ -50,7 +50,7 @@ class AbmProducto{
     /**
      * Espera como parametro un array asociativo donde las claves coinciden  con los atributos 
      * @param array $datos
-     * @return obj
+     * @return Producto
      */
     private function cargarObjetoConClave($datos){
         $obj=null;
@@ -66,7 +66,7 @@ class AbmProducto{
     /**
      * corrobora que dentro del array asociativo estan seteados los campos
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     private function setadosCamposClaves($datos){
         $resp=false;
@@ -101,7 +101,7 @@ class AbmProducto{
     /**
      * METDO ELIMINAR
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     public function baja($datos){
         $resp=false;

@@ -1,19 +1,21 @@
 <?php
 include_once '../../configuracion.php';
-$Titulo = "Compras";
+$Titulo = "Usuario Rol";
 include_once '../estructura/header.php';
 
 $objAbmUsuario = new AbmUsuario();
 $listaUsuario = $objAbmUsuario->buscar(null);
+$objAbmRol = new AbmRol();
+$listaRol = $objAbmRol->buscar(null);
 
 
-$objCompra=new AbmCompra();
+$objUsuarioRol=new AbmUsuarioRol();
 $datos=data_submitted();
 $obj=null; 
-if(isset($datos['idCompra'])){
-    $listaCompras=$objCompra->buscar($datos);
-    if(count($listaCompras)==1){
-        $obj=$listaCompras[0];
+if(isset($datos['id'])){
+    $listaUsuarioRol=$objUsuarioRol->buscar($datos);
+    if(count($listaUsuarioRol)==1){
+        $obj=$listaUsuarioRol[0];
     }// fin if 
 
 }// fin if 
@@ -21,33 +23,24 @@ if(isset($datos['idCompra'])){
 
 <?php  if($obj!=null){?>
     <div class="container mt-3">
-        <form action="accionCompra.php" method="post">
-            <label for="id" style="width:120px">Codigo ID</label>
-            <input type="number" name="idCompra" id="idCompra" readonly value="<?php echo($obj->getidCompra()) ?>"><br>
-            <label for="nombreCompra" style="width:120px"> Compra</label>
-            <input type="text" name="nombreCompra" id="nombreCompra" value="<?php echo($obj->getnombreCompra()) ?>"><br>
-            <label for="precio" style="width:120px"> Precio</label>
-            <input type="text" name="precio" id="precio" value="<?php echo($obj->getprecio()) ?>"><br>
-            <label for="Usuario" style="width:120px"> Id Usuario</label>
-      
-            <select id="idUsuario" name="idUsuario">
-                <option value="<?php echo($obj->getobjUsuario()->getidUsuario())?>"><?php echo($obj->getobjUsuario()->getnombreUsuario()) ?></option>
-                <?php foreach($listaUsuario as $Usuario){?>
-                    <option value="<?php echo($Usuario->getIdUsuario()) ?>"> <?php echo ($Usuario->getnombreUsuario()); ?></option>
-                    <?php } ?>      
-                </select><br>
-            <label for="Tipo" style="width:120px"> Id Tipo </label>
+        <form action="accionUsuarioRol.php" method="post">
+            <label for="id" style="width:120px">Usuario</label>
+            <input type="number" name="idusuario" id="idusuario" readonly value="<?php echo($obj->getObjUsuario()->getId()) ?>"><br>
+            <input type="number" name="idUsuarioNombre" id="idUsuarioNombre" readonly value="<?php echo($obj->getObjUsuario()->getId()) ?>"><br>
+            <label for="nombreRol" style="width:120px"> Rol</label>
+            <input type="text" name="niddol" id="idol" value="<?php echo($obj->getObjRol()->getId()) ?>"><br>
+            <input type="text" name="nombreRol" id="nombreRol" value="<?php echo($obj->getObjRol()->getId()) ?>"><br>
 
-            <select id="idTipo" name="idTipo">
-                <option value="<?php echo($obj->getobjTipo()->getIdTipo()) ?>"><?php echo($obj->getobjTipo()->getnombreTipo()) ?></option>
-                <?php foreach($listaTipo as $tipo){?>
-                    <option value="<?php echo($tipo->getIdTipo()) ?>"> <?php echo ($tipo->getnombreTipo()); ?></option>
+            <select id="idrol" name="idrol">
+                <option value="<?php echo($obj->getObjRol()->getId()) ?>"><?php echo($obj->getObjRol()->getId()) ?></option>
+                <?php foreach($listaRol as $rol){?>
+                    <option value="<?php echo($tipo->getId()) ?>"> <?php echo ($tipo->getNombre()); ?></option>
                     <?php } ?>      
                 </select><br>
             <br><br>
             <input type="submit" name="accion" id="borrar" class="btn btn-danger" value="Borrar">
             <input type="submit" name="accion" id="editar" class="btn btn-info" value="Cambiar">
-            <a href="indexCompra.php" class="btn btn-secondary">Volver</a>
+            <a href="indexUsuarioRol.php" class="btn btn-secondary">Volver</a>
         </form>
     
 <?php } else{

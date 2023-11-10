@@ -54,7 +54,7 @@ class AbmCompra{
     /**
      * Espera como parametro un array asociativo donde las claves coinciden  con los atributos 
      * @param array $datos
-     * @return obj
+     * @return Compra
      */
     private function cargarObjetoConClave($datos){
         $obj=null;
@@ -75,7 +75,7 @@ class AbmCompra{
     /**
      * corrobora que dentro del array asociativo estan seteados los campos
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     private function setadosCamposClaves($datos){
         $resp=false;
@@ -112,7 +112,7 @@ class AbmCompra{
     /**
      * PERMITE ELIMINAR UN OBJ 
      * @param array $datos
-     * @return booelan
+     * @return boolean
      */
     public function baja($datos){
         $resp=false;
@@ -180,7 +180,171 @@ class AbmCompra{
         //var_dump($where); 
         return $arreglo; 
 
+<<<<<<< HEAD
     }// fin funcion   
+=======
+    }// fin funcion     
+
+        /** METODO MODIFICAR ESTADO DE LA COMPRA
+     * En funcion del id de la tabla cambio de estado tipo al que quiero ir  y el obj compra 
+    * realiza la modifcacion 
+     * @param Compra
+     * @param int idCET
+     *@return boolean 
+     */
+    public function modificarEstadoCompra($objCompra,$idCET){
+        $idCompra = $objCompra->getId();
+        $fechaFinCompraEstado=date('Y-m-d H:i:s'); // inicia la fecha y hora de la compra
+        $objCompraEstado =new AbmCompraEstado();
+        $datos  =['idcompra'=>$idCompra, 'cefechafin'=>null];
+        // llamo a la ultima compra con la fecha fin nula 
+        $ultimoEstadoCompra = $objCompraEstado->buscar($datos);
+        $ultimoEstadoCompra=$ultimoEstadoCompra[0];
+        
+        if($ultimoEstadoCompra==null){ // es la primera compra (solo se da de alta)
+            $cambioDeDatos = ['idcompra'=>$idCompra,'idcompraestadotipo'=>1,
+            'cefechaini'=>$fechaFinCompraEstado,'cefechafin'=>null];
+            $resp1=$objCompraEstado->alta($cambioDeDatos);
+
+        }// fin if 
+        else{
+            $cambioDeDatos = ['idcompra'=>$idCompra,'idcompraestadotipo'=>$ultimoEstadoCompra->getObjCompraEstadoTipo()->getId(),
+            'cefechaini'=>$ultimoEstadoCompra->getFechaInicio(),'cefechafin'=>$fechaFin];
+            $resp1=$ultimoEstadoCompra->modificacion($cambioDeDatos);
+>>>>>>> 89ce9a56ad45d4b00ca61e125afbcf4a68c495fd
     
     
+<<<<<<< HEAD
 }// fin clase AbmCmpra
+=======
+    if(array_key_exists('idusuario',$productosUsuario) && array_key_exists('idproducto',$productosUsuario)){
+        // creacion de la nueva compra 
+        $objCompra=new AbmCompra();
+        $listaCompras=$objCompra->buscar(null);
+        $idCompra=$listaCompras[count($listaCompras)]->getId() + 1; // aumenta en 1 el id de la nueva compra
+        $fechaInicioCompra=date('Y-m-d H:i:s'); // inicia la fecha y hora de la compra 
+        $datosCompra=['idcompra'=>$idCompra,'cofecha'=>$fechaInicioCompra,'idusuario'=>$productosUsuario['idusuario']];
+        $objCompra->alta($datosCompra); // alta  a nueva compra
+        
+        // cambio en el estado de la compra
+        $respuesta=$objCompra->modificarEstadoCompra($objCompra,1);
+        if(!$respuesta){
+            $objCompra=null;
+        } // fin if 
+    }// fin if 
+    return $objCompra; 
+
+
+}// fin function 
+
+/**
+ * METODO FINALIZAR COMPRA 
+ * @param Compra
+ * @param array productos (array de  idproductos y cantidad )
+ * @return int   (id compra )
+ */
+public  function finalizarCompra($objCompra,$productos){
+    // creo un obj compra estado para pasar a compra aceptada
+    $objCompraEstado=new AbmCompraEstado();
+    $fechaFin=date('Y-m-d H:i:s'); // 
+    $parametros =['idcompra'=>$objCompra->getId(),'cefechafin'=>null];
+    $listaCompraEstadoAnterior=$objCompraEstado->buscar($parametros); // busca con el id compra y fecha fin null 
+   // obj de compraEstado (inicializada)
+    $estadoCompraAnterior = $listaCompraEstadoAnterior[0]; 
+    $lista = $objCompraEstado->buscar(null);    
+
+    $idCompraEstado=$lista[count($lista)]->getId() + 1;
+
+    // creacion del obj compra estado tipo 
+    $objCET = new AbmCompraEstadoTipo();
+    $compraEstadoTipo = $objCET->buscar(['idcompraestadotipo'=>2]);
+
+    // Carga de los adtos para crear el nuevo estado de la compra  ( id compra estado tipo = 2 significa que la compra fue aceptada)
+    // DATOS PARA ES ESTADO-COMPRA ANTERIOR     
+    $datosCompraEstado1=['idcompraestado'=>$estadoCompraAnterior->getId(),'idcompra'=>$objCompra->getId(),
+    'idcompraestadotipo'=>$compraEstadoTipo[0]->getId(),
+    'cefechaini'=>$fechaFin,'cefechafin'=>$fechaFin];
+    // DATOS PARA ESTADO-COMPRA NUEVA
+    $datosCompraEstado2=['idcompraestado'=>$idCompraEstado,'idcompra'=>$objCompra->getId(),
+    'idcompraestadotipo'=>$compraEstadoTipo[0]->getId(),
+    'cefechaini'=>$fechaFin,'cefechafin'=>null];
+
+    // modificacion del estado de la compra anterior (inicializada)
+    $estadoCompraAnterior->modificacion($datosCompraEstado1);
+
+    // alta al nuevo estado de la compra 
+    $objCompraEstado->alta($datosCompraEstado2);    
+
+
+     // creo el obj de compraItem  UNA COMPRA TIENE VARIOS ITEMS COMPRA, HAY QUE RECORRERLO
+
+    // creacion de los obj compra item en funcion de la cantidad de productos comprados
+    $cantProductos=count($productos);
+    for($i=0; $i<$cantProductos; $i++){
+        $objCompraItem = new AbmCompraItem();
+
+        // busco los items que tengan las mismas id compra 
+        $listaComprasItem=$objCompraItem->buscar(['idcompra'=>$objCompra->getId()]); 
+        $idCompraItem=$listaComprasItem[count($listaComprasItem)]->getId() + 1; 
+
+        // llenado de los datos necesarios para dar de alta al objcompraItem
+        $datosCompraItem=['idcompraitem'=>$idCompraItem,'idproducto'=>$productos[$i]['idproducto'],
+        'idcompra'=>$objCompra->getId(),'cicantidad'=>$productos[$i]['cantidad']];
+        
+        // EL STOCK LO TENGO QUE VERIFICAR CON AJAX DIRECTAMENTE EN EL CARRITO
+        // modificacion del stock del producto
+        $objProducto=new AbmProducto();
+        $unProducto = $objProducto->buscar($productos[$i]['idproducto']);
+        $unProducto[0]->set( $unProducto[0]->getStock() - $productos[$i]['cantidad']);
+        $objCompraItem->alta($datosCompraItem); 
+
+    }// fin for 
+
+    return $objCompra->getId(); 
+
+
+}// fin metodo 
+
+
+/** METODO CANCELAR COMPRA
+ * @param object compra
+ * @param array producto
+ * @return boolean
+ */
+ function cancelarCompra($objCompra,$productos){
+    $idCET = 4; // cancelacion de la compra 
+    $fechafin=date('Y-m-d H:i:s'); // guarda la fecha de cancelacion 
+    // creacion de un obj estadoCompra
+    $objEstadoCompra=new AbmCompraEstado();
+    $objCompraItem = new AbmCompraItem();
+    $objProducto = new AbmProducto();
+    $listaEstadoCompra=$objEstadoCompra->buscar(null);
+    $idEC=$listaEstadoCompra[count($listaEstadoCompra)]->getId()+1;
+    
+    $comprasConId=$objEstadoCompra->buscar(['idcompra' => $objCompra->getId()]);
+    // recupero el ultimo idcompra de la tabla  estado compra 
+    $last=count($comprasConId);
+    $datosEstadoCompra=['idcompraestado'=>$idEC,'idcompra'=>$objCompra->getId(),
+    'idcompraestadotipo'=>$idCET,'cefechaini'=>$listaEstadoCompra[$last]->getFechaFin(),'cefechafin'=>$fechafin];
+    $salida= $objEstadoCompra->alta($datosEstadoCompra);// armo los datos para  ingresar un nuevo estado de la compra (cancelado) 
+    if($salida){
+        $compraItem = $objCompraItem->buscar(['idcompra'=>$objCompra->getId()]);
+        // vuelvo agregar la cantidad a la base de datos 
+        foreach($compraItem as $unItem){
+            $product = $objProducto->buscar(['idproducto'=>$unItem['idproducto']]); // obtengo el producto que coincide con el id producto de la tabla compra item
+            $product[0]['procantstock']+=$unItem['cicntidad'];
+            $objProducto->modificacion($product[0]);
+
+        }// fin for 
+
+    }// fin if 
+
+   return $salida; 
+}// fin metodo cancelar
+
+
+}// FIN DE LA CLASE  
+
+
+?>
+>>>>>>> 89ce9a56ad45d4b00ca61e125afbcf4a68c495fd
