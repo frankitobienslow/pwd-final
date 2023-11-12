@@ -15,12 +15,12 @@ echo("<br>----Hecho----<br>");
 */
 
 // USUARIO
-/** 
-$datos['idusuario']=1;
-$datos['usnombre']='pepe';
-$datos['uspass']=md5('123');
-$datos['usmail']='p@gmail.com';
-$datos['usdeshabilitado']=date('Y-m-d H:i:s');
+/**  
+$datos['idusuario']=7;
+$datos['usnombre']='sofia';
+$datos['uspass']=md5('lmn');
+$datos['usmail']='sofi@gmail.com';
+$datos['usdeshabilitado']=null;//date('Y-m-d H:i:s');
 $objUsuario=new AbmUsuario();
 $objUsuario->modificacion($datos);
 echo("<br>----Hecho usuario ----<br>");
@@ -36,14 +36,22 @@ echo("<br>----Hecho rol ----<br>");
 */
 
 // COMPRA 
- /** 
-$datos['idcompra']=5;
-$datos['cofecha']=null;//date('Y-m-d H:i:s');
-$datos['idusuario']=9;
+ 
+//$datos['idcompra']=5;
+//$datos['cofecha']=null;//date('Y-m-d H:i:s');
+/** 
+$datos['idusuario']=1;
 $objCompra=new AbmCompra();   // NOTA:  LA FUNCION MODIFICAR DE COMPRA NO FUNCIONA PORQUE EL METODO SETAERCAMPOCLAVES DA FALSO
-$objCompra->modificacion($datos);
-echo("<br>----Hecho compra ----<br>");
+$compras=$objCompra->buscar($datos);
+echo("compras hachas por el mismo usuario <br>");
+//var_dump($compras);
+foreach($compras as $un){
+    echo("Nombre:  ".$un->getUsuario()->getNombre()."<br>");
+    echo("ID:  ".$un->getId()."<br>");
+}
+//echo("<br>----Hecho compra ----<br>");
 */
+
 
 //PRODUCTO 
 //$datos['idproducto']=1;
@@ -111,7 +119,8 @@ echo("<br>----Hecho compra item ----<br>");
 */
 
 
-
+/***************** MOSTRAR LOS PRODUCTOS COMPRDOS POR EL USUARIO ************************** */
+// COMO OBTENER EL HISTORIAL DE COMPRAS DE UN USUARIO
 
 
 

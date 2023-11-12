@@ -35,12 +35,14 @@ class AbmUsuario{
      */
     private function cargarObjeto($datos){
         $obj=null; 
-        if(array_key_exists('idusuario',$datos)){
+        if(array_key_exists('idusuario',$datos) && array_key_exists('usnombre',$datos) 
+        && array_key_exists('uspass',$datos) && array_key_exists('usmail',$datos) && array_key_exists('usdeshabilitado',$datos)){
             $obj=new Usuario();
             $obj->setear($datos['idusuario'],$datos['usnombre'],$datos['uspass'],$datos['usmail'],$datos['usdeshabilitado']);
             
         }// fin if 
         return $obj; 
+        
     }// fin function 
 
 
@@ -67,7 +69,7 @@ class AbmUsuario{
      */
     private function setadosCamposClaves($datos){
         $resp=false;
-        if(isset($datos['idusuario']) && isset($datos['usnombre']) && isset($datos['uspass']) && isset($datos['usmail']) && isset($datos['usdeshabilitado'])){
+        if(isset($datos['idusuario']) && isset($datos['usnombre']) && isset($datos['uspass']) && isset($datos['usmail']) && array_key_exists('usdeshabilitado',$datos)){
             $resp=true;
 
         }// fin if 
@@ -122,12 +124,13 @@ class AbmUsuario{
         if($this->setadosCamposClaves($datos)){
             $objUsuario=$this->cargarObjeto($datos);
             if($objUsuario!=null && $objUsuario->modificar()){
+                
                 $resp=true; 
 
             }// fin if 
 
         }// fin if 
-
+//        var_dump($resp);
         return $resp; 
 
     }// fin function 
