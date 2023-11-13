@@ -236,7 +236,7 @@ class CompraEstado{
                     // setea obj compra estado 
                     $objCompraEstado=new CompraEstado();    
                     $objCompraEstado->setear($row['idcompraestado'],$objC,$objCET,$row['cefechaini'],$row['cefechafin']);
-                    array_push($arrayCompras,$objCompraEstado);   // opcion con this. Sino creo un obj y lo reemplazo por el this
+                    array_push($arrayComprasEstados,$objCompraEstado);   // opcion con this. Sino creo un obj y lo reemplazo por el this
                     }// fin while 
                 }// fin if 
             }// fin if 

@@ -205,6 +205,7 @@ class CompraItem{
         $arrayComprasItem=array();
         $baseDatos=new BaseDatos();
         $sql="SELECT * FROM compraitem";
+        
         if($parametro!=""){
             $sql.=' WHERE'.$parametro;
         }// fin if 
@@ -224,7 +225,7 @@ class CompraItem{
                     // seteo el obj Compra
                     $objCompraI=new CompraItem();    
                     $objCompraI->setear($row['idcompraitem'],$objP,$objC,$row['cicantidad']);
-                    array_push($arrayCompras,$objCompraI);   // opcion con this. Sino creo un obj y lo reemplazo por el this
+                    array_push($arrayComprasItem,$objCompraI);   // opcion con this. Sino creo un obj y lo reemplazo por el this
                     }// fin while 
                 }// fin if 
             }// fin if 

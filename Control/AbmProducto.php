@@ -151,7 +151,7 @@ class AbmProducto{
         $where=" true ";
         if($param<>null){
             // Va preguntando si existe los campos de la tabla 
-                if(isset($param['idproducto'])){ // evalua si existe el auto con la primary key
+                if(isset($param['idproducto'])){ 
                 $where.=" and idproducto = ".$param['idproducto'];
                 }// fin if 
                 if(isset($param['pronombre'])){// identifica si esta la clave (atributo de la tabla)
