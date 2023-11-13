@@ -147,19 +147,19 @@ class AbmUsuario{
         if($param<>null){
             // Va preguntando si existe los campos de la tabla 
             if(isset($param['idusuario'])){
-                $where.="and idusuario='".$param['idusuario'];
+                $where.=" and idusuario='".$param['idusuario'];
             } 
             if(isset($param['usnombre'])){// identifica si esta la clave (atributo de la tabla)
-                $where.="and usnombre ='".$param['usnombre']."'";
+                $where.=" and usnombre ='".$param['usnombre']."'";
             }// fin if 
             if(isset($param['uspass'])){// identifica si esta la clave (atributo de la tabla)
-                $where.="and uspass ='".$param['uspass']."'";
+                $where.=" and uspass ='".$param['uspass']."'";
             }// fin if 
             if(isset($param['usmail'])){// identifica si esta la clave (atributo de la tabla)
-                $where.="and usmail ='".$param['usmail']."'";
+                $where.=" and usmail ='".$param['usmail']."'";
             }// fin if 
             if(isset($param['usdeshabilitado'])){// identifica si esta la clave (atributo de la tabla)
-                $where.="and usdeshabilitado ='".$param['usdeshabilitado']."'";
+                $where.=" and usdeshabilitado ='".$param['usdeshabilitado']."'";
             }// fin if 
                 
             // fin if 
