@@ -7,13 +7,14 @@
 
     $resp=false; 
     $objUsuario=new AbmUsuario();
-    $listaObj = $objUsuario->buscar(null);
     $datos=data_submitted();
+    //$listaObj = $objUsuario->buscar($datos);
     
+    var_dump($datos);
     if(isset($datos['accion'])){
         if(($datos['accion']=='Cambiar')){
             $datos["idusuario"] = intval($datos["idusuario"]);
-            echo "estoyaqui";
+            //echo "estoyaqui";
             if($objUsuario->modificacion($datos)){
                 $resp=true; 
             }// fin if 

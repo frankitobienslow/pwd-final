@@ -1,6 +1,7 @@
 <?php
 $Titulo = "Lista Productos";
-include_once("../estructura/header.php");
+include_once ("../../configuracion.php");
+include_once("../estructura/headPrivado.php");
 $objAbmProducto = new AbmProducto();
 
 $listaProducto = $objAbmProducto->buscar(null);

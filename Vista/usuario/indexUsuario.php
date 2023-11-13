@@ -1,5 +1,6 @@
 <?php
 $Titulo = "Lista Compras";
+include_once ("../../configuracion.php");
 include_once("../estructura/headPrivado.php");
 $objAbmUsuario = new AbmUsuario();
 
@@ -25,7 +26,7 @@ $listaUsuario = $objAbmUsuario->buscar(null);
                     <td> <?php echo($usuario->getId()) ?></td>
                     <td> <?php echo($usuario->getNombre())?></td>
                     <td> <?php echo($usuario->getMail())?></td>
-                    <td> <?php echo($usuario->getDeshabilitado())?></td>
+                     <td> <?php echo($usuario->getDeshabilitado())?></td>
                     
                     <td><a href="editarUsuario.php?idusuario=<?php echo($usuario->getId()) ?>" class="btn btn-info">Editar</a></td>
                 </tr>

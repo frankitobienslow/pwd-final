@@ -1,6 +1,6 @@
 <?php
 $Titulo = "Lista Estados de Compra";
-include_once("../estructura/header.php");
+include_once("../estructura/headerLibre.php");
 $objAbmCompraEstadoTipo = new AbmCompraEstadoTipo();
 
 $listaCompraEstadoTipo = $objAbmCompraEstadoTipo->buscar(null);
