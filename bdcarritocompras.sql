@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `compra` (
-  `idcompra` bigint(20) NOT NULL AUTO_INCREMENT
+  `idcompra` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `cofecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `idusuario` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -349,7 +349,7 @@ INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`) VALUES
 INSERT INTO `rol` (`idrol`, `rodescripcion`) VALUES
 (1, 'admin'),
 (2, 'deposito'),
-(3, 'cliente'),
+(3, 'cliente');
 
 -- Insertar datos en la tabla 'usuariorol' para relacionar usuarios y roles
 INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
@@ -378,6 +378,14 @@ INSERT INTO `compra` (`idcompra`, `cofecha`, `idusuario`) VALUES
 (4, '2023-11-03 15:20:00', 2),
 (5, '2023-12-30 16:50:00', 4);
 
+-- Insertar datos en la tabla 'compraestadotipo'
+INSERT INTO `compraestadotipo` (`idcompraestadotipo`, `cetdescripcion`, `cetdetalle`) VALUES
+(1, 'Inicio', 'Momento en el que se inica la compra'),
+(2, 'Pagado', 'El pedido fue pagado'),
+(3, 'En Preparacion', 'El pedido está siendo preparado'),
+(4, 'En camino', 'Se envia el pedido'),
+(5, 'Cancelar', 'Se cancela el pedido');
+
 -- Insertar datos en la tabla 'compraestado'
 INSERT INTO `compraestado` (`idcompraestado`, `idcompra`, `idcompraestadotipo`, `cefechaini`, `cefechafin`) VALUES
 (1, 2, 1, '2023-01-22 10:00:00', NULL),
@@ -386,13 +394,6 @@ INSERT INTO `compraestado` (`idcompraestado`, `idcompra`, `idcompraestadotipo`, 
 (4, 5, 3, '2023-11-03 15:20:00', '2023-11-03 17:30:00'),
 (5, 4, 2, '2023-12-30 16:50:00', '2023-12-31 10:05:00');
 
--- Insertar datos en la tabla 'compraestadotipo'
-INSERT INTO `compraestadotipo` (`idcompraestadotipo`, `cetdescripcion`, `cetdetalle`) VALUES
-(1, 'Inicio', 'Momento en el que se inica la compra'),
-(2, 'Pagado', 'El pedido fue pagado'),
-(3, 'En Preparacion', 'El pedido está siendo preparado'),
-(4, 'En camino', 'Se envia el pedido'),
-(5, 'Cancelar', 'Se cancela el pedido');
 
 -- Insertar datos en la tabla 'compraitem'
 INSERT INTO `compraitem` (`idcompraitem`, `idproducto`, `idcompra`, `cicantidad`) VALUES
@@ -402,6 +403,14 @@ INSERT INTO `compraitem` (`idcompraitem`, `idproducto`, `idcompra`, `cicantidad`
 (4, 4, 4, 12),
 (5, 5, 5, 2);
 
+-- Insertar datos en la tabla 'menu'
+INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
+(1, 'Menú1', 'Descripción del Menú 1', NULL, NULL),
+(2, 'Menú2', 'Descripción del Menú 2', NULL, NULL),
+(3, 'Menú3', 'Descripción del Menú 3', NULL, NULL),
+(4, 'Menú4', 'Descripción del Menú 4', NULL, NULL),
+(5, 'Menú5', 'Descripción del Menú 5', NULL, NULL);
+
 -- Insertar datos en la tabla 'rol' para relacionar menús con roles
 INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 (1, 1),
@@ -410,13 +419,6 @@ INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 (4, 3),
 (5, 2);
 
--- Insertar datos en la tabla 'menu'
-INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
-(1, 'Menú1', 'Descripción del Menú 1', NULL, NULL),
-(2, 'Menú2', 'Descripción del Menú 2', NULL, NULL),
-(3, 'Menú3', 'Descripción del Menú 3', NULL, NULL),
-(4, 'Menú4', 'Descripción del Menú 4', NULL, NULL),
-(5, 'Menú5', 'Descripción del Menú 5', NULL, NULL);
 
 
 
