@@ -4,11 +4,11 @@ include_once 'headPrivado.php';
 
 
 $objProducto=new AbmProducto();
-$listaProdcutos=$objProducto->buscar(null);
+$listaProductos=$objProducto->buscar(null);
 
 // generacion aleatoria de precios
 $precio=array();
-for($i=0;$i<count($listaProdcutos);$i++){
+for($i=0;$i<count($listaProductos);$i++){
     $precio[$i]=rand(1000,100000);
 }// fin for 
 $count=0;
@@ -19,7 +19,7 @@ $count=0;
     <div class="col-10">
     <div class="d-flex flex-wrap">
       <?php 
-        foreach($listaProdcutos as $unProducto){
+        foreach($listaProductos as $unProducto){
           
           ?>
           
