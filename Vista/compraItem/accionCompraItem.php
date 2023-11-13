@@ -6,7 +6,7 @@
     
 
     $resp=false; 
-    $objCompra=new AbmCompra();
+    $objCompra=new AbmCompraItem();
     $listaObj = $objCompra->buscar(null);
     $datos=data_submitted();
     
