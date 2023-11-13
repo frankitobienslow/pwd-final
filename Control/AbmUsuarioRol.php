@@ -21,15 +21,10 @@ class AbmUsuarioRol
         if (array_key_exists('idrol', $param) && array_key_exists('idusuario', $param)) {
             $objRol = new Rol();
             $objRol->setId($param['idrol']);
-<<<<<<< HEAD
             $objRol->cargar();
             $objUsuario = new Usuario();
             $objUsuario->setId($param['idusuario']);
             $objUsuario->cargar();
-=======
-            $objUsuario = new Usuario();
-            $objUsuario->setId($param['idusuario']);
->>>>>>> 89ce9a56ad45d4b00ca61e125afbcf4a68c495fd
             $objUsuarioRol = new UsuarioRol();
             $objUsuarioRol->setear($objUsuario, $objRol);
         }
@@ -144,48 +139,6 @@ class AbmUsuarioRol
         return $arreglo;
     }
 
-<<<<<<< HEAD
   
 
 }// fin clase AbmUsuarioRol
-=======
-    public function darDescripcionRoles($arrayUsuarios){
-        $rolesUs = [];
-        foreach ($arrayUsuarios as $us) {
-            $param['idusuario'] = $us->getId();
-            array_push($rolesUs, $this->buscar($param)); 
-        }
-        $rolesDesc = [];
-        foreach ($rolesUs as $rolUs) {
-            $roles = [];
-            //aca me devuelve el array de roles de cada usuario:
-            foreach ($rolUs as $rolU) {
-                $rol = $rolU->getObjRol()->getDescripcion();
-                array_push($roles, $rol);
-            }
-            array_push($rolesDesc, $roles);
-        }
-        return $rolesDesc;
-    }
-
-    public function daridroles($arrayUsuarios){
-        $rolesUs = [];
-        foreach ($arrayUsuarios as $us) {
-            $param['idusuario'] = $us->getId();
-            array_push($rolesUs, $this->buscar($param)); //esto me devuelve un array de objetos usuario +rol
-        }
-        $rolesId = [];
-        foreach ($rolesUs as $rolUs) {
-            $roles = [];
-            //aca me devuelve el array de roles de cada usuario:
-            foreach ($rolUs as $rolU) {
-                $rol = $rolU->getObjRol()->getId();
-                array_push($roles, $rol);
-            }
-            array_push($rolesId, $roles);
-        }
-        return $rolesId;
-    }
-
-}
->>>>>>> 89ce9a56ad45d4b00ca61e125afbcf4a68c495fd

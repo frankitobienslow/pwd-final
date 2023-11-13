@@ -86,13 +86,8 @@ class AbmMenu{
         $resp = false;
       
         if ($this->seteadosCamposClaves($param)){
-<<<<<<< HEAD
             $ObjMenu = $this->cargarObjetoConClave($param);
             if ($ObjMenu!=null and $ObjMenu->eliminar()){
-=======
-            $objMenu = $this->cargarObjetoConClave($param);
-            if ($objMenu!=null and $objMenu->eliminar()){
->>>>>>> 89ce9a56ad45d4b00ca61e125afbcf4a68c495fd
                 $resp = true;
             }
         }
@@ -110,11 +105,8 @@ class AbmMenu{
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
             $ObjMenu = $this->cargarObjeto($param);
-<<<<<<< HEAD
             
             //var_dump($ObjMenu->modificar());
-=======
->>>>>>> 89ce9a56ad45d4b00ca61e125afbcf4a68c495fd
             if($ObjMenu!=null and $ObjMenu->modificar()){
                 //echo("Entro al modificar");
                 $resp = true;
@@ -154,23 +146,6 @@ class AbmMenu{
     }// fin metodo buscar 
 
 
-<<<<<<< HEAD
-=======
-        /** METODO USUARIO-ROL
-         * devueve los obj de menu y rol dentro de un array 
-     * @return array
-     */
-    public function listarMenuRol($param){
-        $objMenuRol=new MenuRol();
-        $where=' true '; 
-        if($param!=null){
-            if(isset($param['idmenu'])){
-                $where.=" and idmenu='".$param['idmenu']."'";
-            }// fin if 
-            if(isset($param['idrol'])){
-                $where.=" and idrol='".$param['idrol']."'";
-            }// fin if 
->>>>>>> 89ce9a56ad45d4b00ca61e125afbcf4a68c495fd
 
 
 }// fin clase 
