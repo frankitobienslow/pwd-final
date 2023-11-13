@@ -1,5 +1,5 @@
 <?php
-  //include_once("../../configuracion.php");
+  include_once("../../configuracion.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +27,7 @@
 
 </head>
 <?php 
+  /*
   // Parte de verificacion de permisos 
   $objSession=new Session();
   $respuesta=$objSession->validar();
@@ -41,6 +42,7 @@
     // Manda al usuario no validado al login (faltaria la carpeta login)
     header("Location: ../usuario/index.php");
   }// fin else
+  */
 ?>
 
 <body>

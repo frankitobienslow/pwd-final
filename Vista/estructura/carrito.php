@@ -24,7 +24,8 @@ $count=0;
           ?>
           
             <div class="card m-3" style="width: 18rem;">
-              <img src="..." class="card-img-top" alt="...">
+              <img src="../imagenes/<?php echo $unProducto->getId()?>.jpg" class="card-img-top" style="max-width: 200px;
+    " alt="...">
                 <div class="card-body">
                 <h5 class="card-title" id="nombreProducto"><?php echo($unProducto->getNombre()) ?></h5>
                 <p class="card-text" id="detalle"> <?php echo($unProducto->getDetalle()) ?> </p>
