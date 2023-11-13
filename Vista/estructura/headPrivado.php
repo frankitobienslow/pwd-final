@@ -26,6 +26,22 @@
     <script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
 
 </head>
+<?php 
+  // Parte de verificacion de permisos 
+  $objSession=new Session();
+  $respuesta=$objSession->validar();
+  if($respuesta){
+    // pregunta que rol tiene el usuario para mostrar la
+    // informacion en funcion de su rol 
+
+
+
+  }// fin if 
+  else{
+    // Manda al usuario no validado al login (faltaria la carpeta login)
+    header("Location: ../usuario/index.php");
+  }// fin else
+?>
 
 <body>
   <nav class="navbar navbar-expand-lg bg-light p-2 fs-3">
