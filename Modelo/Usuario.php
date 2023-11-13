@@ -163,11 +163,12 @@ class Usuario{
      */
     public function modificar(){
         $salida=false;
+        
         $baseDatos=new BaseDatos();
         $sql="UPDATE usuario SET usnombre='".$this->getNombre().
         "', uspass='".$this->getPassword()."', usmail='".$this->getMail()."', usdeshabilitado='".$this->getDeshabilitado().
         "' WHERE idusuario=".$this->getId();
-
+        //echo($sql);
         if($baseDatos->Iniciar()){
             if($baseDatos->Ejecutar($sql)){
                 $salida=true;
