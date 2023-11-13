@@ -180,8 +180,9 @@ class AbmCompraEstado{
         $where=" true ";
         if($param<>null){
             // Va preguntando si existe los campos de la tabla 
-            if(isset($param['idcompraestado'])){ // evalua si existe el auto con la primary key
-                $where.=" and idcompraestado=".$param['idcompraestado'];
+                if(isset($param['idcompraestado'])){ 
+                    $where.=" and idcompraestado=".$param['idcompraestado'];
+                }// fin if 
                 if(isset($param['idcompra'])){// identifica si esta la clave (atributo de la tabla)
                     $where.=" and idcompra =".$param['idcompra'];
                 }// fin if 
@@ -193,9 +194,7 @@ class AbmCompraEstado{
                 }// fin if 
                 if(isset($param['cefechafin'])){// identifica si esta la clave (atributo de la tabla)
                     $where.=" and cefechafin ='".$param['cefechafin']."'";
-                }// fin if 
-
-            }// fin if 
+                }// fin if  
         }// fin if
         $arreglo=$objCompraEstado->listar($where);
         //var_dump($where); 

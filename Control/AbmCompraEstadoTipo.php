@@ -151,8 +151,9 @@ class AbmCompraEstadoTipo{
         $where=" true ";
         if($param<>null){
             // Va preguntando si existe los campos de la tabla 
-            if(isset($param['idcompraestadotipo'])){ // evalua si existe el auto con la primary key
-                $where.=" and idcompraestadotipo = ".$param['idcompraestadotipo'];
+                if(isset($param['idcompraestadotipo'])){ 
+                    $where.=" and idcompraestadotipo = ".$param['idcompraestadotipo'];
+                }// fin if    
                 if(isset($param['cetdescripcion'])){// identifica si esta la clave (atributo de la tabla)
                     $where.=" and cetdescripcion ='".$param['cetdescripcion'];
                 }// fin if 
@@ -160,7 +161,7 @@ class AbmCompraEstadoTipo{
                     $where.=" and cetdetalle ='".$param['cetdetalle']."'";
                 }// fin if 
 
-            }// fin if 
+        
         }// fin if
         $arreglo=$objCI->listar($where);
         //var_dump($where); 

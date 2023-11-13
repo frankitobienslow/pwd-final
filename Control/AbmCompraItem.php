@@ -169,21 +169,21 @@ class AbmCompraItem{
     public function buscar ($param){
         $objCI=new CompraItem();
         $where=" true ";
+        //var_dump($param);
         if($param<>null){
             // Va preguntando si existe los campos de la tabla 
-            if(isset($param['idcompraitem'])){ // evalua si existe el auto con la primary key
-                $where.=" and idcompraitem = '".$param['idcompraitem'];
+                if(isset($param['idcompraitem'])){  
+                    $where.=" and idcompraitem = '".$param['idcompraitem'];
+                }// fin if     
                 if(isset($param['idproducto'])){// identifica si esta la clave (atributo de la tabla)
                     $where.=" and idproducto ='".$param['idproducto']."'";
                 }// fin if 
                 if(isset($param['idcompra'])){// identifica si esta la clave (atributo de la tabla)
-                    $where.=" and idcompra ='".$param['idcompra'];
+                    $where.=" and idcompra =".$param['idcompra'];
                 }// fin if 
                 if(isset($param['cicantidad'])){// identifica si esta la clave (atributo de la tabla)
                     $where.=" and cicantidad ='".$param['cicantidad']."'";
                 }// fin if 
-
-            }// fin if 
         }// fin if
         $arreglo=$objCI->listar($where);
         //var_dump($where); 

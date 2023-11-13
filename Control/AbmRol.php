@@ -149,13 +149,12 @@ class AbmRol{
         $where=" true ";
         if($param<>null){
             // Va preguntando si existe los campos de la tabla 
-            if(isset($param['idrol'])){ // evalua si existe el auto con la primary key
-                $where.=" and idrol='".$param['idrol'];
+                if(isset($param['idrol'])){ 
+                }// fin if     
+                    $where.=" and idrol='".$param['idrol'];
                 if(isset($param['rodescripcion'])){// identifica si esta la clave (atributo de la tabla)
                     $where.=" and rodescripcion ='".$param['rodescripcion']."'";
-                }// fin if 
-
-            }// fin if 
+                }// fin if  
         }// fin if
         $arreglo=$objNuevoRol->listar($where);
 

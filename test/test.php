@@ -121,6 +121,45 @@ echo("<br>----Hecho compra item ----<br>");
 
 /***************** MOSTRAR LOS PRODUCTOS COMPRDOS POR EL USUARIO ************************** */
 // COMO OBTENER EL HISTORIAL DE COMPRAS DE UN USUARIO
+echo("COMPRAS DEL USUARIO CON ID 3 <br>");
+$datosU['idusuario']=3;
+$datosC['idcompra']=3;
+// con estos 2 id se puede obtener los productos de la compra el los estados de la compra
+$objCompraItem=new AbmCompraItem();
+$objCompra=new AbmCompra();
+$objCompraEstado=new AbmCompraEstado();
+
+
+$listaItemComprados=$objCompraItem->buscar($datosC);
+
+echo("<br> PRODUCTOS DE LA  COMPRA ID:".$datosC['idcompra']."<br>");
+foreach($listaItemComprados as $item){
+    echo("<br>".$item->getObjProducto()->getNombre()."<br>");
+    echo("<br>".$item->getObjProducto()->getDetalle()."<br>");
+
+}// fin for 
+
+$listaEstados=$objCompraEstado->buscar($datosC);
+echo("ESTADOS DE LA COMPRA CON ID: ".$datosC['idcompra']."<br>");
+foreach($listaEstados as $estado){
+    echo("<br>".$estado->getObjCompraEstadoTipo()->getDescripcion()."<br>");
+
+}// fin for 
+
+echo(" COMPRAS HECHAS POR EL USUARIO CON ID :".$datosU['idusuario']."<br>");
+$listaComras=$objCompra->buscar($datosU);
+foreach($listaComras as $compra){
+    echo("<br>".$compra->getCoFecha()."<br>");
+
+}// fin for 
+
+
+
+
+
+
+
+
 
 
 

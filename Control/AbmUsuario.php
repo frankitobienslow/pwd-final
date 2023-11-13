@@ -148,7 +148,7 @@ class AbmUsuario{
             // Va preguntando si existe los campos de la tabla 
             if(isset($param['idusuario'])){
                 $where.="and idusuario='".$param['idusuario'];
-            } // evalua si existe el auto con la primary key
+            } 
             if(isset($param['usnombre'])){// identifica si esta la clave (atributo de la tabla)
                 $where.="and usnombre ='".$param['usnombre']."'";
             }// fin if 
