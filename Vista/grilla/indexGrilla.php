@@ -6,6 +6,7 @@ include_once '../estructura/headPrivado.php';
 $objProducto = new AbmProducto();
 $listaProductos = $objProducto->buscar(null);
 
+$count = 0;
 // RECORIDO DE LOS PRODUCTOS CON SU IMAGEN, NOMBRE Y PRECIO
 ?>
 <div class="d-flex flex-wrap pb-5 justify-content-center">
