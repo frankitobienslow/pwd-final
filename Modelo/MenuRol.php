@@ -7,13 +7,12 @@ class MenuRol{
 
     // CONSTRUCTOR 
     public function __construct(){
-
+        $this->objMenu=new Menu();
         $this->objRol=new Rol();
-        $this->objMenu=new Usuario();
     }// fin constructor 
 
     // METODO SETEAR 
-    public function setear($objR,$objM){
+    public function setear($objM,$objR){
         $this->setObjMenu($objM);
         $this->setObjRol($objR);
 
@@ -53,7 +52,7 @@ class MenuRol{
     public function cargar(){
         $salida=false;
         $baseDatos=new BaseDatos();
-        $sql="SELECT * FROM menurol WHERE idrol=".$this->getObjRol()->getId()." AND idusuraio=".$this->getObjMenu()->getId().";";
+        $sql="SELECT * FROM menurol WHERE idmenu=".$this->getObjMenu()->getId()." AND idrol=".$this->getObjRol()->getId().";";
         if($baseDatos->Iniciar()){
             $salida=$baseDatos->Ejecutar($sql);
             if($salida>-1){
@@ -146,7 +145,7 @@ class MenuRol{
 
 
     /** METODO LISTAR 
-     * @param parametro
+     * @param $parametro
      * @return array
      */
     public function listar($parametro=""){

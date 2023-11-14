@@ -1,5 +1,15 @@
 <?php
-  //include_once("../../configuracion.php");
+  include_once("../configuracion.php");
+  $_SESSION["iduser"] = "1";
+  $_SESSION["idrol"] = "3";
+  /*$objAbmMenu = new AbmMenu();
+  $listaMenu = $objAbmMenu->buscar(null);
+  $objAbmRol = new AbmRol();
+  $listaRol = $objAbmRol->buscar(null);*/
+  $objMenuRol=new AbmMenuRol();
+  $param["idrol"] =  $_SESSION["idrol"];
+  $listaMenuRol = $objMenuRol->buscar($param);
+  var_dump($listaMenuRol);
 ?>
 <!DOCTYPE html>
 <html lang="en">

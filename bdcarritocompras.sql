@@ -88,23 +88,6 @@ CREATE TABLE `menu` (
   `medeshabilitado` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha en la que el menu fue deshabilitado por ultima vez'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-<<<<<<< HEAD
---
--- Volcado de datos para la tabla `menu`
---
-
-INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
-(1,'producto','Productos Disponibles', NULL, NULL),
-(11, 'nuevo', './producto/index.php', 1, NULL),
-(12, 'editar', './producto/index.php',1,NULL),
-(2, 'usuario', 'Administracion de Usuarios', NULL, NULL),
-(3, 'compras', 'Administracion de Compras', NULL, NULL),
-(31, 'edicion', './compras/index.php', 3, NULL),
-(6, 'rol', 'Administracion de Roles', NULL, NULL),
-(61, 'nuevo', './menu/index.php', 6, NULL),
-(62, 'editar', './menu/index.php', 6, NULL),
-(63, 'eliminar', './menu/index.php', 6, NULL);
-
 
 --
 -- Estructura de tabla para la tabla `menurol`
@@ -364,11 +347,16 @@ INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
 
 -- Insertar datos en la tabla 'producto'
 INSERT INTO `producto` (`idproducto`, `pronombre`, `prodetalle`, `procantstock`) VALUES
-(1, 'Producto1', 'Descripción del Producto 1', 7),
-(2, 'Producto2', 'Descripción del Producto 2', 2),
-(3, 'Producto3', 'Descripción del Producto 3', 65),
-(4, 'Producto4', 'Descripción del Producto 4', 23),
-(5, 'Producto5', 'Descripción del Producto 5', 5);
+(1, 'Zapatillas adidas', '43', 108),
+(7, 'Buzo Nike', 'xl', 20),
+(8, 'Zapatillas Nike Air Max 1', '46', 15),
+(9, 'Buzo puma', 'xxl', 10),
+(10, 'Gorra LA', 'Azul', 32),
+(11, 'Remera', 'XL', 18),
+(12, 'Zapatillas Nike TN Black', '43', 2),
+(13, 'Remera Rauw Alejandro', 'S', 11),
+(14, 'Buzo Puma Tricolor', 'L', 21),
+(15, 'Gorra Nike', 'Azul', 8);
 
 -- Insertar datos en la tabla 'compra'
 INSERT INTO `compra` (`idcompra`, `cofecha`, `idusuario`) VALUES
@@ -398,26 +386,38 @@ INSERT INTO `compraestado` (`idcompraestado`, `idcompra`, `idcompraestadotipo`, 
 -- Insertar datos en la tabla 'compraitem'
 INSERT INTO `compraitem` (`idcompraitem`, `idproducto`, `idcompra`, `cicantidad`) VALUES
 (1, 1, 1, 1),
-(2, 2, 2, 2),
-(3, 3, 3, 55),
-(4, 4, 4, 12),
-(5, 5, 5, 2);
+(2, 7, 2, 2),
+(3, 8, 3, 55),
+(4, 9, 4, 12),
+(5, 10, 5, 2);
 
 -- Insertar datos en la tabla 'menu'
-INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
-(1, 'Menú1', 'Descripción del Menú 1', NULL, NULL),
-(2, 'Menú2', 'Descripción del Menú 2', NULL, NULL),
-(3, 'Menú3', 'Descripción del Menú 3', NULL, NULL),
-(4, 'Menú4', 'Descripción del Menú 4', NULL, NULL),
-(5, 'Menú5', 'Descripción del Menú 5', NULL, NULL);
+INSERT INTO menu (idmenu, menombre, medescripcion, idpadre, medeshabilitado) VALUES
+(1,'Producto','Productos Disponibles', NULL, NULL),
+(11, 'Nuevo', './producto/altaProducto.php', 1, NULL),
+(12, 'Listar', './producto/indexProducto.php', 1, NULL),
+(13, 'Editar', './producto/editarProducto.php',1,NULL),
+(2, 'Usuario', 'Administracion de Usuarios', NULL, NULL),
+(22, 'Listar', './usuario/indexUsuario.php', 2, NULL),
+(23, 'Editar', './usuario/editarUsuario.php', 2, NULL),
+(3, 'compras', 'Administracion de Compras', NULL, NULL),
+(33, 'Editar', './compras/editarCompra.php', 3, NULL),
+(32, 'Listar', './compras/indexCompra.php', 3, NULL),
+(4, 'Rol', 'Administracion de Roles', NULL, NULL),
+(41, 'Nuevo', './menu/altaMenu.php', 4, NULL),
+(43, 'Editar', './menu/editarMenu.php', 4, NULL),
+(42, 'Listar', './menu/indexMenu.php', 4, NULL),
+(44, 'eliminar', './menu/editarMenu.php', 4, NULL);
 
 -- Insertar datos en la tabla 'rol' para relacionar menús con roles
 INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 (1, 1),
-(2, 3),
+(2, 1),
+(3, 1),
+(4, 1),
+(1, 2),
 (3, 2),
-(4, 3),
-(5, 2);
+(1, 3);
 
 
 
