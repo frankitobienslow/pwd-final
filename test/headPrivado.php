@@ -1,5 +1,11 @@
 <?php
-  //include_once("../../configuracion.php");
+  include_once("../configuracion.php");
+  $_SESSION["iduser"]="11";
+  $_SESSION["idrol"]= "3";
+  $objAbmMenurol = new AbmMenurol();
+  $param["idrol"] = $_SESSION["idrol"];
+  $listaMenurol = $objAbmMenurol->buscar($param);
+  var_dump($listaMenurol);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +66,7 @@
           <!--DROPDOWN TP1 -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">
-              Gestion Usuarios
+              Usuarios
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Ver Compras</a></li>

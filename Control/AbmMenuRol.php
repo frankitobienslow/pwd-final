@@ -19,7 +19,7 @@
             $objMenu->cargar();
             $objRol->cargar();
             $obj =new MenuRol();
-            $obj->setear($objRol,$objMenu);
+            $obj->setear($objMenu,$objRol);
         }
         return $obj;
     }// fin metodo
@@ -35,7 +35,7 @@
         //print_R ($param);
         if (isset($param['idmenu']) && isset($param['idrol'])) {
             $objMenuRol = new MenuRol();
-            $objMenuRol->setear($param['idrol'], $$param['idmenu']);
+            $objMenuRol->setear($param['idmenu'], $param['idrol']);
         }
         return $objMenuRol;
     }
