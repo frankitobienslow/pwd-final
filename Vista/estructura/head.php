@@ -1,5 +1,5 @@
 <?php
-  include_once("../configuracion.php");
+  include_once("../../configuracion.php");
   $_SESSION["iduser"] = "1";
   $_SESSION["idrol"] = "2";
   /*$objAbmMenu = new AbmMenu();
@@ -9,6 +9,9 @@
   $objMenuRol=new AbmMenuRol();
   $param["idrol"] =  $_SESSION["idrol"];
   $listaMenuRol = $objMenuRol->buscar($param);
+  $listaMenuPadre = array();
+  $listaMenuHijos = array();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +72,7 @@
           $menu .= $objMenuRol->getObjMenu()->getNombre() . "</a>";
           $menu .= '<ul class="dropdown-menu">';
             foreach ($listaMenuRol as $key => $value){
+              echo $value->getObjMenu()->getDescripcion();
               $menu .= '<li><a class="dropdown-item" href="'. $value->getObjMenu()->getDescripcion(). '">'.$value->getObjMenu()->getNombre().'</a></li>';
             }
           }

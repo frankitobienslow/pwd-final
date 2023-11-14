@@ -6,9 +6,8 @@ class Menu{
     private $idMenu;
     private $nombreMenu; 
     private $descripcionMenu;
-    private $idPadre;
+    private $objMenuPadre;
     private $deshabilitado;
-    private $objMenu; 
     private $mensaje; 
 
     // CONSTRUCTOR 
@@ -17,10 +16,9 @@ class Menu{
         $this->idMenu="";
         $this->nombreMenu="";
         $this->descripcionMenu="";
-        $this->idPadre=0;
+        $this->objMenuPadre=new Menu();
         $this->deshabilitado="";
         $this->mensaje="";
-        $this->objMenu=null; 
 
     }// fin constructor 
 
@@ -29,7 +27,7 @@ class Menu{
         $this->idMenu=$idMenu;
         $this->nombreMenu=$nombre;
         $this->descripcionMenu=$descrip;
-        $this->objMenu=$objMenu;
+        $this->objMenuPadre=$objMenu;
         $this->deshabilitado=$deshab;
 
     }// fin metodo setear
@@ -47,8 +45,8 @@ class Menu{
         return $this->descripcionMenu;
     }// fin metodo get
 
-    public function getIdPadre(){
-        return $this->idPadre;
+    public function getobjMenuPadre(){
+        return $this->objMenuPadre;
     }// fin metodo get
 
     public function getDeshabilitado(){
@@ -59,9 +57,6 @@ class Menu{
         return $this->mensaje;
     }// fin metodo get
 
-    public function getObjMenu(){
-        return $this->objMenu;
-    }// fin metodo get
 
     // METODOS SET
     public function setId($id){
@@ -76,8 +71,8 @@ class Menu{
         $this->descripcionMenu=$descr;
     }// fin metodo set
 
-    public function setIdPadre($padre){
-        $this->idPadre=$padre;
+    public function setobjMenuPadre($padre){
+        $this->objMenuPadre=$padre;
     }// fin metodo set
 
     public function setDeshabilitado($desh){
@@ -88,9 +83,6 @@ class Menu{
         $this->mensaje=$msj;
     }// fin metodo set
 
-    public function setObjMenu($obj){
-        $this->objMenu=$obj;
-    }// fin metodo set
 
 
     /**
@@ -110,7 +102,7 @@ class Menu{
                     $salida=true; 
                     $objMenu=null;
                     $R=$baseDatos->Registro(); // recupera los registros de la tabla  con la ID dada
-                    if($R['idpadre']!=null or $R['idpadre']!=""){
+                    if($R['idpadre']!= null){
                         $objMenu=new Menu();
                         $objMenu->setId($R['idpadre']);
                         $objMenu->cargar();
@@ -140,14 +132,14 @@ class Menu{
         $base=new BaseDatos();
         $sql="INSERT INTO menu( menombre ,  medescripcion ,  idpadre ,  medeshabilitado)  ";
         $sql.="VALUES('".$this->getNombre()."','".$this->getDescripcion()."',";
-        if ($this->getObjMenu()!= null) // pregunta si el menu no esl nulo
-            $sql.=$this->getObjMenu()->getId().",";
+        if ($this->getobjMenuPadre() != null) // pregunta si el menu no esl nulo
+            $sql.= " ".$this->getobjMenuPadre()->getId().",";
         else
-            $sql.="null,";
+            $sql.=" null, ";
         if ($this->getDeshabilitado()!=null)
             $sql.= "'".$this->getDeshabilitado()."'";
         else 
-            $sql.="null";
+            $sql.=" null ";
         $sql.= ");";
      // echo $sql;
         if ($base->Iniciar()) {
@@ -172,12 +164,12 @@ class Menu{
         $salida=false;
         $baseDatos=new BaseDatos();
         $sql="UPDATE menu SET menombre='".$this->getNombre()."', medescripcion='".$this->getDescripcion()."'";
-        if($this->getObjMenu()!=null){
-            $sql.=" ,idpadre=".$this->getObjMenu()->getId();
+        if($this->getObjMenuPadre()!=null){
+            $sql.=" , idpadre = ".$this->getObjMenuPadre()->getId();
 
         }// fin if 
         else{
-            $sql.=", idpadre=null";
+            $sql.=", idpadre=null ";
         }// fin else 
         if($this->getDeshabilitado()!=null){
             $sql.=", medeshabilitado='".$this->getDeshabilitado()."'";
@@ -185,7 +177,7 @@ class Menu{
         }// fin if 
         else{
             $sql.=", medeshabilitado=null";
-            $sql.=" WHERE idmenu=".$this->getId();
+            $sql.=" WHERE idmenu = ".$this->getId();
         }// fin else
 
         
@@ -244,7 +236,7 @@ class Menu{
      /**
      * METODO LISTAR 
      * DEVUELVE TODOS LOS USUARIOS EN LA BASE DE DATOS
-     * @param parametro
+     * @param $parametro
      * @return array 
      */
     public function listar($parametro=""){

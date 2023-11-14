@@ -253,7 +253,7 @@ ALTER TABLE `compraitem`
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -392,30 +392,22 @@ INSERT INTO `compraitem` (`idcompraitem`, `idproducto`, `idcompra`, `cicantidad`
 (5, 10, 5, 2);
 
 -- Insertar datos en la tabla 'menu'
-<<<<<<< HEAD
-INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
-=======
 INSERT INTO menu (idmenu, menombre, medescripcion, idpadre, medeshabilitado) VALUES
->>>>>>> fac0a480ab06b466b4e1b1447c3432a6a2351aa6
 (1,'Producto','Productos Disponibles', NULL, NULL),
-(11, 'Nuevo', './producto/altaProducto.php', 1, NULL),
-(12, 'Listar', './producto/indexProducto.php', 1, NULL),
-(13, 'Editar', './producto/editarProducto.php',1,NULL),
+(11, 'Nuevo', '../producto/altaProducto.php', 1, NULL),
+(12, 'Listar', '../producto/indexProducto.php', 1, NULL),
+(13, 'Editar', '../producto/editarProducto.php',1,NULL),
 (2, 'Usuario', 'Administracion de Usuarios', NULL, NULL),
-(22, 'Listar', './usuario/indexUsuario.php', 2, NULL),
-<<<<<<< HEAD
-(23, 'Editar', './usuario/editarUsuario.php',2, NULL),
-=======
-(23, 'Editar', './usuario/editarUsuario.php', 2, NULL),
->>>>>>> fac0a480ab06b466b4e1b1447c3432a6a2351aa6
+(22, 'Listar', '../usuario/indexUsuario.php', 2, NULL),
+(23, 'Editar', '../usuario/editarUsuario.php', 2, NULL),
 (3, 'compras', 'Administracion de Compras', NULL, NULL),
-(33, 'Editar', './compras/editarCompra.php', 3, NULL),
-(32, 'Listar', './compras/indexCompra.php', 3, NULL),
+(33, 'Editar', '../compras/editarCompra.php', 3, NULL),
+(32, 'Listar', '../compras/indexCompra.php', 3, NULL),
 (4, 'Rol', 'Administracion de Roles', NULL, NULL),
-(41, 'Nuevo', './menu/altaMenu.php', 4, NULL),
-(43, 'Editar', './menu/editarMenu.php', 4, NULL),
-(42, 'Listar', './menu/indexMenu.php', 4, NULL),
-(44, 'eliminar', './menu/editarMenu.php', 4, NULL);
+(41, 'Nuevo', '../menu/altaMenu.php', 4, NULL),
+(43, 'Editar', '../menu/editarMenu.php', 4, NULL),
+(42, 'Listar', '../menu/indexMenu.php', 4, NULL),
+(44, 'eliminar', '../menu/editarMenu.php', 4, NULL);
 
 -- Insertar datos en la tabla 'rol' para relacionar menús con roles
 INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
@@ -425,11 +417,7 @@ INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 (4, 1),
 (1, 2),
 (3, 2),
-<<<<<<< HEAD
-(3, 3);
-=======
 (1, 3);
->>>>>>> fac0a480ab06b466b4e1b1447c3432a6a2351aa6
 
 
 
