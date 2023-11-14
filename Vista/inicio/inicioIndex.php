@@ -1,7 +1,7 @@
 <?php
 include_once "../estructura/headPrivado.php";
 ?>
-<a href="../estructura/carrito.php"><div class="container imagenInicio">
+<a href="../grilla/indexGrilla.php"><div class="container imagenInicio">
     
 </div></a>
 <?php
