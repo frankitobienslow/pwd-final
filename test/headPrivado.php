@@ -1,7 +1,7 @@
 <?php
   include_once("../configuracion.php");
   $_SESSION["iduser"] = "1";
-  $_SESSION["idrol"] = "3";
+  $_SESSION["idrol"] = "2";
   /*$objAbmMenu = new AbmMenu();
   $listaMenu = $objAbmMenu->buscar(null);
   $objAbmRol = new AbmRol();
@@ -9,7 +9,6 @@
   $objMenuRol=new AbmMenuRol();
   $param["idrol"] =  $_SESSION["idrol"];
   $listaMenuRol = $objMenuRol->buscar($param);
-  var_dump($listaMenuRol);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,53 +58,25 @@
     <div class="container-fluid">
       <a class="navbar-brand" id="pagina-principal" href="../estructura/principal.php">Grupo N°5</a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="https://github.com/AlexisCasimiro/pwd"> <i class="bi bi-github"></i> </a>
-          </li>
+        <ul class="navbar-nav"> 
           <!--DROPDOWN TP1 -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">
-              Usuarios
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Ver Compras</a></li>
-              <li><a class="dropdown-item" href="#">Baja usuario</a></li>
-              <li><a class="dropdown-item" href="#">Ver Usuarios</a></li>
-              
-            </ul>
-          </li>
-          <!--DROPDOWN TP2 -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Gestion Rol
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../tp2/ejercicio3.php">Cambiar Rol</a></li>
-              <li><a class="dropdown-item" href="../tp2/ejercicio4.php">Nuevo Rol</a></li>
-            </ul>
-          </li>
+
+<?php          
+      foreach ($listaMenuRol as $key => $objMenuRol){
+        echo $objMenuRol->getObjMenu()->getNombre();
+          $menu = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">';
+          $menu .= $objMenuRol->getObjMenu()->getNombre() . "</a>";
+          $menu .= '<ul class="dropdown-menu">';
+            foreach ($listaMenuRol as $key => $value){
+              $menu .= '<li><a class="dropdown-item" href="'. $value->getObjMenu()->getDescripcion(). '">'.$value->getObjMenu()->getNombre().'</a></li>';
+            }
+          }
+          $menu .= "</ul></li>";
+      echo $menu;
+?>
 
 
-          <!--DROPDOWN TP3 -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Registrarse
-            </a>
-          </li>
-
-
-          <!--DROPDOWN TP4 -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Salir
-            </a>
-
-          </li>
 
         </ul>
       </div>
