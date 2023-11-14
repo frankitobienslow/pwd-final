@@ -8,7 +8,6 @@
     $resp=false; 
     $objUsuario=new AbmUsuario();
     $datos=data_submitted();
-<<<<<<< HEAD
     //$listaObj = $objUsuario->buscar($datos);
     
     var_dump($datos);
@@ -16,14 +15,6 @@
         if(($datos['accion']=='Cambiar')){
             $datos["idusuario"] = intval($datos["idusuario"]);
             //echo "estoyaqui";
-=======
-    //$dato["idusuario"]=$datos["idusuario"];
-    $listaObj = $objUsuario->buscar($datos["idusuario"]);
-    if(isset($datos['accion'])){
-        if(($datos['accion']=='Cambiar')){
-            $datos["uspass"] = $listaObj[0]->getPassword();
-            $usuario=$objUsuario->buscar($datos);
->>>>>>> 91d25c98c8025483a635a4b0811ac84c37ce4bd4
             if($objUsuario->modificacion($datos)){
                 $resp=true; 
             }// fin if 

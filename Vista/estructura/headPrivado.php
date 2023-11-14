@@ -28,7 +28,7 @@
 
 </head>
 <?php 
-/*
+
   // Parte de verificacion de permisos 
   //$objSession=new Session();
   //$respuesta=$objSession->validar();
@@ -41,8 +41,8 @@
   //}// fin if 
   //else{
     // Manda al usuario no validado al login (faltaria la carpeta login)
-    header("Location: ../usuario/index.php");
-  }// fin else*/
+    //header("Location: ../usuario/index.php");
+  //}// fin else
 ?>
 
 <body>
