@@ -24,6 +24,7 @@
 
     <!--LINK JS - JQUERY-->
     <script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../Js/main.js"></script>
 
 </head>
 <?php 
@@ -57,6 +58,13 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="https://github.com/Matias-Ignacio/PWD_2023_TPFinal"> <i class="bi bi-github"></i> </a>
           </li>
+
+           <!--DROPDOWN TP3 -->
+           <li class="nav-item">
+            <a class="nav-link" href="../login/index.php" role="button" aria-expanded="false">
+              Ingresar
+            </a>
+          </li>
           <!--DROPDOWN TP1 -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">
@@ -79,16 +87,14 @@
               <li><a class="dropdown-item" href="../tp2/ejercicio4.php">Nuevo Rol</a></li>
             </ul>
           </li>
-
-
-          <!--DROPDOWN TP3 -->
           <li class="nav-item">
-            <a class="nav-link" href="#" role="button" aria-expanded="false">
-              Ingresar
+            <a class="nav-link" href="../grilla/indexGrilla.php" role="button" aria-expanded="false">
+              Productos
             </a>
+
           </li>
 
-
+         
           <!--DROPDOWN TP4 -->
           <li class="nav-item">
             <a class="nav-link" href="#" role="button" aria-expanded="false">
@@ -96,6 +102,10 @@
             </a>
 
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="../carrito/carrito.php"> <i class="bi bi-cart4"></i> </a>
+          </li>
+          
 
         </ul>
       </div>
