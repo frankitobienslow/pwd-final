@@ -9,6 +9,18 @@ class Producto{
     private $cantStock; 
    // private $precio; 
     private $mensaje; 
+    private $arregloPrecios=[
+        1=>56860,
+        7=>36000,
+        8=>74560,
+        9=>24580,
+        10=>35746,
+        11=>12900,
+        12=>98500,
+        13=>6500,
+        14=>38750,
+        15=>26870
+    ];
 
     // METODO CONSTRUCTOR 
     public function __construct()
@@ -55,7 +67,12 @@ class Producto{
 
     public function getMensaje(){
         return $this->mensaje; 
-    }// fin metodo get
+    }
+    
+    public function getPrecio(){
+        return $this->arregloPrecios[$this->getId()];
+    }
+    // fin metodo get
 
     // METODOS SET
     public function setId($id){

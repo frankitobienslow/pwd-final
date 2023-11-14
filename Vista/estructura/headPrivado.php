@@ -27,6 +27,7 @@
 
 </head>
 <?php 
+
   // Parte de verificacion de permisos 
   //$objSession=new Session();
   //$respuesta=$objSession->validar();
@@ -46,15 +47,15 @@
 <body>
   <nav class="navbar navbar-expand-lg bg-light p-2 fs-3">
     <div class="container-fluid">
-      <a class="navbar-brand" id="pagina-principal" href="../estructura/principal.php">Grupo N°5</a>
+      <a class="navbar-brand" id="pagina-principal" href="../inicio/inicioIndex.php">Grupo N°5</a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul cl ass="navbar-nav">
+        <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="https://github.com/AlexisCasimiro/pwd"> <i class="bi bi-github"></i> </a>
+            <a class="nav-link active" aria-current="page" href="https://github.com/Matias-Ignacio/PWD_2023_TPFinal"> <i class="bi bi-github"></i> </a>
           </li>
           <!--DROPDOWN TP1 -->
           <li class="nav-item dropdown">
@@ -81,16 +82,16 @@
 
 
           <!--DROPDOWN TP3 -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Registrarse
+          <li class="nav-item">
+            <a class="nav-link" href="#" role="button" aria-expanded="false">
+              Ingresar
             </a>
           </li>
 
 
           <!--DROPDOWN TP4 -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <li class="nav-item">
+            <a class="nav-link" href="#" role="button" aria-expanded="false">
               Salir
             </a>
 
