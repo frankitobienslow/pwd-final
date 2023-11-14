@@ -7,7 +7,7 @@ class MenuRol{
 
     // CONSTRUCTOR 
     public function __construct(){
-        $this->objMenu=new Usuario();
+        $this->objMenu=new Menu();
         $this->objRol=new Rol();
     }// fin constructor 
 

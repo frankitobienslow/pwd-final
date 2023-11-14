@@ -386,20 +386,28 @@ INSERT INTO `compraestado` (`idcompraestado`, `idcompra`, `idcompraestadotipo`, 
 -- Insertar datos en la tabla 'compraitem'
 INSERT INTO `compraitem` (`idcompraitem`, `idproducto`, `idcompra`, `cicantidad`) VALUES
 (1, 1, 1, 1),
-(2, 2, 2, 2),
-(3, 3, 3, 55),
-(4, 4, 4, 12),
-(5, 5, 5, 2);
+(2, 7, 2, 2),
+(3, 8, 3, 55),
+(4, 9, 4, 12),
+(5, 10, 5, 2);
 
 -- Insertar datos en la tabla 'menu'
+<<<<<<< HEAD
 INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
+=======
+INSERT INTO menu (idmenu, menombre, medescripcion, idpadre, medeshabilitado) VALUES
+>>>>>>> fac0a480ab06b466b4e1b1447c3432a6a2351aa6
 (1,'Producto','Productos Disponibles', NULL, NULL),
 (11, 'Nuevo', './producto/altaProducto.php', 1, NULL),
 (12, 'Listar', './producto/indexProducto.php', 1, NULL),
 (13, 'Editar', './producto/editarProducto.php',1,NULL),
 (2, 'Usuario', 'Administracion de Usuarios', NULL, NULL),
 (22, 'Listar', './usuario/indexUsuario.php', 2, NULL),
+<<<<<<< HEAD
 (23, 'Editar', './usuario/editarUsuario.php',2, NULL),
+=======
+(23, 'Editar', './usuario/editarUsuario.php', 2, NULL),
+>>>>>>> fac0a480ab06b466b4e1b1447c3432a6a2351aa6
 (3, 'compras', 'Administracion de Compras', NULL, NULL),
 (33, 'Editar', './compras/editarCompra.php', 3, NULL),
 (32, 'Listar', './compras/indexCompra.php', 3, NULL),
@@ -417,7 +425,11 @@ INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 (4, 1),
 (1, 2),
 (3, 2),
+<<<<<<< HEAD
 (3, 3);
+=======
+(1, 3);
+>>>>>>> fac0a480ab06b466b4e1b1447c3432a6a2351aa6
 
 
 

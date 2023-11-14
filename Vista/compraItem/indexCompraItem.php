@@ -1,7 +1,8 @@
 <?php
 $Titulo = "Lista CompraItems";
-include_once("../estructura/header.php");
-$objAbmCompraItem = new AbmCompraItemItem();
+include_once("../estructura/headerLibre.php");
+include_once("../../configuracion.php");
+$objAbmCompraItem = new AbmCompraItem();
 
 $listaCompraItem = $objAbmCompraItem->buscar(null);
 //var_dump($listaCompraItem);
