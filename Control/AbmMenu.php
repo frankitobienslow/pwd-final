@@ -118,7 +118,7 @@ class AbmMenu{
     /**
      * permite buscar un objeto
      * @param array $param
-     * @return boolean
+     * @return array
      */
     public function buscar($param){
         $objMenus=new Menu(); 
@@ -146,8 +146,22 @@ class AbmMenu{
     }// fin metodo buscar 
 
 
+    /**
+     * Lista los menu Padre del listado menuRol
+     * @param array $listaMenuRol
+     * @return array
+     */
+    public function listarPadre($listaMenuRol){
+        $objMenu=new Menu();
+        $listaPadre = array();
+        foreach ($listaMenuRol as $objMenuRol) {
+            if ($objMenuRol->getObjMenu()->getIdPadre() == null){
+            array_push ($listaPadre, $objMenuRol->getObjMenu());
+            }
+        }
 
-
+        return $listaPadre;
+    }
 }// fin clase 
 
 ?>

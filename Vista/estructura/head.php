@@ -1,6 +1,32 @@
 <?php
   include_once("../../configuracion.php");
-?>
+  $_SESSION["iduser"] = "1";
+  $_SESSION["idrol"] = "2";
+  $objMenuRol=new AbmMenuRol();
+  $param["idrol"] =  $_SESSION["idrol"];
+  $listaMenuRol = $objMenuRol->buscar($param);
+  $listaPadre = array();
+  $listahijos = array();
+  foreach ($listaMenuRol as $obj) {
+    if ($obj->getObjMenu()->getObjMenuPadre() == null){
+      array_push ($listaPadre, $obj->getObjMenu());
+    }else{
+      array_push ($listahijos, $obj->getObjMenu());
+    }
+  }
+  $menu = "";      
+  foreach ($listaPadre as $objMenuPadre){
+      $menu .= '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">';
+      $menu .= $objMenuPadre->getNombre() . '</a><ul class="dropdown-menu">';
+      foreach ($listahijos as $objMenuHijo){
+        if ($objMenuHijo->getobjMenuPadre()->getId() == $objMenuPadre->getId()){
+          $menu .= '<li><a class="dropdown-item" href="'. $objMenuHijo->getDescripcion(). '">'.$objMenuHijo->getNombre().'</a></li>';
+        }
+      }
+      $menu .= "</ul></li>";
+  }
+ 
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,19 +50,16 @@
 
     <!--LINK JS - JQUERY-->
     <script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../Js/main.js"></script>
 
 </head>
 <?php 
-
+/*
   // Parte de verificacion de permisos 
   $objSession=new Session();
   $respuesta=$objSession->validar();
   if($respuesta){
     // pregunta que rol tiene el usuario para mostrar la
-    // informacion en funcion de su rol  
-    $roles=$objSession->getRol();
-    var_dump($roles);
+    // informacion en funcion de su rol 
 
 
 
@@ -44,7 +67,7 @@
   else{
     // Manda al usuario no validado al login (faltaria la carpeta login)
     header("Location: ../usuario/index.php");
-  }// fin else
+  }// fin else*/
 ?>
 
 <body>
@@ -67,36 +90,10 @@
               Ingresar
             </a>
           </li>
-          <!--DROPDOWN TP1 -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">
-              Gestion Usuarios
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Ver Compras</a></li>
-              <li><a class="dropdown-item" href="#">Baja usuario</a></li>
-              <li><a class="dropdown-item" href="#">Ver Usuarios</a></li>
-              
-            </ul>
-          </li>
-          <!--DROPDOWN TP2 -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Gestion Rol
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../tp2/ejercicio3.php">Cambiar Rol</a></li>
-              <li><a class="dropdown-item" href="../tp2/ejercicio4.php">Nuevo Rol</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../grilla/indexGrilla.php" role="button" aria-expanded="false">
-              Productos
-            </a>
 
-          </li>
-
-         
+<?php    
+      echo $menu;
+?>
           <!--DROPDOWN TP4 -->
           <li class="nav-item">
             <a class="nav-link" href="#" role="button" aria-expanded="false">
@@ -107,7 +104,7 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="../carrito/carrito.php"> <i class="bi bi-cart4"></i> </a>
           </li>
-          
+
 
         </ul>
       </div>

@@ -20,13 +20,7 @@
                 $resp=true; 
             }// fin if 
         }// fin if
-        if($datos['accion']=='Borrar'){
-            if($objProducto->baja($datos)){
-                $resp=true; 
 
-            }// fin if 
-
-        }// fin if 
         if($datos['accion']=='Nuevo'){
             //echo("<br> nuevo");
             $dato["idProducto"] = intval($datos["Id"]);
