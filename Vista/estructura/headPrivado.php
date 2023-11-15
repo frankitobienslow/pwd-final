@@ -1,5 +1,5 @@
 <?php
-  include_once("../../configuracion.php");
+include_once("../../configuracion.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,42 +7,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!--LINK BOOSTRAP -->
   <link rel="stylesheet" href="../librerias/bootstrap5/css/bootstrap.min.css">
-  
-  
+
+
   <!--LINK ICONOS BOOTSTRAP  -->
   <link rel="stylesheet" href="../librerias/node_modules/bootstrap-icons/font/bootstrap-icons.css">
-  
+
   <!-- LINK CSS -->
   <link rel="stylesheet" type="text/css" href="../css/estilos.css">
 
-  
+
   <!--LINK JS - BOOTSTRAP-->
   <script src="../librerias/bootstrap5/js/bootstrap.min.js"></script>
 
-    <!--LINK JS - JQUERY-->
-    <script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../Js/main.js"></script>
+  <!--LINK JS - JQUERY-->
+  <script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../Js/main.js"></script>
 
 </head>
-<?php 
+<?php
 
-  // Parte de verificacion de permisos 
-  //$objSession=new Session();
-  //$respuesta=$objSession->validar();
- // if($respuesta){
-    // pregunta que rol tiene el usuario para mostrar la
-    // informacion en funcion de su rol  
+// Parte de verificacion de permisos 
+//$objSession=new Session();
+//$respuesta=$objSession->validar();
+// if($respuesta){
+// pregunta que rol tiene el usuario para mostrar la
+// informacion en funcion de su rol  
 
 
 
-  //}// fin if 
-  //else{
-    // Manda al usuario no validado al login (faltaria la carpeta login)
-    //header("Location: ../usuario/index.php");
-  //}// fin else
+//}// fin if 
+//else{
+// Manda al usuario no validado al login (faltaria la carpeta login)
+//header("Location: ../usuario/index.php");
+//}// fin else
 ?>
 
 <body>
@@ -59,22 +59,22 @@
             <a class="nav-link active" aria-current="page" href="https://github.com/Matias-Ignacio/PWD_2023_TPFinal"> <i class="bi bi-github"></i> </a>
           </li>
 
-           <!--DROPDOWN TP3 -->
-           <li class="nav-item">
+          <!--DROPDOWN TP3 -->
+          <li class="nav-item">
             <a class="nav-link" href="../login/index.php" role="button" aria-expanded="false">
               Ingresar
             </a>
           </li>
           <!--DROPDOWN TP1 -->
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Gestion Usuarios
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Ver Compras</a></li>
               <li><a class="dropdown-item" href="#">Baja usuario</a></li>
               <li><a class="dropdown-item" href="#">Ver Usuarios</a></li>
-              
+
             </ul>
           </li>
           <!--DROPDOWN TP2 -->
@@ -94,7 +94,7 @@
 
           </li>
 
-         
+
           <!--DROPDOWN TP4 -->
           <li class="nav-item">
             <a class="nav-link" href="#" role="button" aria-expanded="false">
@@ -102,11 +102,7 @@
             </a>
 
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../carrito/carrito.php"> <i class="bi bi-cart4"></i> </a>
-          </li>
-          
-
+       <?php include_once ("carritoIcono.php");?>
         </ul>
       </div>
     </div>
