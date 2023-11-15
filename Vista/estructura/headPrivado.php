@@ -27,7 +27,6 @@ include_once("../../configuracion.php");
   <script src="../Js/main.js"></script>
 
 </head>
-<<<<<<< HEAD
 <?php 
 // seccion de prueba (no iria)
 $objSession=new Session();
@@ -48,7 +47,7 @@ $salida=$objSession->iniciar($datos['nombre'],$datos['password']);
     $menuRoles=new AbmMenuRol();
     
     foreach($objRoles as $rol){
-      echo("<br>".$rol->getObjRol()->getId()."<br>");
+      ("<br>".$rol->getObjRol()->getId()."<br>");
     }// fin for 
 
 
@@ -57,8 +56,7 @@ $salida=$objSession->iniciar($datos['nombre'],$datos['password']);
     // Manda al usuario no validado al login 
     header("Location: ../login/index.php");
   }// fin else
-=======
-<?php
+
 
 // Parte de verificacion de permisos 
 //$objSession=new Session();
@@ -74,7 +72,6 @@ $salida=$objSession->iniciar($datos['nombre'],$datos['password']);
 // Manda al usuario no validado al login (faltaria la carpeta login)
 //header("Location: ../usuario/index.php");
 //}// fin else
->>>>>>> ce36051aaf2c30453bf8db5c2f25ad7e4181d7b2
 ?>
 
 <body>
