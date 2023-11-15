@@ -1,7 +1,7 @@
 <?php
 include_once '../../configuracion.php';
 include_once '../estructura/headPrivado.php';
-$Titulo="Productos";
+
 
 $objProducto = new AbmProducto();
 $listaProductos = $objProducto->buscar(null);

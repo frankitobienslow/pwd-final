@@ -1,7 +1,7 @@
 <?php
 include_once '../../configuracion.php';
 $Titulo = "Productos";
-include_once '../estructura/header.php';
+include_once '../estructura/headerPrivado.php';
 
 
 $objProducto=new AbmProducto();
@@ -41,6 +41,5 @@ if(isset($datos['Id'])){
     </div>
 <?php
 include_once("../estructura/footer.php");
-//      <input type="text" name="idUsuario" id="idUsuario" value="<?php echo($obj->getobjUsuario()->getidUsuario()) ? >">
-//<input type="text" name="idTipo" id="idTipo" value="<?php echo($obj->getobjTipo()->getIdTipo()) ? >">
+
 ?>
