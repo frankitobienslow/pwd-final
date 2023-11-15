@@ -1,6 +1,6 @@
 <?php
 include_once '../../configuracion.php';
-include_once '../estructura/headPrivado.php';
+include_once '../estructura/head.php';
 
 
 $objProducto = new AbmProducto();

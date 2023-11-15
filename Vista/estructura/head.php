@@ -1,11 +1,7 @@
 <?php
   include_once("../../configuracion.php");
   $_SESSION["iduser"] = "1";
-  $_SESSION["idrol"] = "1";
-  /*$objAbmMenu = new AbmMenu();
-  $listaMenu = $objAbmMenu->buscar(null);
-  $objAbmRol = new AbmRol();
-  $listaRol = $objAbmRol->buscar(null);*/
+  $_SESSION["idrol"] = "2";
   $objMenuRol=new AbmMenuRol();
   $param["idrol"] =  $_SESSION["idrol"];
   $listaMenuRol = $objMenuRol->buscar($param);
@@ -17,6 +13,17 @@
     }else{
       array_push ($listahijos, $obj->getObjMenu());
     }
+  }
+  $menu = "";      
+  foreach ($listaPadre as $objMenuPadre){
+      $menu .= '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">';
+      $menu .= $objMenuPadre->getNombre() . '</a><ul class="dropdown-menu">';
+      foreach ($listahijos as $objMenuHijo){
+        if ($objMenuHijo->getobjMenuPadre()->getId() == $objMenuPadre->getId()){
+          $menu .= '<li><a class="dropdown-item" href="'. $objMenuHijo->getDescripcion(). '">'.$objMenuHijo->getNombre().'</a></li>';
+        }
+      }
+      $menu .= "</ul></li>";
   }
  
  ?>
@@ -66,27 +73,37 @@
 <body>
   <nav class="navbar navbar-expand-lg bg-light p-2 fs-3">
     <div class="container-fluid">
-      <a class="navbar-brand" id="pagina-principal" href="../estructura/principal.php">Grupo N°5</a>
+      <a class="navbar-brand" id="pagina-principal" href="../inicio/inicioIndex.php">Grupo N°5</a>
 
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav"> 
-          <!--DROPDOWN TP1 -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="https://github.com/Matias-Ignacio/PWD_2023_TPFinal"> <i class="bi bi-github"></i> </a>
+          </li>
 
-<?php          
-      foreach ($listaPadre as $objMenuPadre){
-        //echo $objMenuRol->getObjMenu()->getNombre();
-          $menu = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">';
-          $menu .= $objMenuPadre->getNombre() . "</a>";
-          $menu .= '<ul class="dropdown-menu">';
-            foreach ($listahijos as $value){
-              //echo $value->getObjMenu()->getDescripcion();
-              $menu .= '<li><a class="dropdown-item" href="'. $value->getDescripcion(). '">'.$value->getNombre().'</a></li>';
-            }
-          }
-          $menu .= "</ul></li>";
+           <!--DROPDOWN TP3 -->
+           <li class="nav-item">
+            <a class="nav-link" href="../login/index.php" role="button" aria-expanded="false">
+              Ingresar
+            </a>
+          </li>
+
+<?php    
       echo $menu;
 ?>
+          <!--DROPDOWN TP4 -->
+          <li class="nav-item">
+            <a class="nav-link" href="#" role="button" aria-expanded="false">
+              Salir
+            </a>
 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="../carrito/carrito.php"> <i class="bi bi-cart4"></i> </a>
+          </li>
 
 
         </ul>
