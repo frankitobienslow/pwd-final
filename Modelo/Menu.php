@@ -16,7 +16,7 @@ class Menu{
         $this->idMenu="";
         $this->nombreMenu="";
         $this->descripcionMenu="";
-        $this->objMenuPadre=new Menu();
+        $this->objMenuPadre = null;
         $this->deshabilitado="";
         $this->mensaje="";
 

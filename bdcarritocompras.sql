@@ -411,13 +411,9 @@ INSERT INTO menu (idmenu, menombre, medescripcion, idpadre, medeshabilitado) VAL
 
 -- Insertar datos en la tabla 'rol' para relacionar menús con roles
 INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
-(1, 1),
-(2, 1),
-(3, 1),
-(4, 1),
-(1, 2),
-(3, 2),
-(1, 3);
+(1, 1),(11, 1),(12, 1),(13, 1),(2, 1),(22, 1),(23, 1),(3, 1),(32, 1),(33, 1),(4, 1),(41, 1),(42, 1),(43, 1),(44, 1),
+(1, 2),(11, 2),(12, 2),(13, 2),(3, 2),(32, 2),(33, 2),
+(12, 3),(3, 3);
 
 
 

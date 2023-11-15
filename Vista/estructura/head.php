@@ -1,7 +1,7 @@
 <?php
   include_once("../../configuracion.php");
   $_SESSION["iduser"] = "1";
-  $_SESSION["idrol"] = "2";
+  $_SESSION["idrol"] = "1";
   /*$objAbmMenu = new AbmMenu();
   $listaMenu = $objAbmMenu->buscar(null);
   $objAbmRol = new AbmRol();
@@ -9,10 +9,17 @@
   $objMenuRol=new AbmMenuRol();
   $param["idrol"] =  $_SESSION["idrol"];
   $listaMenuRol = $objMenuRol->buscar($param);
-  $listaMenuPadre = array();
-  $listaMenuHijos = array();
-
-?>
+  $listaPadre = array();
+  $listahijos = array();
+  foreach ($listaMenuRol as $obj) {
+    if ($obj->getObjMenu()->getObjMenuPadre() == null){
+      array_push ($listaPadre, $obj->getObjMenu());
+    }else{
+      array_push ($listahijos, $obj->getObjMenu());
+    }
+  }
+ 
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,14 +73,14 @@
           <!--DROPDOWN TP1 -->
 
 <?php          
-      foreach ($listaMenuRol as $key => $objMenuRol){
-        echo $objMenuRol->getObjMenu()->getNombre();
+      foreach ($listaPadre as $objMenuPadre){
+        //echo $objMenuRol->getObjMenu()->getNombre();
           $menu = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">';
-          $menu .= $objMenuRol->getObjMenu()->getNombre() . "</a>";
+          $menu .= $objMenuPadre->getNombre() . "</a>";
           $menu .= '<ul class="dropdown-menu">';
-            foreach ($listaMenuRol as $key => $value){
-              echo $value->getObjMenu()->getDescripcion();
-              $menu .= '<li><a class="dropdown-item" href="'. $value->getObjMenu()->getDescripcion(). '">'.$value->getObjMenu()->getNombre().'</a></li>';
+            foreach ($listahijos as $value){
+              //echo $value->getObjMenu()->getDescripcion();
+              $menu .= '<li><a class="dropdown-item" href="'. $value->getDescripcion(). '">'.$value->getNombre().'</a></li>';
             }
           }
           $menu .= "</ul></li>";

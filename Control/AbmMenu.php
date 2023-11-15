@@ -155,8 +155,8 @@ class AbmMenu{
         $objMenu=new Menu();
         $listaPadre = array();
         foreach ($listaMenuRol as $objMenuRol) {
-            if ($objMenuRol->getObjMenu()->getIdPadre()<>null){
-            $listaPadre[] = $objMenuRol->getObjMenu();
+            if ($objMenuRol->getObjMenu()->getIdPadre() == null){
+            array_push ($listaPadre, $objMenuRol->getObjMenu());
             }
         }
 
