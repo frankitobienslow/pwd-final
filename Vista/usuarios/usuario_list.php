@@ -29,9 +29,9 @@
         </thead>
     </table>
     <div id="toolbar">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">New User</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Edit User</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Remove User</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">Nuevo Usuario</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Editar Usuario</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Dar de baja Usuario</a>
     </div>
     
     <div id="dlg_nuevo" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-boton'">
@@ -142,8 +142,18 @@
                 if (row){
                     $.messager.confirm('Confirm','Seguro que desea eliminar el usuario?', function(r){
                         if (r){
-                            $('#dg').datagrid('reload'); 
-                            url = 'accion/eliminar_usuario.php?id='+row.id;
+                            $.post('accion/eliminar_usuario.php?idusuario='+row.idusuario,{idusuario:row.id},
+                               function(result){ 
+                                 if (result.respuesta){
+                                   	 
+                                    $('#dg').datagrid('reload');    // reload the  data
+                                } else {
+                                    $.messager.show({    // show error message
+                                        title: 'Error',
+                                        msg: result.errorMsg
+                                  });
+                                }
+                            },'json');
                         }
                     });
                 }
