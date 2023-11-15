@@ -29,19 +29,21 @@
 <?php 
 
   // Parte de verificacion de permisos 
-  //$objSession=new Session();
-  //$respuesta=$objSession->validar();
- // if($respuesta){
+  $objSession=new Session();
+  $respuesta=$objSession->validar();
+  if($respuesta){
     // pregunta que rol tiene el usuario para mostrar la
     // informacion en funcion de su rol  
+    $roles=$objSession->getRol();
+    var_dump($roles);
 
 
 
-  //}// fin if 
-  //else{
+  }// fin if 
+  else{
     // Manda al usuario no validado al login (faltaria la carpeta login)
-    //header("Location: ../usuario/index.php");
-  //}// fin else
+    header("Location: ../usuario/index.php");
+  }// fin else
 ?>
 
 <body>
