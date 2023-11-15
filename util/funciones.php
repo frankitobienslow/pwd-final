@@ -19,15 +19,16 @@ function data_submitted() {
 
 // auto load register 
 spl_autoload_register(function ($class_name){
-    //echo($class_name); 
+    //echo($class_name);
+    //echo($_SESSION['ROOT']); 
     $directorys = array(
-        $_SESSION['ROOT'].'Modelo/',
-        $_SESSION['ROOT'].'Modelo/conector/',
-        $_SESSION['ROOT'].'Control/',
-        $_SESSION['ROOT'].'vendor/'
+        $GLOBALS['ROOT'].'Modelo/',
+        $GLOBALS['ROOT'].'Modelo/conector/',
+        $GLOBALS['ROOT'].'Control/',
+        $GLOBALS['ROOT'].'Vista/'
       //  $GLOBALS['ROOT'].'util/class/',
         );
-    //print_object($directorys) ;
+    //print_r($directorys) ;
     foreach($directorys as $directory){
 
         if(file_exists($directory.$class_name .'.php')){

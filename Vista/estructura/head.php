@@ -86,7 +86,7 @@
 
            <!--DROPDOWN TP3 -->
            <li class="nav-item">
-            <a class="nav-link" href="../login/index.php" role="button" aria-expanded="false">
+            <a class="nav-link" href="../login/index.php?msg" role="button" aria-expanded="false">
               Ingresar
             </a>
           </li>

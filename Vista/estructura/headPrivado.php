@@ -28,22 +28,33 @@
 
 </head>
 <?php 
+// seccion de prueba (no iria)
+$objSession=new Session();
+$datos['nombre']='pepe';
+$datos['password']='123';
+$datos['password']=md5($datos['password']);
+$salida=$objSession->iniciar($datos['nombre'],$datos['password']);
+
+// fin seccion de prueba 
 
   // Parte de verificacion de permisos 
-  $objSession=new Session();
+  //$objSession=new Session();
   $respuesta=$objSession->validar();
   if($respuesta){
     // pregunta que rol tiene el usuario para mostrar la
     // informacion en funcion de su rol  
-    $roles=$objSession->getRol();
-    var_dump($roles);
-
+    $objRoles=$objSession->getRol(); // getRol llama al AbmUsuarioRol
+    $menuRoles=new AbmMenuRol();
+    
+    foreach($objRoles as $rol){
+      echo("<br>".$rol->getObjRol()->getId()."<br>");
+    }// fin for 
 
 
   }// fin if 
   else{
-    // Manda al usuario no validado al login (faltaria la carpeta login)
-    header("Location: ../usuario/index.php");
+    // Manda al usuario no validado al login 
+    header("Location: ../login/index.php");
   }// fin else
 ?>
 

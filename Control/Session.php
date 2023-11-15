@@ -13,17 +13,21 @@ class Session{
      * @param pws string
     */
     public function iniciar($nombreUsuario,$pws){
+        $resp=false;
         $objAbmUsuario=new AbmUsuario();
         $consulta=['usnombre'=>$nombreUsuario,'uspass'=>$pws,'usdeshabilitado'=>null]; // forma la consulta para el metodo buscar de AbmUsuario 
         $usuarios=$objAbmUsuario->buscar($consulta);
-        if($usuarios>=1){
+        
+        if(count($usuarios)>=1){
             if($this->activa()){
                 $_SESSION['idUser']=$usuarios[0]->getId(); // guarda el Id del usuario en la session
-                $_SESSION['nombreUsuario']=$usuarios[0]->getNombre(); 
+                //$_SESSION['nombreUsuario']=$usuarios[0]->getNombre(); 
+                $resp=true;
 
             }// fin if 
         }// fin if 
-        return $_SESSION; 
+        //var_dump($resp);
+        return $resp; 
     }// fin metodo iniciar 
 
 
@@ -58,7 +62,7 @@ class Session{
     */
     public function getUsuario(){
         $objAbmUsuario=new AbmUsuario();
-        $consulta=['usnombre'=>$_SESSION['nombreUsuario'],'idusuario'=>$_SESSION['idUser']];// pregunto si el usuario con 
+        $consulta=['idusuario'=>$_SESSION['idUser']];// pregunto si el usuario con 
         // esa session esta registrado. Lo busco en la BD
         $usuarios=$objAbmUsuario->buscar($consulta);
         if(count($usuarios)>=1){

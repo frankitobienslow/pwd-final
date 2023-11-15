@@ -9,7 +9,7 @@ $PROYECTO ='PWD_2023_TPFinal';
 
 //variable que almacena el directorio del proyecto
 $ROOT =$_SERVER['DOCUMENT_ROOT']."/".$PROYECTO."/";
-//var_dump($_SERVER['HTTP_HOST']);
+//var_dump($ROOT);
 
 include_once($ROOT.'util/funciones.php');
 
@@ -21,6 +21,6 @@ $INICIO = "Location:http://".$_SERVER['HTTP_HOST']."/$PROYECTO/vista/estructura/
 $PRINCIPAL = "Location:http://".$_SERVER['HTTP_HOST']."/$PROYECTO/vista/estructura/index_a.php";
 
 
-$_SESSION['ROOT']=$ROOT;
-//var_dump($_SESSION['ROOT']);
+$GLOBALS['ROOT']=$ROOT;
+
 ?>

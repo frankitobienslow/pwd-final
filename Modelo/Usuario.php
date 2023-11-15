@@ -251,12 +251,6 @@ class Usuario{
     }// fin function listar
     
 
-
-
-
-
-
-
 }// fin clase 
 
 
