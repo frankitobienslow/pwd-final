@@ -5,24 +5,30 @@ $objSession=new Session();
 
   // Parte de verificacion de permisos 
   $menu = "";    
-  $opcionRol = "";  
+  $opcionRol = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">Rol</a><ul class="dropdown-menu">';
+
+
+
   $respuesta=$objSession->validar();
   //var_dump($respuesta);
   if($respuesta){
     // pregunta que rol tiene el usuario para mostrar la
     // informacion en funcion de su rol  
-    $objRoles=$objSession->getRol(); // getRol llama al AbmUsuarioRol
+    $listaUsuarioRol=$objSession->getRol(); // getRol llama al AbmUsuarioRol
     $idRoles=[]; // guarda los id de roles en caso que tenga mas de 1 rol
     $objMenuRol=new AbmMenuRol();
     $i=0;
-    foreach($objRoles as $rol){
-      $idRoles[$i]=$rol->getObjRol()->getId();
+    foreach($listaUsuarioRol as $Usuariorol){
+      $idRoles[$i]=$Usuariorol->getObjRol()->getId();
+     // $idRol=max($idRoles); // 1) ADM  2) Deposito  3) Cliente
+      $opcionRol .= '<li><a onclick="<?php $objSession->setRol($Usuariorol->getObjRol()->getId()); ?>" class="dropdown-item" href="#">'.$Usuariorol->getObjRol()->getDescripcion().'</a></li>'; 
       $i++;
     }// fin for 
-    $idRol=max($idRoles); // 1) ADM  2) Deposito  3) Cliente
-    
+
+
+
     // GENERACION DEL MENU DINAMICO 
-    $param['idrol']=1;//$idRol;
+    $param['idrol']=$_SESSION['idRol'];
     $listaMenuRol=$objMenuRol->buscar($param);
     $listaPadre=array();
     $listaHijos=array();
@@ -36,9 +42,6 @@ $objSession=new Session();
       }// fin else
       
     }// fin for 
-    
-    $menu="";
-
       // ARMADO DEL MENU SEGUN EL ROL 
       foreach($listaPadre as $objMenuPadre){
         $menu.='<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">';
@@ -46,14 +49,12 @@ $objSession=new Session();
         foreach($listaHijos as $objMenuHijo){
           if($objMenuHijo->getobjMenuPadre()->getId() == $objMenuPadre->getId()){
             $menu .= '<li><a class="dropdown-item" href="'. $objMenuHijo->getDescripcion(). '">'.$objMenuHijo->getNombre().'</a></li>';  
-
           }// fin if 
-
         }// fin for
         $menu.='</ul></li>';
       }// fin for  
 
-     
+     $menu .= $opcionRol . '</ul></li>';;
 
   }// fin if 
   else{
@@ -103,23 +104,20 @@ $objSession=new Session();
             <a class="nav-link active" aria-current="page" href="https://github.com/Matias-Ignacio/PWD_2023_TPFinal"> <i class="bi bi-github"></i> </a>
           </li>
 
-          <!--DROPDOWN TP3 -->
+          <!--DROPDOWN TP3 
           <li class="nav-item">
             <a class="nav-link" href="../login/indexLogin.php" role="button" aria-expanded="false">
               Ingresar
             </a>
-          </li>
+          </li>-->
           <?php    
-          if($objSession->activa()){
-            echo $menu;
-            echo $opcionRol;
-          }
+          if($objSession->activa()) echo $menu;
       ?>
 
 
           <!--DROPDOWN TP4 -->
           <li class="nav-item">
-            <a class="nav-link" href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">
+            <a class="nav-link" onclick="<?php $objSession->cerrar(); ?>" href="../inicio/inicioIndex.php" role="button" aria-expanded="false">
               Salir
             </a>
           </li>
