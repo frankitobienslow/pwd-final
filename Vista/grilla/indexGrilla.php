@@ -7,6 +7,10 @@ if(isset($datos) && isset($datos['logeado']) && $datos['logeado']=='si'){
 }
 else{
   include_once '../estructura/headLibre.php';
+<<<<<<< HEAD
+  echo("<script> let a=false; </script>");
+=======
+>>>>>>> 540d3d3c6af802df6ecb4e45d7079b7f4f5822e7
 }//fin else
 $token = bin2hex(random_bytes(32));
 $_SESSION['csrf_token'] = $token;
@@ -23,7 +27,7 @@ $count = 0;
 
   ?>
 
-    <div class="card m-3 justify-content-between"style="width: 18rem;max-height:400px;">
+    <div class="card m-3 justify-content-between" style="width: 18rem; max-height:400px;">
       <img src="../imagenes/<?php echo $unProducto->getId() ?>.jpg" class="card-img" style="max-height:200px;object-fit:contain" alt="...">
       <div class="card-body d-flex flex-column justify-content-end" style="max-height:200px">
         <h5 class="card-title"><?php echo ($unProducto->getNombre()) ?></h5>
@@ -37,5 +41,17 @@ $count = 0;
   } //fin for 
   ?>
 </div>
+<script> 
+  $(document).ready(function(){
+       
+    if(!a){
+      console.log("usted no esta registrado");
+      
+    }// fin if 
+    
+  });
+</script>
+
 <?php
 include_once "../estructura/footer.php"; ?>
+
