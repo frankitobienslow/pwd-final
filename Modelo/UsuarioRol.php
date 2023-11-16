@@ -168,7 +168,6 @@ class UsuarioRol{
             $sql.=' WHERE '.$parametro; 
         }// fin if 
         if($baseDatos->Iniciar()){
-            print_r("entro");
             $salida=$baseDatos->Ejecutar($sql);
             //var_dump($salida);
             if($salida>-1){

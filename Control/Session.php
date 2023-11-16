@@ -11,17 +11,20 @@ class Session{
     /** METODO INICIAR 
      * @param $nombreUsuario string
      * @param $pws string
+     * @return boolean
     */
     public function iniciar($nombreUsuario,$pws){
         $resp=false;
         $objAbmUsuario=new AbmUsuario();
         $consulta=['usnombre'=>$nombreUsuario,'uspass'=>$pws,'usdeshabilitado'=>null]; // forma la consulta para el metodo buscar de AbmUsuario 
-        $usuarios=$objAbmUsuario->buscar($consulta);
-        
-        if(count($usuarios)>=1){
+        $listaUsuario=$objAbmUsuario->buscar($consulta);
+        $listarol=$this->getRol(); 
+        if(count($listaUsuario)>=1){
             if($this->activa()){
-                $_SESSION['idUser']=$usuarios[0]->getId(); // guarda el Id del usuario en la session
-                //$_SESSION['nombreUsuario']=$usuarios[0]->getNombre(); 
+                
+                $_SESSION['idUser']=$listaUsuario[0]->getId(); // guarda el Id del usuario en la session
+
+                $_SESSION['idRol']=($listarol[0]->getObjRol()->getId());
                 $resp=true;
 
             }// fin if 
@@ -73,7 +76,7 @@ class Session{
     }// fin metodo getUsuario
 
     /** METODO GETROL
-     * @return obj
+     * @return array
      */
     public function getRol(){
         $objRolesUsuarios=null;
@@ -93,6 +96,13 @@ class Session{
         $resp=session_destroy();
         return $resp;  
     }// fin metodo cerrar
+
+    /** METODO SETROL
+     * @param int
+     */
+    public function setRol($param){
+        $_SESSION["idRol"] = $param;
+    }
 
 }// fin clase Session 
 

@@ -1,10 +1,10 @@
 <?php
 $Titulo = "Lista Usuariorols";
-include_once("../estructura/headerPrivado.php");
+include_once("../estructura/headPrivado.php");
 $objAbmUsuariorol = new AbmUsuariorol();
 
 $listaUsuariorol = $objAbmUsuariorol->buscar(null);
-//var_dump($listaUsuariorol);
+echo count($listaUsuariorol);
 ?>	
 
 <div class="container mt-3">
@@ -13,23 +13,18 @@ $listaUsuariorol = $objAbmUsuariorol->buscar(null);
   <form action="editarUsuariorol.php" method="post">
     <table class="table-striped">
         <tr>
-            <th style="width:10%">Id</th>
-            <th style="width:40%">Id Usuariorol</th>
-            <th style="width:20%">Fecha</th>
-            <th style="width:20%">Id Usuario</th>
-        
+            <th style="width:10%">Nombre Usuario</th>
+            <th style="width:40%">Roles</th>
         </tr>
         
             <?php if(count($listaUsuariorol)>0){
                 foreach($listaUsuariorol as $Usuariorol){?>
                     <tr>
-                    <td> <?php echo($Usuariorol->getidUsuariorol()) ?></td>
-                    <td> <?php echo($Usuariorol->getfecha())?></td>
-                    <td> <?php echo($Usuariorol->getobjUsuario()->getidUsuario())?></td>
-                    <td> <?php echo($Usuariorol->getobjUsuario()->getnombreUsuario())?></td>
-                    
-                    <td><a href="editarUsuariorol.php?idUsuariorol=<?php echo($Usuariorol->getidUsuariorol()) ?>" class="btn btn-info">Editar</a></td>
-                </tr>
+                    <td> <?php echo($Usuariorol->getObjUsuario()->getNombre()) ?></td>
+                    <td> <?php echo($Usuariorol->getObjRol()->getDescripcion())?></td>
+                    <td><a href="editarUsuarioRol.php?idusuario=<?php echo ($Usuariorol->getObjUsuario()->getId()) ?>&idrol=<?php echo ($Usuariorol->getObjRol()->getId()) ?>" class="btn btn-danger">Eliminar</a>
+                    </td>
+                    </tr>
                 <?php    
                 }// fin for 
             } ?>

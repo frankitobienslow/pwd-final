@@ -1,17 +1,11 @@
 <?php
 include_once("../../configuracion.php");
 
-// seccion de prueba (no iria)
 $objSession=new Session();
-//$datos['nombre']='pepe';
-//$datos['password']='123';
-//$datos['password']=md5($datos['password']);
-//$salida=$objSession->iniciar($datos['nombre'],$datos['password']);
 
-// fin seccion de prueba 
-  
   // Parte de verificacion de permisos 
-  //$objSession=new Session();
+  $menu = "";    
+  $opcionRol = "";  
   $respuesta=$objSession->validar();
   //var_dump($respuesta);
   if($respuesta){
@@ -64,9 +58,8 @@ $objSession=new Session();
   }// fin if 
   else{
     // Manda al usuario no validado al login 
-    header("Location: ../login/index.php");
+    header("Location: ../inicio/inicioIndex.php");
   }// fin else
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,7 +110,10 @@ $objSession=new Session();
             </a>
           </li>
           <?php    
-          if($objSession->activa())echo $menu;
+          if($objSession->activa()){
+            echo $menu;
+            echo $opcionRol;
+          }
       ?>
 
 

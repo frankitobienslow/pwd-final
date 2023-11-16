@@ -41,7 +41,13 @@ class AbmUsuarioRol
         //print_R ($param);
         if (isset($param['idusuario']) && isset($param['idrol'])) {
             $objUsuarioRol = new UsuarioRol();
-            $objUsuarioRol->setear($param['idusuario'], $$param['idrol']);
+            $objUsuario=new Usuario();
+            $objUsuario->setId($param['idusuario']);
+            $objUsuario->cargar();
+            $objRol=new Rol();
+            $objRol->setId($param['idrol']);
+            $objRol->cargar();
+            $objUsuarioRol->setear($objRol, $objUsuario);
         }
         return $objUsuarioRol;
     }
