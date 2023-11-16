@@ -1,6 +1,7 @@
 <?php
 $titulo="Login";
-include_once '../Estructura/headLibre.php'; 
+//include_once '../Estructura/headLibre.php'; 
+include_once '../Estructura/headPrivado.php'; 
 
 //$datos=data_submitted();
 //if(isset($datos) && isset($datos['msg']) && $datos['msg']!=null){
@@ -11,7 +12,7 @@ include_once '../Estructura/headLibre.php';
 
  <main>
     <div class="container bg-white-50 d-flex justify-content-center mt-5">
-        <form action="accion.php" method="POST" class="row g-3 needs-validation" novalidate>
+        <form action="accionLogin.php" method="POST" class="row g-3 needs-validation" novalidate>
         <input type="hidden" name="accion" value="login">
             <div class="card" style="width: 18rem;">
                 <img src="../imagenes/autenticacion.png" class="card-img-top" alt="...">

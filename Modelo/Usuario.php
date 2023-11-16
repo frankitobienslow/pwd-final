@@ -162,8 +162,7 @@ class Usuario{
      * @return boolean
      */
     public function modificar(){
-        $salida=false;
-        
+        $salida=false;       
         $baseDatos=new BaseDatos();
         $sql="UPDATE usuario SET usnombre='".$this->getNombre().
         "', uspass='".$this->getPassword()."', usmail='".$this->getMail()."', usdeshabilitado='".$this->getDeshabilitado().
@@ -172,23 +171,15 @@ class Usuario{
         if($baseDatos->Iniciar()){
             if($baseDatos->Ejecutar($sql)){
                 $salida=true;
-
             }// fin if 
             else{
                 $this->setMensaje("Tabla usuario Modificar ").$baseDatos->getError();
-
             }// fin else
-
-
         } // fin if
         else{
             $this->setMensaje("Tabla usuario Modificar ").$baseDatos->getError();
-
         } // fin else
-
         return $salida; 
-
-
     }// fin function modificar
 
     /**
@@ -198,7 +189,7 @@ class Usuario{
     public function eliminar(){
         $salida=false;
         $baseDatos=new BaseDatos();
-        $sql="DELETE FROM usuario WHERE idusuario=".$this->getId();
+        $sql="UPDATE usuario SET usdeshabilitado = NULL WHERE idusuario = ".$this->getId();
         if($baseDatos->Iniciar()){
             if($baseDatos->Ejecutar($sql)){
                 $salida=true;
@@ -220,7 +211,7 @@ class Usuario{
     /**
      * METODO LISTAR 
      * DEVUELVE TODOS LOS USUARIOS EN LA BASE DE DATOS
-     * @param parametro
+     * @param $parametro
      * @return array 
      */
     public function listar($parametro=""){
@@ -228,7 +219,7 @@ class Usuario{
         $baseDatos=new BaseDatos();
         $sql="SELECT * FROM usuario";
         if($parametro!=""){
-            $sql.=' WHERE'.$parametro;
+            $sql.=' WHERE '.$parametro;
         }// fin if 
         
         if($baseDatos->Iniciar()){

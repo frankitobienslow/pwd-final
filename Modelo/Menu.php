@@ -213,7 +213,7 @@ class Menu{
      */
     public function eliminar(){
         $salida=false;
-        $sql="DELETE FROM menu WHERE idmenu=".$this->getId();
+        $sql="UPDATE menu SET medeshabilitado = NULL WHERE idmenu = ".$this->getId();
         $baseDatos=new BaseDatos();
         if($baseDatos->Iniciar()){
             if($baseDatos->Ejecutar($sql)){
