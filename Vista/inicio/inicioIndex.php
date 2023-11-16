@@ -1,5 +1,5 @@
 <?php
-include_once "../estructura/headPrivado.php";
+include_once "../estructura/headLibre.php";
 ?>
 <a href="../grilla/indexGrilla.php"><div class="container imagenInicio">
     

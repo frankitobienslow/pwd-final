@@ -1,5 +1,36 @@
 <?php
 include_once("../../configuracion.php");
+
+// seccion de prueba (no iria)
+$objSession=new Session();
+//$datos['nombre']='pepe';
+//$datos['password']='123';
+//$datos['password']=md5($datos['password']);
+//$salida=$objSession->iniciar($datos['nombre'],$datos['password']);
+
+// fin seccion de prueba 
+  
+  // Parte de verificacion de permisos 
+  //$objSession=new Session();
+  $respuesta=$objSession->validar();
+  var_dump($respuesta);
+  if($respuesta){
+    // pregunta que rol tiene el usuario para mostrar la
+    // informacion en funcion de su rol  
+    $objRoles=$objSession->getRol(); // getRol llama al AbmUsuarioRol
+    $menuRoles=new AbmMenuRol();
+    
+    foreach($objRoles as $rol){
+      //echo("<br>".$rol->getObjRol()->getId()."<br>");
+    }// fin for 
+
+
+  }// fin if 
+  else{
+    // Manda al usuario no validado al login 
+    header("Location: ../login/index.php");
+  }// fin else
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,7 +143,7 @@ $salida=$objSession->iniciar($datos['nombre'],$datos['password']);
               Salir
             </a>
           </li>
-       <?php include_once ("carritoIcono.php");?>
+       <?php //include_once ("carritoIcono.php");?>
         </ul>
       </div>
     </div>
