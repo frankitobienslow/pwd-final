@@ -10,7 +10,7 @@ $objSession=new Session();
 
 
   $respuesta=$objSession->validar();
-  //var_dump($respuesta);
+  var_dump($respuesta);
   if($respuesta){
     // pregunta que rol tiene el usuario para mostrar la
     // informacion en funcion de su rol  
@@ -28,6 +28,7 @@ $objSession=new Session();
 
 
     // GENERACION DEL MENU DINAMICO 
+//    echo($param['idrol']);
     $param['idrol']=$_SESSION['idRol'];
     $listaMenuRol=$objMenuRol->buscar($param);
     $listaPadre=array();
@@ -59,7 +60,8 @@ $objSession=new Session();
   }// fin if 
   else{
     // Manda al usuario no validado al login 
-    header("Location: ../inicio/inicioIndex.php");
+    echo($respuesta);
+    //header("Location: ../inicio/inicioIndex.php");
   }// fin else
 ?>
 <!DOCTYPE html>
@@ -103,13 +105,6 @@ $objSession=new Session();
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="https://github.com/Matias-Ignacio/PWD_2023_TPFinal"> <i class="bi bi-github"></i> </a>
           </li>
-
-          <!--DROPDOWN TP3 
-          <li class="nav-item">
-            <a class="nav-link" href="../login/indexLogin.php" role="button" aria-expanded="false">
-              Ingresar
-            </a>
-          </li>-->
           <?php    
           if($objSession->activa()) echo $menu;
       ?>
@@ -117,7 +112,7 @@ $objSession=new Session();
 
           <!--DROPDOWN TP4 -->
           <li class="nav-item">
-            <a class="nav-link" onclick="<?php $objSession->cerrar(); ?>" href="../inicio/inicioIndex.php" role="button" aria-expanded="false">
+            <a class="nav-link" onclick="<?php //$objSession->cerrar(); ?>" href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">
               Salir
             </a>
           </li>
