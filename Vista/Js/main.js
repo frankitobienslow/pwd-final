@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-<<<<<<< HEAD
 });
 
 $(document).ready(function () {
@@ -70,10 +69,6 @@ $(document).ready(function () {
     //console.log(md5(password));
 
   //});
-     
-
+    
 });
-=======
 
-});
->>>>>>> ce36051aaf2c30453bf8db5c2f25ad7e4181d7b2

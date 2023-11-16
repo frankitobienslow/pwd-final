@@ -1,5 +1,36 @@
 <?php
 include_once("../../configuracion.php");
+
+// seccion de prueba (no iria)
+$objSession=new Session();
+//$datos['nombre']='pepe';
+//$datos['password']='123';
+//$datos['password']=md5($datos['password']);
+//$salida=$objSession->iniciar($datos['nombre'],$datos['password']);
+
+// fin seccion de prueba 
+  
+  // Parte de verificacion de permisos 
+  //$objSession=new Session();
+  $respuesta=$objSession->validar();
+  var_dump($respuesta);
+  if($respuesta){
+    // pregunta que rol tiene el usuario para mostrar la
+    // informacion en funcion de su rol  
+    $objRoles=$objSession->getRol(); // getRol llama al AbmUsuarioRol
+    $menuRoles=new AbmMenuRol();
+    
+    foreach($objRoles as $rol){
+      //echo("<br>".$rol->getObjRol()->getId()."<br>");
+    }// fin for 
+
+
+  }// fin if 
+  else{
+    // Manda al usuario no validado al login 
+    header("Location: ../login/index.php");
+  }// fin else
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,55 +58,7 @@ include_once("../../configuracion.php");
   <script src="../Js/main.js"></script>
 
 </head>
-<<<<<<< HEAD
-<?php 
-// seccion de prueba (no iria)
-$objSession=new Session();
-$datos['nombre']='pepe';
-$datos['password']='123';
-$datos['password']=md5($datos['password']);
-$salida=$objSession->iniciar($datos['nombre'],$datos['password']);
 
-// fin seccion de prueba 
-
-  // Parte de verificacion de permisos 
-  //$objSession=new Session();
-  $respuesta=$objSession->validar();
-  if($respuesta){
-    // pregunta que rol tiene el usuario para mostrar la
-    // informacion en funcion de su rol  
-    $objRoles=$objSession->getRol(); // getRol llama al AbmUsuarioRol
-    $menuRoles=new AbmMenuRol();
-    
-    foreach($objRoles as $rol){
-      echo("<br>".$rol->getObjRol()->getId()."<br>");
-    }// fin for 
-
-
-  }// fin if 
-  else{
-    // Manda al usuario no validado al login 
-    header("Location: ../login/index.php");
-  }// fin else
-=======
-<?php
-
-// Parte de verificacion de permisos 
-//$objSession=new Session();
-//$respuesta=$objSession->validar();
-// if($respuesta){
-// pregunta que rol tiene el usuario para mostrar la
-// informacion en funcion de su rol  
-
-
-
-//}// fin if 
-//else{
-// Manda al usuario no validado al login (faltaria la carpeta login)
-//header("Location: ../usuario/index.php");
-//}// fin else
->>>>>>> ce36051aaf2c30453bf8db5c2f25ad7e4181d7b2
-?>
 
 <body>
   <nav class="navbar navbar-expand-lg bg-light p-2 fs-3">
@@ -129,12 +112,12 @@ $salida=$objSession->iniciar($datos['nombre'],$datos['password']);
 
           <!--DROPDOWN TP4 -->
           <li class="nav-item">
-            <a class="nav-link" href="#" role="button" aria-expanded="false">
+            <a class="nav-link" href="../login/accion.php?accion=cerrar" role="button" aria-expanded="false">
               Salir
             </a>
 
           </li>
-       <?php include_once ("carritoIcono.php");?>
+       <?php //include_once ("carritoIcono.php");?>
         </ul>
       </div>
     </div>
