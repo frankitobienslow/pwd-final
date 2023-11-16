@@ -1,14 +1,9 @@
 <?php
 $titulo="Login";
-//include_once '../Estructura/headLibre.php'; 
-include_once '../Estructura/headPrivado.php'; 
-
-//$datos=data_submitted();
-//if(isset($datos) && isset($datos['msg']) && $datos['msg']!=null){
-//    echo($datos['msg']);
-//}// fin if 
+include_once '../Estructura/headLibre.php'; 
+//include_once '../Estructura/headPrivado.php'; 
 ?>
- 
+
 
  <main>
     <div class="container bg-white-50 d-flex justify-content-center mt-5">
@@ -40,7 +35,7 @@ include_once '../Estructura/headPrivado.php';
             </div> 
 
         </form>
-
+        <span id="error"></span>
     </div>
 
 

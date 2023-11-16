@@ -13,17 +13,53 @@ $objSession=new Session();
   // Parte de verificacion de permisos 
   //$objSession=new Session();
   $respuesta=$objSession->validar();
-  var_dump($respuesta);
+  //var_dump($respuesta);
   if($respuesta){
     // pregunta que rol tiene el usuario para mostrar la
     // informacion en funcion de su rol  
     $objRoles=$objSession->getRol(); // getRol llama al AbmUsuarioRol
-    $menuRoles=new AbmMenuRol();
-    
+    $idRoles=[]; // guarda los id de roles en caso que tenga mas de 1 rol
+    $objMenuRol=new AbmMenuRol();
+    $i=0;
     foreach($objRoles as $rol){
-      //echo("<br>".$rol->getObjRol()->getId()."<br>");
+      $idRoles[$i]=$rol->getObjRol()->getId();
+      $i++;
     }// fin for 
+    $idRol=max($idRoles); // 1) ADM  2) Deposito  3) Cliente
+    
+    // GENERACION DEL MENU DINAMICO 
+    $param['idrol']=$idRol;
+    $listaMenuRol=$objMenuRol->buscar($param);
+    $listaPadre=array();
+    $listaHijos=array();
+    //echo($idRol);
+    foreach($listaMenuRol as $obj){
+      if($obj->getObjMenu()->getObjMenuPadre()==null){
+        array_push($listaPadre,$obj->getObjMenu());
+      }// fin if 
+      else{
+        array_push($listaHijos,$obj->getObjMenu());
+      }// fin else
+      
+    }// fin for 
+    
+    $menu="";
 
+      // ARMADO DEL MENU SEGUN EL ROL 
+      foreach($listaPadre as $objMenuPadre){
+        $menu.='<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">';
+        $menu .= $objMenuPadre->getNombre() . '</a><ul class="dropdown-menu">';
+        foreach($listaHijos as $objMenuHijo){
+          if($objMenuHijo->getobjMenuPadre()->getId() == $objMenuPadre->getId()){
+            $menu .= '<li><a class="dropdown-item" href="'. $objMenuHijo->getDescripcion(). '">'.$objMenuHijo->getNombre().'</a></li>';  
+
+          }// fin if 
+
+        }// fin for
+        $menu.='</ul></li>';
+      }// fin for  
+
+     
 
   }// fin if 
   else{
@@ -58,8 +94,7 @@ $objSession=new Session();
   <script src="../Js/main.js"></script>
 
 </head>
-?>
->>>>>>> c63ef4acd40110f73ae4136d0d6d05acbee856c1
+
 
 <body>
   <nav class="navbar navbar-expand-lg bg-light p-2 fs-3">
@@ -88,11 +123,7 @@ $objSession=new Session();
 
           <!--DROPDOWN TP4 -->
           <li class="nav-item">
-<<<<<<< HEAD
-            <a class="nav-link" href="../login/accion.php?accion=cerrar" role="button" aria-expanded="false">
-=======
-            <a class="nav-link" onclick="<?php $objSession->cerrar(); ?>" href="../../index.php" role="button" aria-expanded="false">
->>>>>>> c63ef4acd40110f73ae4136d0d6d05acbee856c1
+            <a class="nav-link" href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">
               Salir
             </a>
           </li>
