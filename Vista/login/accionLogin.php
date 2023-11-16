@@ -1,5 +1,9 @@
 <?php
 include_once '../../configuracion.php';
+<<<<<<< HEAD
+//include_once '../estructura/headLibre.php';
+=======
+>>>>>>> 29cc111574f051bc3cfe3d33b81208c46cba229a
 //include_once '../estructura/headPrivado.php';
 
 $datos=data_submitted();

@@ -136,7 +136,7 @@ class AbmMenu{
             if(isset($param['medesripcion'])){
                 $where.=" and medesripcion ='".$param['medesripcion']."'";
             }// fin if 
-            if(isset($param['medeshabilitado'])){
+            if(array_key_exists('medeshabilitado', $param)){
                 $where.=" and medeshabilitado ='".$param['medeshabilitado']."'";
             }// fin if 
         }// fin if 

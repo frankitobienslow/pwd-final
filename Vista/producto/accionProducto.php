@@ -15,7 +15,7 @@
             $dato["pronombre"] = $datos["pronombre"]; 
             $dato["prodetalle"] = $datos["prodetalle"];
             $dato["stock"] = intval($datos["stock"]);
-            var_dump($datos);
+            
             if($objProducto->modificacion($dato)){
                 $resp=true; 
             }// fin if 
