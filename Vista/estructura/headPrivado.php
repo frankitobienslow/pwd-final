@@ -26,9 +26,9 @@ $objSession=new Session();
     }// fin for 
 
 
-
+echo $objSession->getRolActual();
     // GENERACION DEL MENU DINAMICO 
-    $param['idrol']=$_SESSION['idRol'];
+    $param['idrol'] = $objSession->getRolActual();
     $listaMenuRol=$objMenuRol->buscar($param);
     $listaPadre=array();
     $listaHijos=array();
@@ -103,13 +103,6 @@ $objSession=new Session();
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="https://github.com/Matias-Ignacio/PWD_2023_TPFinal"> <i class="bi bi-github"></i> </a>
           </li>
-
-          <!--DROPDOWN TP3 
-          <li class="nav-item">
-            <a class="nav-link" href="../login/indexLogin.php" role="button" aria-expanded="false">
-              Ingresar
-            </a>
-          </li>-->
           <?php    
           if($objSession->activa()) echo $menu;
       ?>
@@ -117,7 +110,7 @@ $objSession=new Session();
 
           <!--DROPDOWN TP4 -->
           <li class="nav-item">
-            <a class="nav-link" onclick="<?php $objSession->cerrar(); ?>" href="../inicio/inicioIndex.php" role="button" aria-expanded="false">
+            <a class="nav-link"  href="../inicio/inicioIndex.php" role="button" aria-expanded="false">
               Salir
             </a>
           </li>

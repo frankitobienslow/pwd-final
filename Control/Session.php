@@ -108,7 +108,12 @@ class Session{
     public function setRol($param){
         $_SESSION["idRol"] = $param;
     }
-
+    /** METODO SETROL
+     * @return int
+     */
+    public function getRolActual(){
+        return $_SESSION["idRol"];
+    }
 }// fin clase Session 
 
 ?>
