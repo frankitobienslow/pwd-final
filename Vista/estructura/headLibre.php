@@ -56,7 +56,7 @@
           
           <!--REGISTRARSE-->
           <li class="nav-item mx-5">
-            <a class="nav-link" href="#" role="button" aria-expanded="false">
+            <a class="nav-link" href="../login/indexLogin.php" role="button" aria-expanded="false">
               Registrarse
             </a>
           </li>

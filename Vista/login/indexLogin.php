@@ -1,7 +1,7 @@
 <?php
 $titulo="Login";
-//include_once '../Estructura/headLibre.php'; 
-include_once '../Estructura/headPrivado.php'; 
+include_once '../Estructura/headLibre.php'; 
+//include_once '../Estructura/headPrivado.php'; 
 
 //$datos=data_submitted();
 //if(isset($datos) && isset($datos['msg']) && $datos['msg']!=null){

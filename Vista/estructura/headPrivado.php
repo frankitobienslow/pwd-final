@@ -1,36 +1,57 @@
 <?php
 include_once("../../configuracion.php");
 
-// seccion de prueba (no iria)
 $objSession=new Session();
-//$datos['nombre']='pepe';
-//$datos['password']='123';
-//$datos['password']=md5($datos['password']);
-//$salida=$objSession->iniciar($datos['nombre'],$datos['password']);
 
-// fin seccion de prueba 
-  
   // Parte de verificacion de permisos 
-  //$objSession=new Session();
+  $menu = "";    
+  $opcionRol = "";  
   $respuesta=$objSession->validar();
-  var_dump($respuesta);
   if($respuesta){
     // pregunta que rol tiene el usuario para mostrar la
     // informacion en funcion de su rol  
-    $objRoles=$objSession->getRol(); // getRol llama al AbmUsuarioRol
-    $menuRoles=new AbmMenuRol();
+    $listaRol=$objSession->getRol(); // getRol llama al AbmUsuarioRol
+    $param["idrol"] =  $_SESSION["idRol"];
     
+    $opcionRol .= '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">Rol</a><ul class="dropdown-menu">';
+    foreach ($listaRol as $objRol){
+        $opcionRol .= '<li><a onclick="<?php $objSession->setRol($objRol->getObjRol()->getId(); ?> class="dropdown-item" href="#">'.$objRol->getObjRol()->getNombre().'</a></li>';
+    }
+    $opcionRol .= "</li>";
+   
+  
+
+
+
     foreach($objRoles as $rol){
-      //echo("<br>".$rol->getObjRol()->getId()."<br>");
+      echo("<br>".$rol->getObjRol()->getId()."<br>");
     }// fin for 
 
-
+    // Menu Dinamico ******************
+    $listaMenuRol = $objMenuRol->buscar($param);
+    $listaPadre = array();
+    $listahijos = array();
+    foreach ($listaMenuRol as $obj) {
+      if ($obj->getObjMenu()->getObjMenuPadre() == null) array_push ($listaPadre, $obj->getObjMenu());
+      else array_push ($listahijos, $obj->getObjMenu());
+    }
+    foreach ($listaPadre as $objMenuPadre){
+        $menu .= '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">';
+        $menu .= $objMenuPadre->getNombre() . '</a><ul class="dropdown-menu">';
+        foreach ($listahijos as $objMenuHijo){
+          if ($objMenuHijo->getobjMenuPadre()->getId() == $objMenuPadre->getId()){
+            $menu .= '<li><a class="dropdown-item" href="'. $objMenuHijo->getDescripcion(). '">'.$objMenuHijo->getNombre().'</a></li>';
+          }
+        }
+        $menu .= "</ul></li>";
+    }
+    //Fin MEnu Dinamico ******************
+    
   }// fin if 
   else{
     // Manda al usuario no validado al login 
-    header("Location: ../login/index.php");
+    header("Location: ../inicio/inicioIndex.php");
   }// fin else
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,59 +79,7 @@ $objSession=new Session();
   <script src="../Js/main.js"></script>
 
 </head>
-<?php 
-// seccion de prueba (no iria)
 
-$objSession=new Session();
-/*
-$datos['nombre']='pepe';
-$datos['password']='123';
-$datos['password']=md5($datos['password']);
-$salida=$objSession->iniciar($datos['nombre'],$datos['password']);
-*/
-// fin seccion de prueba 
-
-  // Parte de verificacion de permisos 
-  //$objSession=new Session();
-  $menu = "";      
-  $respuesta=$objSession->validar();
-  if($respuesta){
-    // pregunta que rol tiene el usuario para mostrar la
-    // informacion en funcion de su rol  
-    $objRoles=$objSession->getRol(); // getRol llama al AbmUsuarioRol
-    $menuRoles=new AbmMenuRol();
-    
-    foreach($objRoles as $rol){
-      echo("<br>".$rol->getObjRol()->getId()."<br>");
-    }// fin for 
-    // Menu Dinamico
-    $objMenuRol=new AbmMenuRol();
-    $param["idrol"] =  $_SESSION["idrol"];
-    $listaMenuRol = $objMenuRol->buscar($param);
-    $listaPadre = array();
-    $listahijos = array();
-    foreach ($listaMenuRol as $obj) {
-      if ($obj->getObjMenu()->getObjMenuPadre() == null) array_push ($listaPadre, $obj->getObjMenu());
-      else array_push ($listahijos, $obj->getObjMenu());
-    }
-    foreach ($listaPadre as $objMenuPadre){
-        $menu .= '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">';
-        $menu .= $objMenuPadre->getNombre() . '</a><ul class="dropdown-menu">';
-        foreach ($listahijos as $objMenuHijo){
-          if ($objMenuHijo->getobjMenuPadre()->getId() == $objMenuPadre->getId()){
-            $menu .= '<li><a class="dropdown-item" href="'. $objMenuHijo->getDescripcion(). '">'.$objMenuHijo->getNombre().'</a></li>';
-          }
-        }
-        $menu .= "</ul></li>";
-    }
-    //Fin MEnu Dinamico
-
-  }// fin if 
-  else{
-    // Manda al usuario no validado al login 
-    header("Location: ../login/indexLogin.php");
-  }// fin else
-?>
 
 <body>
   <nav class="navbar navbar-expand-lg bg-light p-2 fs-3">
@@ -133,7 +102,10 @@ $salida=$objSession->iniciar($datos['nombre'],$datos['password']);
             </a>
           </li>
           <?php    
-          if($objSession->activa())echo $menu;
+          if($objSession->activa()){
+            echo $menu;
+            echo $opcionRol;
+          }
       ?>
 
 

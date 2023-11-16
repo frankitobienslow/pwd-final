@@ -322,6 +322,7 @@ COMMIT;
 --
 -- Insertar datos en la tabla 'usuario'
 INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`) VALUES
+(6, 'Anonimo', '', 'anonimo@example.com'),
 (1, 'pepe', '11111', 'usuario1@example.com'),
 (2, 'lolo', '22222', 'usuario2@example.com'),
 (3, 'pedro', '33333', 'usuario3@example.com'),
@@ -332,7 +333,8 @@ INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`) VALUES
 INSERT INTO `rol` (`idrol`, `rodescripcion`) VALUES
 (1, 'admin'),
 (2, 'deposito'),
-(3, 'cliente');
+(3, 'cliente'),
+(4, 'anonimo');
 
 -- Insertar datos en la tabla 'usuariorol' para relacionar usuarios y roles
 INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
@@ -343,7 +345,8 @@ INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
 (2, 2),
 (3, 3),
 (4, 3),
-(5, 1);
+(5, 1),
+(6, 4);
 
 -- Insertar datos en la tabla 'producto'
 INSERT INTO `producto` (`idproducto`, `pronombre`, `prodetalle`, `procantstock`) VALUES
@@ -397,6 +400,7 @@ INSERT INTO menu (idmenu, menombre, medescripcion, idpadre, medeshabilitado) VAL
 (11, 'Nuevo', '../producto/altaProducto.php', 1, NULL),
 (12, 'Listar', '../producto/indexProducto.php', 1, NULL),
 (13, 'Editar', '../producto/editarProducto.php',1,NULL),
+(14, 'Grilla', '../grilla/indexGrilla.php', NULL, NULL),
 (2, 'Usuario', 'Administracion de Usuarios', NULL, NULL),
 (22, 'Listar', '../usuario/indexUsuario.php', 2, NULL),
 (23, 'Editar', '../usuario/editarUsuario.php', 2, NULL),
@@ -407,13 +411,16 @@ INSERT INTO menu (idmenu, menombre, medescripcion, idpadre, medeshabilitado) VAL
 (41, 'Nuevo', '../menu/altaMenu.php', 4, NULL),
 (43, 'Editar', '../menu/editarMenu.php', 4, NULL),
 (42, 'Listar', '../menu/indexMenu.php', 4, NULL),
-(44, 'eliminar', '../menu/editarMenu.php', 4, NULL);
+(44, 'eliminar', '../menu/editarMenu.php', 4, NULL),
+(5, 'Registrarse', '../login/indexLogin.php', NULL, NULL),
+(51, 'WESH-WESH', '../inicio/inicioIndex.php', NULL, NULL);
 
 -- Insertar datos en la tabla 'rol' para relacionar menús con roles
 INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
-(1, 1),(11, 1),(12, 1),(13, 1),(2, 1),(22, 1),(23, 1),(3, 1),(32, 1),(33, 1),(4, 1),(41, 1),(42, 1),(43, 1),(44, 1),
+(1, 1),(11, 1),(12, 1),(13, 1),(14,1),(2, 1),(22, 1),(23, 1),(3, 1),(32, 1),(33, 1),(4, 1),(41, 1),(42, 1),(43, 1),(44, 1),
 (1, 2),(11, 2),(12, 2),(13, 2),(3, 2),(32, 2),(33, 2),
-(12, 3),(3, 3);
+(12, 3),(3, 3),(14,3),
+(14,4),(5,4),(51,4);
 
 
 
