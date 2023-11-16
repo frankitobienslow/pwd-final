@@ -1,18 +1,15 @@
 <?php
   include_once("../../configuracion.php");
   $_SESSION["iduser"] = "1";
-  $_SESSION["idrol"] = "2";
+  //$_SESSION["idrol"] = "2";
   $objMenuRol=new AbmMenuRol();
   $param["idrol"] =  $_SESSION["idrol"];
   $listaMenuRol = $objMenuRol->buscar($param);
   $listaPadre = array();
   $listahijos = array();
   foreach ($listaMenuRol as $obj) {
-    if ($obj->getObjMenu()->getObjMenuPadre() == null){
-      array_push ($listaPadre, $obj->getObjMenu());
-    }else{
-      array_push ($listahijos, $obj->getObjMenu());
-    }
+    if ($obj->getObjMenu()->getObjMenuPadre() == null) array_push ($listaPadre, $obj->getObjMenu());
+    else array_push ($listahijos, $obj->getObjMenu());
   }
   $menu = "";      
   foreach ($listaPadre as $objMenuPadre){

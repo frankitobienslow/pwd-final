@@ -58,12 +58,13 @@ $objSession=new Session();
   <script src="../Js/main.js"></script>
 
 </head>
-
+?>
+>>>>>>> c63ef4acd40110f73ae4136d0d6d05acbee856c1
 
 <body>
   <nav class="navbar navbar-expand-lg bg-light p-2 fs-3">
     <div class="container-fluid">
-      <a class="navbar-brand" id="pagina-principal" href="../inicio/inicioIndex.php">Grupo N°5</a>
+      <a class="navbar-brand" id="pagina-principal" href="../../index.php">Grupo N°5</a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -76,46 +77,24 @@ $objSession=new Session();
 
           <!--DROPDOWN TP3 -->
           <li class="nav-item">
-            <a class="nav-link" href="../login/index.php" role="button" aria-expanded="false">
+            <a class="nav-link" href="../login/indexLogin.php" role="button" aria-expanded="false">
               Ingresar
             </a>
           </li>
-          <!--DROPDOWN TP1 -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Gestion Usuarios
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Ver Compras</a></li>
-              <li><a class="dropdown-item" href="#">Baja usuario</a></li>
-              <li><a class="dropdown-item" href="#">Ver Usuarios</a></li>
-
-            </ul>
-          </li>
-          <!--DROPDOWN TP2 -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Gestion Rol
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../tp2/ejercicio3.php">Cambiar Rol</a></li>
-              <li><a class="dropdown-item" href="../tp2/ejercicio4.php">Nuevo Rol</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../grilla/indexGrilla.php" role="button" aria-expanded="false">
-              Productos
-            </a>
-
-          </li>
+          <?php    
+          if($objSession->activa())echo $menu;
+      ?>
 
 
           <!--DROPDOWN TP4 -->
           <li class="nav-item">
+<<<<<<< HEAD
             <a class="nav-link" href="../login/accion.php?accion=cerrar" role="button" aria-expanded="false">
+=======
+            <a class="nav-link" onclick="<?php $objSession->cerrar(); ?>" href="../../index.php" role="button" aria-expanded="false">
+>>>>>>> c63ef4acd40110f73ae4136d0d6d05acbee856c1
               Salir
             </a>
-
           </li>
        <?php //include_once ("carritoIcono.php");?>
         </ul>

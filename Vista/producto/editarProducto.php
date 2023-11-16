@@ -1,7 +1,7 @@
 <?php
 include_once '../../configuracion.php';
 $Titulo = "Productos";
-include_once '../estructura/headerPrivado.php';
+include_once '../estructura/headPrivado.php';
 
 
 $objProducto=new AbmProducto();

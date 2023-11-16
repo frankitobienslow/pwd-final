@@ -1,7 +1,7 @@
 <?php
 include_once '../../configuracion.php';
 $Titulo = "Menu Rol";
-include_once '../estructura/header.php';
+include_once '../estructura/headPrivado.php';
 
 $objAbmMenu = new AbmMenu();
 $listaMenu = $objAbmMenu->buscar(null);
