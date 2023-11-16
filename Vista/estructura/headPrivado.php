@@ -110,9 +110,8 @@ echo $objSession->getRolActual();
 
 
           <!--DROPDOWN TP4 -->
-          <li class="nav-item">
+          <li style="float: left;"  class="nav-item">
             <a class="nav-link" onclick="<?php //$objSession->cerrar(); ?>" href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">
-            <a class="nav-link"  href="../inicio/inicioIndex.php" role="button" aria-expanded="false">
               Salir
             </a>
           </li>
