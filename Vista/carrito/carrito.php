@@ -1,7 +1,7 @@
 <?php
 include_once '../../configuracion.php';
-include_once '../estructura/headLibre.php';
-//include_once '../estructura/headPrivado.php';
+//include_once '../estructura/headLibre.php';
+include_once '../estructura/headPrivado.php';
 //include_once '../../Control/AbmProducto.php';
 //include_once '../../Modelo/Producto.php';
 //include_once '../../Modelo/Conector/BaseDatos.php';

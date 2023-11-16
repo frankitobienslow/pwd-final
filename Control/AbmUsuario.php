@@ -144,6 +144,7 @@ class AbmUsuario{
      */
     public function buscar ($param){
         $where=" true ";
+        //var_dump($param);
         if($param<>null){
             // Va preguntando si existe los campos de la tabla 
             if(isset($param['idusuario'])){
@@ -165,6 +166,7 @@ class AbmUsuario{
             // fin if 
         }// fin if
         $objUsuario=new Usuario();
+        //echo($where);
         $arreglo=$objUsuario->listar($where);
         return $arreglo; 
 

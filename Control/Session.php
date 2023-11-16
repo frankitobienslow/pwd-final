@@ -16,8 +16,13 @@ class Session{
     public function iniciar($nombreUsuario,$pws){
         $resp=false;
         $objAbmUsuario=new AbmUsuario();
-        $consulta=['usnombre'=>$nombreUsuario,'uspass'=>$pws,'usdeshabilitado'=>null]; // forma la consulta para el metodo buscar de AbmUsuario 
-        $listaUsuario=$objAbmUsuario->buscar($consulta);
+        $datos['usnombre']=$nombreUsuario;
+        $datos['uspass']=$pws;
+        $datos['usdeshabilitado']=null;
+        //$consulta=['usnombre'=>$nombreUsuario,'uspass'=>$pws,'usdeshabilitado'=>null]; // forma la consulta para el metodo buscar de AbmUsuario 
+        //echo($consulta);
+        $listaUsuario=$objAbmUsuario->buscar($datos);
+       // var_dump($listaUsuario);
         $listarol=$this->getRol(); 
         if(count($listaUsuario)>=1){
             if($this->activa()){

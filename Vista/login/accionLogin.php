@@ -1,6 +1,5 @@
 <?php
 include_once '../../configuracion.php';
-include_once '../estructura/headLibre.php';
 //include_once '../estructura/headPrivado.php';
 
 $datos=data_submitted();
@@ -14,10 +13,10 @@ if($datos['accion']=='login'){
         header("Location: ../grilla/indexGrilla.php?logeado=si");
     }
     else{
-
         $mensaje="<p class='text-danger'>"." Usted no esta registrado."."</p>";
-        echo("<script>  </script>");
-        header("Location: indexLogin.php");
+        echo("<script> $('#error').html($mensaje) </script>");
+        echo("<script>console.log($mensaje);</script>");
+        header("Location: indexLogin.php?");
     }// fin else
 }// fin if 
 
@@ -30,4 +29,5 @@ if($datos['accion']=="cerrar"){
 }// fin 
 
 ?>
+
 

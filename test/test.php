@@ -15,16 +15,17 @@ echo("<br>----Hecho----<br>");
 */
 
 // USUARIO
-/**  
-$datos['idusuario']=7;
-$datos['usnombre']='sofia';
-$datos['uspass']=md5('lmn');
-$datos['usmail']='sofi@gmail.com';
+ 
+//$datos['idusuario']=7;
+$datos['usnombre']='pepe';
+$datos['uspass']=md5('123');
+//$datos['usmail']='sofi@gmail.com';
 $datos['usdeshabilitado']=null;//date('Y-m-d H:i:s');
 $objUsuario=new AbmUsuario();
-$objUsuario->modificacion($datos);
+$objUsuario->buscar($datos);
+var_dump($objUsuario);
 echo("<br>----Hecho usuario ----<br>");
-*/
+
 
 // ROL
 /** 
@@ -121,6 +122,7 @@ echo("<br>----Hecho compra item ----<br>");
 
 /***************** MOSTRAR LOS PRODUCTOS COMPRDOS POR EL USUARIO ************************** */
 // COMO OBTENER EL HISTORIAL DE COMPRAS DE UN USUARIO
+/** 
 echo("COMPRAS DEL USUARIO CON ID 3 <br>");
 $datosU['idusuario']=3;
 $datosC['idcompra']=3;
@@ -153,7 +155,7 @@ foreach($listaComras as $compra){
 
 }// fin for 
 
-
+*/
 
 
 

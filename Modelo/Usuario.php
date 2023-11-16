@@ -231,6 +231,7 @@ class Usuario{
                     while($row=$baseDatos->Registro()){
                     $obj=new Usuario();
                     $obj->setear($row['idusuario'],$row['usnombre'],$row['uspass'],$row['usmail'],$row['usdeshabilitado']);
+                    
                     array_push($arrayUsuarios,$obj);   
                     }// fin while 
 

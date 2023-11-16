@@ -2,6 +2,8 @@
 $titulo="Login";
 include_once '../Estructura/headLibre.php'; 
 //include_once '../Estructura/headPrivado.php'; 
+//$dato=data_submitted();
+
 ?>
 
 
@@ -35,7 +37,7 @@ include_once '../Estructura/headLibre.php';
             </div> 
 
         </form>
-        <span id="error"></span>
+        <div id="error"></div>
     </div>
 
 

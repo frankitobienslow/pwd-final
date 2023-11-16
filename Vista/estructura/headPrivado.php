@@ -22,7 +22,7 @@ $objSession=new Session();
     $idRol=max($idRoles); // 1) ADM  2) Deposito  3) Cliente
     
     // GENERACION DEL MENU DINAMICO 
-    $param['idrol']=$idRol;
+    $param['idrol']=1;//$idRol;
     $listaMenuRol=$objMenuRol->buscar($param);
     $listaPadre=array();
     $listaHijos=array();
