@@ -220,8 +220,7 @@ class Usuario{
         $sql="SELECT * FROM usuario";
         if($parametro!=""){
             $sql.=' WHERE '.$parametro;
-        }// fin if 
-        
+        }// fin if        
         if($baseDatos->Iniciar()){
            
             $respuesta=$baseDatos->Ejecutar($sql);
@@ -231,7 +230,7 @@ class Usuario{
                     while($row=$baseDatos->Registro()){
                     $obj=new Usuario();
                     $obj->setear($row['idusuario'],$row['usnombre'],$row['uspass'],$row['usmail'],$row['usdeshabilitado']);
-                    array_push($arrayUsuarios,$obj);   
+                        array_push($arrayUsuarios,$obj);   // 
                     }// fin while 
 
 

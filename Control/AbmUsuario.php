@@ -158,7 +158,7 @@ class AbmUsuario{
             if(isset($param['usmail'])){// identifica si esta la clave (atributo de la tabla)
                 $where.=" and usmail ='".$param['usmail']."'";
             }// fin if 
-            if(isset($param['usdeshabilitado'])){// identifica si esta la clave (atributo de la tabla)
+            if(array_key_exists('usdeshabilitado',$param)){// identifica si esta la clave (atributo de la tabla)
                 $where.=" and usdeshabilitado ='".$param['usdeshabilitado']."'";
             }// fin if 
                 

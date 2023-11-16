@@ -1,6 +1,5 @@
 <?php
 include_once '../../configuracion.php';
-//include_once '../estructura/headLibre.php';
 
 $datos=data_submitted();
 if(isset($datos) && isset($datos['logeado']) && $datos['logeado']=='si'){
