@@ -8,7 +8,6 @@ if(isset($datos) && isset($datos['logeado']) && $datos['logeado']=='si'){
 }
 else{
   include_once '../estructura/headLibre.php';
-
 }//fin else
 $token = bin2hex(random_bytes(32));
 $_SESSION['csrf_token'] = $token;
