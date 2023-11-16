@@ -10,7 +10,7 @@ $objSession=new Session();
 
 
   $respuesta=$objSession->validar();
-  //var_dump($respuesta);
+  var_dump($respuesta);
   if($respuesta){
     // pregunta que rol tiene el usuario para mostrar la
     // informacion en funcion de su rol  
@@ -24,7 +24,7 @@ $objSession=new Session();
       $opcionRol .= '<li><a onclick="<?php $objSession->setRol($Usuariorol->getObjRol()->getId()); ?>" class="dropdown-item" href="#">'.$Usuariorol->getObjRol()->getDescripcion().'</a></li>'; 
       $i++;
     }// fin for 
-
+  
 
 echo $objSession->getRolActual();
     // GENERACION DEL MENU DINAMICO 
@@ -59,7 +59,8 @@ echo $objSession->getRolActual();
   }// fin if 
   else{
     // Manda al usuario no validado al login 
-    header("Location: ../inicio/inicioIndex.php");
+    echo($respuesta);
+    //header("Location: ../inicio/inicioIndex.php");
   }// fin else
 ?>
 <!DOCTYPE html>
@@ -110,6 +111,7 @@ echo $objSession->getRolActual();
 
           <!--DROPDOWN TP4 -->
           <li class="nav-item">
+            <a class="nav-link" onclick="<?php //$objSession->cerrar(); ?>" href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">
             <a class="nav-link"  href="../inicio/inicioIndex.php" role="button" aria-expanded="false">
               Salir
             </a>

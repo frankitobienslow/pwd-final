@@ -1,12 +1,13 @@
 <?php
 include_once '../../configuracion.php';
+//include_once '../estructura/headLibre.php';
 //include_once '../estructura/headPrivado.php';
 
 $datos=data_submitted();
 
 // Validacion 
 if($datos['accion']=='login'){
-    //$datos['password']=md5($datos['password']);
+    $datos['password']=md5($datos['password']);
     $session=new Session();
     $salida=$session->iniciar($datos['nombre'],$datos['password']);
     if($salida){
@@ -21,7 +22,8 @@ if($datos['accion']=='login'){
 }// fin if 
 
 if($datos['accion']=="cerrar"){
-    $resp=$objSession->cerrar();
+    $session=new Session();
+    $resp=$session->cerrar();
     
     if($resp){
         header("Location: ../index.php");
