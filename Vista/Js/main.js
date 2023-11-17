@@ -85,7 +85,6 @@ if (window.location.href.indexOf('http://localhost/PWD_2023_TPFINAL/Vista/carrit
    
         boton.addEventListener('click', function (event) {
              event.preventDefault();
-                tokens.push(tiempoActual);
                 //AJAX para enviar el id del producto seleccionado a carrito.php con metodo POST
                 $.ajax({
                     url: '../carrito/eliminarDelCarrito.php',
