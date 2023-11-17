@@ -178,7 +178,7 @@ class Rol{
         $baseDatos=new BaseDatos();
         $sql="SELECT * FROM rol";
         if($parametro!=""){
-            $sql.='WHERE'.$parametro;
+            $sql.=' WHERE'.$parametro;
         }// fin if 
 
         if($baseDatos->Iniciar()){
