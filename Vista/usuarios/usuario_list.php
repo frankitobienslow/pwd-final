@@ -11,9 +11,8 @@
     <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
 </head>
-<body>
-    <h2>Basic CRUD Application</h2>
-    <p>Click the buttons on datagrid toolbar to do crud actions.</p>
+<body style="margin:0; padding:0">
+    <h1>Lista de Todos los usuarios</h1>
     
     <table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:250px"
             url="accion/list_usuario.php"
