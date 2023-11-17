@@ -1,6 +1,6 @@
 <?php
 $Titulo = "Lista";
-include_once("../estructura/header.php");
+include_once("../estructura/headPrivado.php");
 $objAbmMenuRol = new AbmMenurol();
 
 $listaMenuRol= $objAbmMenuRol->buscar(null);

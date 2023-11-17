@@ -1,7 +1,7 @@
 <?php
 include_once '../../configuracion.php';
 $Titulo = "Compras";
-include_once '../estructura/header.php';
+include_once '../estructura/headPrivado.php';
 
 $objAbmUsuario = new AbmUsuario();
 $listaUsuario = $objAbmUsuario->buscar(null);

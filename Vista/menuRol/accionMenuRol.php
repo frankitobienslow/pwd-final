@@ -1,7 +1,5 @@
 <?php
     include_once '../../configuracion.php';
-    $Titulo = "Lista";
-    include_once '../estructura/header.php';
 
     $resp=false; 
     $objMenuRol=new AbmMenuRol();

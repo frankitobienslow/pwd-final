@@ -1,6 +1,6 @@
 <?php
 $Titulo = "Lista Menu";
-include_once("../estructura/headerLibre.php");
+include_once("../estructura/headPrivado.php");
 include_once("../../configuracion.php");
 $objAbmMenu = new AbmMenu();
 
