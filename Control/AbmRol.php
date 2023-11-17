@@ -158,7 +158,7 @@ class AbmRol{
                 
         }// fin if
         $arreglo=$objNuevoRol->listar($where);
-
+        
         return $arreglo; 
 
     }// fin funcion     
