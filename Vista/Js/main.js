@@ -39,14 +39,7 @@ if (window.location.href.indexOf('http://localhost/PWD_2023_TPFINAL/Vista/grilla
     botonesCarrito.forEach(function (boton) {
 
         boton.addEventListener('click', function (event) {
-            var tiempoActual = new Date().getTime();
-            /*Verificar si el tiempo desde el último clic es menor que 5 milisegundos
-            if (tokens.length !== 0 && tiempoActual - tokens[tokens.length - 1] < 5) {
-                console.log("Duplicación evitada.");
-                return;
-            } else {*/
                 event.preventDefault();
-                tokens.push(tiempoActual);
                 //AJAX para enviar el id del producto seleccionado a carrito.php con metodo POST
                 $.ajax({
                     url: '../carrito/agregarAlCarrito.php',
@@ -63,7 +56,6 @@ if (window.location.href.indexOf('http://localhost/PWD_2023_TPFINAL/Vista/grilla
                         console.log("No se agregó al carrito")
                     }
                 });
-            //}
         });
     });
     function actualizarIcono(){
@@ -90,15 +82,9 @@ if (window.location.href.indexOf('http://localhost/PWD_2023_TPFINAL/Vista/carrit
     //Eliminar del carrito
     var botonesEliminar = document.querySelectorAll('.eliminarCarrito');
     botonesEliminar.forEach(function (boton) {
-        tokens = [];
+   
         boton.addEventListener('click', function (event) {
-            var tiempoActual = new Date().getTime();
-            // Verificar si el tiempo desde el último clic es menor que 5 milisegundos 
-            /*if (tokens.length !== 0 && tiempoActual - tokens[tokens.length - 1] < 5) {
-                console.log("Duplicación evitada.");
-                return;
-            } else {
-               */ event.preventDefault();
+             event.preventDefault();
                 tokens.push(tiempoActual);
                 //AJAX para enviar el id del producto seleccionado a carrito.php con metodo POST
                 $.ajax({
