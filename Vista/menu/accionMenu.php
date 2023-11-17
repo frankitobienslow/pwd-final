@@ -1,7 +1,7 @@
 <?php
     include_once '../../configuracion.php';
     $Titulo = "Lista de Menu";
-    include_once '../estructura/header.php';
+    //include_once '../estructura/header.php';
 
     $resp=false; 
     $objMenu=new AbmMenu();

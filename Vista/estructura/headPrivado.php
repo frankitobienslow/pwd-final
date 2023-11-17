@@ -19,8 +19,9 @@ $objSession=new Session();
     $i=0;
     foreach($listaRol as $rol){
       $idRoles[$i]=$rol->getId();
-      $opcionRol .= '<li><a id=menurol'.$rol->getId().' class="dropdown-item" > '.$rol->getDescripcion().'</a></li>'; 
-      //href="accionEstructura.php?menurol='.$rol->getId().'"
+      $opcionRol .= '<li><a href="../estructura/accionEstructura.php?menurol='.$rol->getId().'" class="dropdown-item" > '.$rol->getDescripcion().'</a></li>'; 
+      //href="../estructura/accionEstructura.php?menurol='.$rol->getId().'"  id=menurol'.$rol->getId().'
+      // id=menurol'.$rol->getId().' onclick="menurol('.$rol->getId().')"
       $i++;
     }// fin for 
     // GENERACION DEL MENU DINAMICO 
@@ -28,7 +29,7 @@ $objSession=new Session();
     $listaMenuRol=$objMenuRol->buscar($param);
     $listaPadre=array();
     $listaHijos=array();
-    //echo($idRol);
+    //echo $_SESSION["idRol"];
     foreach($listaMenuRol as $obj){
       if($obj->getObjMenu()->getObjMenuPadre()==null){
         array_push($listaPadre,$obj->getObjMenu());
@@ -55,7 +56,7 @@ $objSession=new Session();
   }// fin if 
   else{
     // Manda al usuario no validado al login 
-    echo($respuesta);
+    header("Location: ../index.php");
   }// fin else
 ?>
 <!DOCTYPE html>
@@ -86,18 +87,18 @@ $objSession=new Session();
 <!--   pruebaaaa      -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-  $("#menurol1").click(function(){
-    $.post("menu.asp",
-    {
-      name: "1",
-    },
-    function(data){
-
-        alert("Cambio de rol de usuario " + data);
-    });
-  });
-});
+function menurol(data){
+  alert("Aca" + data);
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("#menurol").innerHTML = this.responseText;
+      }
+    }
+    xmlhttp.open("GET", "../estructura/accionEstructura.php?menurol="+data, true);
+    xmlhttp.send();
+    return
+}
 </script>
 
 
