@@ -49,9 +49,9 @@
             <div style="margin-bottom:10px">
                 <input name="usmail" class="easyui-textbox" required="true" label="Email:" style="width:100%">
             </div>
-            <div style="margin-bottom:10px">
-                <input name="usdeshabilitado" class="easyui-textbox" required="true" label="Deshabilitado:" style="width:100%">
-            </div>
+            
+                <input name="usdeshabilitado" type="hidden" value="null" label="Deshabilitado:" >
+            
         </form>
     </div>
     <div id="dlg_edit" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">

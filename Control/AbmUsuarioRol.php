@@ -26,7 +26,7 @@ class AbmUsuarioRol
             $objUsuario->setId($param['idusuario']);
             $objUsuario->cargar();
             $objUsuarioRol = new UsuarioRol();
-            $objUsuarioRol->setear($objUsuario, $objRol);
+            $objUsuarioRol->setear($objRol, $objUsuario);
         }
         return $objUsuarioRol;
     }

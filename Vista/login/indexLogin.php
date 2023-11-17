@@ -31,8 +31,9 @@ include_once '../Estructura/headLibre.php';
 
                     <div class="col-12 mt-3">
                         <button class="btn btn-primary" id="enviar" type="submit">Ingresar</button>
+                        <a href="register.php" class="btn btn-secondary" id="enviar">Registrarse</a>
                     </div>
-
+                    
                 </div>
             </div> 
 

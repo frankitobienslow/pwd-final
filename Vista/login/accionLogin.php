@@ -7,7 +7,7 @@ $datos=data_submitted();
 
 // Validacion 
 if($datos['accion']=='login'){
-    $datos['password']=md5($datos['password']);
+    //$datos['password']=md5($datos['password']);
     $session=new Session();
     $salida=$session->iniciar($datos['nombre'],$datos['password']);
     if($salida){
@@ -29,6 +29,19 @@ if($datos['accion']=="cerrar"){
         header("Location: ../index.php");
     }// fin if
 }// fin 
+
+if($datos['accion']=='nuevo'){
+    $objAbmUsuario=new AbmUsuario();
+    $respuesta=$objAbmUsuario->alta($datos);
+    if($respuesta){
+        $objAbmUsuarioRol=new AbmUsuarioRol();
+        $usuarios=$objAbmUsuario->buscar(null);
+        $data['idusuario']=end($usuarios)->getId();
+        $data['idrol']=3;
+        $objAbmUsuarioRol->alta($data);
+        header("Location: indexLogin.php?");
+    }
+}
 
 ?>
 
