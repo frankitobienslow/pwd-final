@@ -20,10 +20,10 @@
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
             <tr>
-                <th field="idusuario" width="50">Id</th>
+                <th field="idusuario" width="20">Id</th>
                 <th field="usnombre" width="50">Nombre</th>
-                <th field="usmail" width="50">Email</th>
-                <th field="usdeshabilitado" width="50">Deshabilitado</th>
+                <th field="usmail" width="70">Email</th>
+                <th field="usdeshabilitado" width="50">Habilitado</th>
             </tr>
         </thead>
     </table>

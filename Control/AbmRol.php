@@ -151,10 +151,11 @@ class AbmRol{
             // Va preguntando si existe los campos de la tabla 
                 if(isset($param['idrol'])){ 
                 }// fin if     
-                    $where.=" and idrol='".$param['idrol'];
+                    $where.=" and idrol= ".$param['idrol'];
                 if(isset($param['rodescripcion'])){// identifica si esta la clave (atributo de la tabla)
-                    $where.=" and rodescripcion ='".$param['rodescripcion']."'";
+                    $where.=" and rodescripcion = '".$param['rodescripcion']."'";
                 }// fin if  
+                
         }// fin if
         $arreglo=$objNuevoRol->listar($where);
 
