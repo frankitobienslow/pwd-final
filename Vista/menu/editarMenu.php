@@ -1,7 +1,7 @@
 <?php
 include_once '../../configuracion.php';
 $Titulo = "Menu";
-include_once '../estructura/header.php';
+include_once '../estructura/headPrivado.php';
 
 $objAbmMenuP = new AbmMenu();
 $listaMenuP = $objAbmMenuP->buscar(null);

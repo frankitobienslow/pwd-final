@@ -38,10 +38,11 @@ $count = 0;
   } //fin for 
   ?>
 </div>
-<script>
-  $(document).ready(function() {
-
-    if (!a) {
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script> 
+  $(document).ready(function(){
+       
+    if(!a){
       console.log("usted no esta registrado");
 
     } // fin if 

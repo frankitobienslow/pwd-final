@@ -9,7 +9,7 @@ echo count($listaUsuariorol);
 
 <div class="container mt-3">
   <h2 style="text-align: center; color:dodgerblue;">Tabla </h2>
-  <h5 style="text-align: left; color:dodgerblue;">Usuariorols disponibles</h5>            
+  <h5 style="text-align: left; color:dodgerblue;">Gestion de Roles</h5>            
   <form action="editarUsuariorol.php" method="post">
     <table class="table-striped">
         <tr>

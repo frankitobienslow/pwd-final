@@ -7,32 +7,29 @@ $objSession=new Session();
   $menu = "";    
   $opcionRol = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">Rol</a><ul class="dropdown-menu">';
 
-
+ 
 
   $respuesta=$objSession->validar();
-  var_dump($respuesta);
   if($respuesta){
     // pregunta que rol tiene el usuario para mostrar la
     // informacion en funcion de su rol  
-    $listaUsuarioRol=$objSession->getRol(); // getRol llama al AbmUsuarioRol
+    $listaRol=$objSession->getRol(); // getRol llama al Abmrol
     $idRoles=[]; // guarda los id de roles en caso que tenga mas de 1 rol
     $objMenuRol=new AbmMenuRol();
     $i=0;
-    foreach($listaUsuarioRol as $Usuariorol){
-      $idRoles[$i]=$Usuariorol->getObjRol()->getId();
-     // $idRol=max($idRoles); // 1) ADM  2) Deposito  3) Cliente
-      $opcionRol .= '<li><a onclick="<?php $objSession->setRol($Usuariorol->getObjRol()->getId()); ?>" class="dropdown-item" href="#">'.$Usuariorol->getObjRol()->getDescripcion().'</a></li>'; 
+    foreach($listaRol as $rol){
+      $idRoles[$i]=$rol->getId();
+      $opcionRol .= '<li><a href="../estructura/accionEstructura.php?menurol='.$rol->getId().'" class="dropdown-item" > '.$rol->getDescripcion().'</a></li>'; 
+      //href="../estructura/accionEstructura.php?menurol='.$rol->getId().'"  id=menurol'.$rol->getId().'
+      // id=menurol'.$rol->getId().' onclick="menurol('.$rol->getId().')"
       $i++;
     }// fin for 
-  
-
-echo $objSession->getRolActual();
     // GENERACION DEL MENU DINAMICO 
     $param['idrol'] = $objSession->getRolActual();
     $listaMenuRol=$objMenuRol->buscar($param);
     $listaPadre=array();
     $listaHijos=array();
-    //echo($idRol);
+    //echo $_SESSION["idRol"];
     foreach($listaMenuRol as $obj){
       if($obj->getObjMenu()->getObjMenuPadre()==null){
         array_push($listaPadre,$obj->getObjMenu());
@@ -59,8 +56,7 @@ echo $objSession->getRolActual();
   }// fin if 
   else{
     // Manda al usuario no validado al login 
-    echo($respuesta);
-    //header("Location: ../inicio/inicioIndex.php");
+    header("Location: ../index.php");
   }// fin else
 ?>
 <!DOCTYPE html>
@@ -88,6 +84,25 @@ echo $objSession->getRolActual();
   
 
 
+<!--   pruebaaaa      -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+function menurol(data){
+  alert("Aca" + data);
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("#menurol").innerHTML = this.responseText;
+      }
+    }
+    xmlhttp.open("GET", "../estructura/accionEstructura.php?menurol="+data, true);
+    xmlhttp.send();
+    return
+}
+</script>
+
+
+<!--  fin    pruebaaaa      -->
 </head>
 
 

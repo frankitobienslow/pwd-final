@@ -11,9 +11,8 @@
     <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
 </head>
-<body>
-    <h2>Basic CRUD Application</h2>
-    <p>Click the buttons on datagrid toolbar to do crud actions.</p>
+<body style="margin:0; padding:0">
+    <h1>Lista de Todos los usuarios</h1>
     
     <table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:250px"
             url="accion/list_usuario.php"
@@ -21,10 +20,10 @@
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
             <tr>
-                <th field="idusuario" width="50">Id</th>
+                <th field="idusuario" width="20">Id</th>
                 <th field="usnombre" width="50">Nombre</th>
-                <th field="usmail" width="50">Email</th>
-                <th field="usdeshabilitado" width="50">Deshabilitado</th>
+                <th field="usmail" width="70">Email</th>
+                <th field="usdeshabilitado" width="50">Habilitado</th>
             </tr>
         </thead>
     </table>
@@ -49,9 +48,9 @@
             <div style="margin-bottom:10px">
                 <input name="usmail" class="easyui-textbox" required="true" label="Email:" style="width:100%">
             </div>
-            <div style="margin-bottom:10px">
-                <input name="usdeshabilitado" class="easyui-textbox" required="true" label="Deshabilitado:" style="width:100%">
-            </div>
+            
+                <input name="usdeshabilitado" type="hidden" value="null" label="Deshabilitado:" >
+            
         </form>
     </div>
     <div id="dlg_edit" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">

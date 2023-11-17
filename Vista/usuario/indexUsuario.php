@@ -14,9 +14,9 @@ $listaUsuario = $objAbmUsuario->buscar(null);
     <table class="table-striped">
         <tr>
             <th style="width:10%">Id</th>
-            <th style="width:40%">Nombre</th>
-            <th style="width:20%">Mail</th>
-            <th style="width:20%">Deshabilitado</th>
+            <th style="width:30%">Nombre</th>
+            <th style="width:30%">Mail</th>
+            <th style="width:30%">Habilitado</th>
         
         </tr>
         
@@ -26,7 +26,9 @@ $listaUsuario = $objAbmUsuario->buscar(null);
                     <td> <?php echo($usuario->getId()) ?></td>
                     <td> <?php echo($usuario->getNombre())?></td>
                     <td> <?php echo($usuario->getMail())?></td>
-                     <td> <?php echo($usuario->getDeshabilitado())?></td>
+
+                     <td> <?php if ($usuario->getDeshabilitado() ==="0000-00-00 00:00:00") echo "Si";
+                     else echo "No";?></td>
                     
                     <td><a href="editarUsuario.php?idusuario=<?php echo($usuario->getId()) ?>" class="btn btn-info">Editar</a></td>
                 </tr>

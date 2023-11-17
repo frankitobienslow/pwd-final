@@ -30,6 +30,19 @@ if($datos['accion']=="cerrar"){
     }// fin if
 }// fin 
 
+if($datos['accion']=='nuevo'){
+    $objAbmUsuario=new AbmUsuario();
+    $respuesta=$objAbmUsuario->alta($datos);
+    if($respuesta){
+        $objAbmUsuarioRol=new AbmUsuarioRol();
+        $usuarios=$objAbmUsuario->buscar(null);
+        $data['idusuario']=end($usuarios)->getId();
+        $data['idrol']=3;
+        $objAbmUsuarioRol->alta($data);
+        header("Location: indexLogin.php?");
+    }
+}
+
 ?>
 
 

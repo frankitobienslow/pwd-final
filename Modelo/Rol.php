@@ -169,16 +169,16 @@ class Rol{
     /**
      * METODO LISTAR POSTULANTE
      * DEVUELVE TODOS LOS POSTULANTES EN LA BASE DE DATOS
-     * @param parametro
+     * @param $parametro
      * @return array 
      */
     public function listar($parametro=""){
         //var_dump($parametro);
         $arrayUsuarios=array();
         $baseDatos=new BaseDatos();
-        $sql="SELECT * FROM rol";
+        $sql="SELECT * FROM rol ";
         if($parametro!=""){
-            $sql.='WHERE'.$parametro;
+            $sql.=' WHERE '.$parametro;
         }// fin if 
 
         if($baseDatos->Iniciar()){
