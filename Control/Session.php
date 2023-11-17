@@ -23,18 +23,15 @@ class Session{
         //echo($consulta);
         $listaUsuario=$objAbmUsuario->buscar($datos);
        // var_dump($listaUsuario);
-        $listarol=$this->getRol(); 
-        if(count($listaUsuario)>=1){
-            if($this->activa()){
-                
-                $_SESSION['idUser']=$listaUsuario[0]->getId(); // guarda el Id del usuario en la session
-
-                $_SESSION['idRol']=($listarol[0]->getObjRol()->getId());
-                $resp=true;
+       if(count($listaUsuario)>=1){
+           if($this->activa()){
+               $_SESSION['idUser']=$listaUsuario[0]->getId(); // guarda el Id del usuario en la session
+               $listarol=$this->getRol(); 
+               $_SESSION['idRol']=($listarol[0]->getId());
+               $resp=true;
 
             }// fin if 
         }// fin if 
-        //var_dump($resp);
         return $resp; 
     }// fin metodo iniciar 
 
@@ -84,15 +81,24 @@ class Session{
      * @return array
      */
     public function getRol(){
+        $listaRoles = array();
         $objRolesUsuarios=null;
+        $i = 0;
         if($this->getUsuario()!=null){
             $userLog=$this->getUsuario(); // almacena el obj usuario  
             $datos['idusuario']=$userLog->getId(); // guarda el id de usuario 
             $objRolUsuario=new AbmUsuarioRol();
             $objRolesUsuarios=$objRolUsuario->buscar($datos); // busca en la tabla usuarioRol los roles que coincide con el id del usuario
+
+            foreach ($objRolesUsuarios as $objRolUsuario){
+                array_push($listaRoles, $objRolUsuario->getObjRol());
+            
+            }
         }// fin if 
-        return $objRolesUsuarios;  // puede devolver una lista de usuarios con distintos roles o un solo usuario con un unico rol
+        return $listaRoles;  // puede devolver una lista de usuarios con distintos roles o un solo usuario con un unico rol
     }// fin metodo getRol
+
+
 
     /** METODO CERRAR 
      * @return boolean

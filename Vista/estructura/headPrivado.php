@@ -7,26 +7,22 @@ $objSession=new Session();
   $menu = "";    
   $opcionRol = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">Rol</a><ul class="dropdown-menu">';
 
-
+ 
 
   $respuesta=$objSession->validar();
-  var_dump($respuesta);
   if($respuesta){
     // pregunta que rol tiene el usuario para mostrar la
     // informacion en funcion de su rol  
-    $listaUsuarioRol=$objSession->getRol(); // getRol llama al AbmUsuarioRol
+    $listaRol=$objSession->getRol(); // getRol llama al Abmrol
     $idRoles=[]; // guarda los id de roles en caso que tenga mas de 1 rol
     $objMenuRol=new AbmMenuRol();
     $i=0;
-    foreach($listaUsuarioRol as $Usuariorol){
-      $idRoles[$i]=$Usuariorol->getObjRol()->getId();
-     // $idRol=max($idRoles); // 1) ADM  2) Deposito  3) Cliente
-      $opcionRol .= '<li><a onclick="<?php $objSession->setRol($Usuariorol->getObjRol()->getId()); ?>" class="dropdown-item" href="#">'.$Usuariorol->getObjRol()->getDescripcion().'</a></li>'; 
+    foreach($listaRol as $rol){
+      $idRoles[$i]=$rol->getId();
+      $opcionRol .= '<li><a id=menurol'.$rol->getId().' class="dropdown-item" > '.$rol->getDescripcion().'</a></li>'; 
+      //href="accionEstructura.php?menurol='.$rol->getId().'"
       $i++;
     }// fin for 
-  
-
-echo $objSession->getRolActual();
     // GENERACION DEL MENU DINAMICO 
     $param['idrol'] = $objSession->getRolActual();
     $listaMenuRol=$objMenuRol->buscar($param);
@@ -60,7 +56,6 @@ echo $objSession->getRolActual();
   else{
     // Manda al usuario no validado al login 
     echo($respuesta);
-    //header("Location: ../inicio/inicioIndex.php");
   }// fin else
 ?>
 <!DOCTYPE html>
@@ -88,6 +83,25 @@ echo $objSession->getRolActual();
   <script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="../Js/main.js"></script>
 
+<!--   pruebaaaa      -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#menurol1").click(function(){
+    $.post("menu.asp",
+    {
+      name: "1",
+    },
+    function(data){
+
+        alert("Cambio de rol de usuario " + data);
+    });
+  });
+});
+</script>
+
+
+<!--  fin    pruebaaaa      -->
 </head>
 
 
