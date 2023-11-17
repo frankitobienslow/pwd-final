@@ -1,7 +1,5 @@
 <?php
     include_once '../../configuracion.php';
-    $Titulo = "Lista de Productos";
-    include_once '../estructura/header.php';
     
 
     $resp=false; 

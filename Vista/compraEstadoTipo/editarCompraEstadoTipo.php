@@ -1,7 +1,7 @@
 <?php
 include_once '../../configuracion.php';
 $Titulo = "Tipos de estados de compras";
-include_once '../estructura/header.php';
+include_once '../estructura/headPrivado.php';
 
 
 $objCompraET=new AbmCompraEstadoTipo();

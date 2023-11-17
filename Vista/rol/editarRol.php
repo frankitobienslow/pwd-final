@@ -1,7 +1,7 @@
 <?php
 include_once '../../configuracion.php';
 $Titulo = "Rols";
-include_once '../estructura/header.php';
+include_once '../estructura/headPrivado.php';
 
 
 $objRol=new AbmRol();
