@@ -79,12 +79,6 @@ if (window.location.href.indexOf('http://localhost/PWD_2023_TPFINAL/Vista/grilla
 }
 
 if (window.location.href.indexOf('http://localhost/PWD_2023_TPFINAL/Vista/carrito/carrito.php') > -1) {
-
-       
-        if(!a){
-          console.log("usted no esta registrado");
-    
-        } // fin if 
     
     //Eliminar del carrito
     var botonesEliminar = document.querySelectorAll('.eliminarCarrito');
