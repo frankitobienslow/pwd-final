@@ -85,8 +85,8 @@ echo $objSession->getRolActual();
   <script src="../librerias/bootstrap5/js/bootstrap.min.js"></script>
 
   <!--LINK JS - JQUERY-->
-  <script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="../Js/main.js"></script>
+  
+
 
 </head>
 
@@ -115,7 +115,10 @@ echo $objSession->getRolActual();
               Salir
             </a>
           </li>
+          
        <?php //include_once ("carritoIcono.php");?>
+       
+       
         </ul>
       </div>
     </div>

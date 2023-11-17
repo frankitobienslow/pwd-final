@@ -11,8 +11,9 @@
     </div>
 </footer>
 
-<!--LINK BOOSTRAP JS-->
+<script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../Js/main.js"> </script>	
+
 
 </body>
 </html>

@@ -1,54 +1,60 @@
 <?php
 include_once '../../configuracion.php';
+//include_once '../estructura/headLibre.php';
+include_once '../estructura/headPrivado.php';
+include_once '../../Control/AbmProducto.php';
+include_once '../../Modelo/Producto.php';
+include_once '../../Modelo/Conector/BaseDatos.php';
 
-$datos=data_submitted();
-if(isset($datos) && isset($datos['logeado']) && $datos['logeado']=='si'){
-  include_once '../estructura/headPrivado.php';
-}
-else{
-  include_once '../estructura/headLibre.php';
-  echo("<script> let a=false; </script>");
-}//fin else
-$token = bin2hex(random_bytes(32));
-$_SESSION['csrf_token'] = $token;
+// Obtener el contenido del carrito desde la sesión
 
-$objProducto = new AbmProducto();
-$listaProductos = $objProducto->buscar(null);
-
+$carrito = $_SESSION['carrito'] ?? [];
 $count = 0;
+$objProducto = new AbmProducto();
+$cantProductos = count($carrito);
+$arregloProductos = [];
+$total = 0;
+for ($i = 0; $i < $cantProductos; $i++) {
+  $data = ["idproducto" => $carrito[$i]];
+  $arregloProductos[$i] = $objProducto->buscar($data)[0];
+  $total += $arregloProductos[$i]->getPrecio();
+}
+
 // RECORIDO DE LOS PRODUCTOS CON SU IMAGEN, NOMBRE Y PRECIO
 ?>
-<div class="d-flex flex-wrap pb-5 justify-content-center">
-  <?php
-  foreach ($listaProductos as $unProducto) {
+<form class="form-group" action="#">
+  <div class="container mt-3">
+    <h2 style="text-align: center; color:dodgerblue;">Carrito</h2>
+    <table class="table-striped d-flex justify-content-center text-center">
+      <tr>
+        <th style="width:40%;border:2px solid dodgerblue">Nombre</th>
+        <th style="width:40%;border:2px solid dodgerblue">Detalle</th>
+        <th style="width:40%;border:2px solid dodgerblue">Precio</th>
 
-  ?>
+      </tr>
+      <?php
+      foreach ($arregloProductos as $Producto) {
+      ?>
+        <tr style="border:2px solid dodgerblue;" class="producto" data-id="<?php echo ($Producto->getId()) ?>">
 
-    <div class="card m-3 justify-content-between" style="width: 18rem; max-height:400px;">
-      <img src="../imagenes/<?php echo $unProducto->getId() ?>.jpg" class="card-img" style="max-height:200px;object-fit:contain" alt="...">
-      <div class="card-body d-flex flex-column justify-content-end" style="max-height:200px">
-        <h5 class="card-title"><?php echo ($unProducto->getNombre()) ?></h5>
-        <p class="card-text"> <?php echo ($unProducto->getDetalle()) ?> </p>
-        <p class="card-text"> <?php echo ("$" . $unProducto->getPrecio()) ?> </p>
-        <a href="#" class="btn btn-primary carrito" data-id="<?php echo $unProducto->getId()?>">Añadir al Carrito</a>
-      </div>
-    </div>
-  <?php
-    $count++;
-  } //fin for 
-  ?>
-</div>
-<script> 
-  $(document).ready(function(){
-       
-    if(!a){
-      console.log("usted no esta registrado");
-      
-    }// fin if 
-    
-  });
-</script>
+          <td style="border:2px solid dodgerblue;"> <?php echo ($Producto->getNombre()) ?></td>
+          <td style="bordersolid dodgerblue;text-align:center"> <?php echo ($Producto->getDetalle()) ?></td>
+          <td style="border:2px solid dodgerblue;" class="precio"> $<?php echo ($Producto->getPrecio()) ?></td>
+          <td><i data-id="<?php echo ($Producto->getId()) ?>" class="btn btn-danger bi bi-x p-1 m-1 eliminarCarrito"></i></td>
+        </tr>
+      <?php
+        $count++;
+      } //fin for 
+      ?>
+      <th>
+        <div class="btn btn-success mt-2" id="confirmarCompra" style="width:275%;">Confirmar compra</div>
+      </th>
+
+    </table>
+  </div>
+
+</form>
 
 <?php
-include_once "../estructura/footer.php"; ?>
-
+include_once '../estructura/footer.php';
+?>
