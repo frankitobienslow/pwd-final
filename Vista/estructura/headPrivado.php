@@ -6,11 +6,8 @@ $objSession=new Session();
   // Parte de verificacion de permisos 
   $menu = "";    
   $opcionRol = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">Rol</a><ul class="dropdown-menu">';
-
-
-
   $respuesta=$objSession->validar();
-  var_dump($respuesta);
+  //var_dump($respuesta);
   if($respuesta){
     // pregunta que rol tiene el usuario para mostrar la
     // informacion en funcion de su rol  
@@ -26,8 +23,9 @@ $objSession=new Session();
     }// fin for 
   
 
-echo $objSession->getRolActual();
-    // GENERACION DEL MENU DINAMICO 
+//echo $objSession->getRolActual();
+    // GENERACION DEL MENU DINAMICO
+     
     $param['idrol'] = $objSession->getRolActual();
     $listaMenuRol=$objMenuRol->buscar($param);
     $listaPadre=array();
@@ -42,6 +40,7 @@ echo $objSession->getRolActual();
       }// fin else
       
     }// fin for 
+    var_dump(count($listaPadre));
       // ARMADO DEL MENU SEGUN EL ROL 
       foreach($listaPadre as $objMenuPadre){
         $menu.='<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">';
@@ -111,8 +110,8 @@ echo $objSession->getRolActual();
 
           <!--DROPDOWN TP4 -->
           <li class="nav-item">
-            <a class="nav-link" onclick="<?php //$objSession->cerrar(); ?>" href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">
-            <a class="nav-link"  href="../inicio/inicioIndex.php" role="button" aria-expanded="false">
+            <a class="nav-link" href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">
+            
               Salir
             </a>
           </li>

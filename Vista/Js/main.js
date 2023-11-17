@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var botonesCarrito = document.querySelectorAll('.carrito');
     var cantCarrito = parseInt($("#cantCarrito").text());
     botonesCarrito.forEach(function (boton) {
-
+        //console.log("hola");
         boton.addEventListener('click', function (event) {
             event.preventDefault();
             var idProducto = boton.getAttribute('data-id');
@@ -24,9 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     url: '../estructura/carritoIcono.php',
                     method: 'POST',
                     data: { cantCarrito: cantCarrito + 1 },
-                    success: function (response) {
+                    success: function (response){
                         cantCarrito+=1;
                         $("#cantCarrito").text(cantCarrito);
+                        console.log(idProducto);
                     },
                     error: function (error) {
                         console.error(error);
@@ -48,7 +49,7 @@ $(document).ready(function () {
 
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
         var forms = document.querySelectorAll('.needs-validation')
-
+        //console.log("hola");
         // Loop over them and prevent submission
         Array.prototype.slice.call(forms)
             .forEach(function (form) {

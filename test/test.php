@@ -15,7 +15,7 @@ echo("<br>----Hecho----<br>");
 */
 
 // USUARIO
- 
+/**  
 //$datos['idusuario']=7;
 $datos['usnombre']='pepe';
 $datos['uspass']=md5('123');
@@ -25,7 +25,7 @@ $objUsuario=new AbmUsuario();
 $objUsuario->buscar($datos);
 var_dump($objUsuario);
 echo("<br>----Hecho usuario ----<br>");
-
+*/
 
 // ROL
 /** 
