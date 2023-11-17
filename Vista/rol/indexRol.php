@@ -1,6 +1,6 @@
 <?php
 $Titulo = "Lista Rols";
-include_once("../estructura/header.php");
+include_once("../estructura/headPrivado.php");
 $objAbmRol = new AbmRol();
 
 $listaRol = $objAbmRol->buscar(null);
