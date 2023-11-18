@@ -126,15 +126,18 @@ class Session{
     public function permisos(){
         $objAbmRol = new AbmRol();
         $objAbmMenuRol = new AbmMenuRol();
-        $resp = true;
+        $resp = false;
         $url = $_SERVER['SCRIPT_NAME'] ;
         $url = strchr($url, "vista");
-        $url = str_replace("vista","", $url);
-        $idrol = $this->getRolActual();
-        $objAbmRol->buscar($idrol);
-        $objAbmMenuRol->buscar($idrol);
-
-
+        $url = str_replace("vista","..", $url);
+        $param['idrol'] = $this->getRolActual();
+        //$param['idrol'] = $objAbmRol->buscar($param);
+        $listaAbmMenuRol = $objAbmMenuRol->buscar($param);
+        foreach ($listaAbmMenuRol as $obj) {
+            if($obj->getObjMenu()->getDescripcion() == $url){
+                $resp = true;
+            }
+        }
         return $resp;
     }
 

@@ -198,7 +198,7 @@ class CompraItem{
     /**
      * METODO LISTAR COMPRA 
      * DEVUELVE TODAS LAS COMPRAS DE LA BASE DE DATOS
-     * @param parametro
+     * @param string $parametro
      * @return array
      */
     public function listar($parametro=""){

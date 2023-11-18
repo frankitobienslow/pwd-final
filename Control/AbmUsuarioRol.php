@@ -13,11 +13,9 @@ class AbmUsuarioRol
 
     private function cargarObjeto($param)
     {
-        //var_dump($param);
         $objUsuarioRol = null;
         $objRol = null;
         $objUsuario = null;
-        //print_r($param);
         if (array_key_exists('idrol', $param) && array_key_exists('idusuario', $param)) {
             $objRol = new Rol();
             $objRol->setId($param['idrol']);

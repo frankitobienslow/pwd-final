@@ -169,7 +169,7 @@ class Rol{
     /**
      * METODO LISTAR POSTULANTE
      * DEVUELVE TODOS LOS POSTULANTES EN LA BASE DE DATOS
-     * @param parametro
+     * @param string $parametro
      * @return array 
      */
     public function listar($parametro=""){

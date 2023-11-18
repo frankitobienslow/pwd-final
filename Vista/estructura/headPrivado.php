@@ -4,8 +4,7 @@
   $objAbmMenuRol=new AbmMenuRol();
 
  
-  
-  if($objSession->validar() && $objSession->permisos()){
+  if($objSession->validar() && $objSession->permisos() ){    //&& $objSession->permisos()
     $menu = $objAbmMenuRol->menuPrincipal($objSession);
   }else{
     header("Location: ../index.php");

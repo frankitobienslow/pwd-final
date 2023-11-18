@@ -157,7 +157,7 @@ class UsuarioRol{
 
 
     /** METODO LISTAR 
-     * @param parametro
+     * @param string $parametro
      * @return array
      */
     public function listar($parametro=""){
