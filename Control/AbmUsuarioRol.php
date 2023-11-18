@@ -124,7 +124,6 @@ class AbmUsuarioRol
         return $resp;
     }
 
-
     /**
      * permite buscar un objeto
      * @param array $param
@@ -145,6 +144,5 @@ class AbmUsuarioRol
         return $arreglo;
     }
 
-  
-
+   
 }// fin clase AbmUsuarioRol

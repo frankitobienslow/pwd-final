@@ -98,8 +98,6 @@ class Session{
         return $listaRoles;  // puede devolver una lista de usuarios con distintos roles o un solo usuario con un unico rol
     }// fin metodo getRol
 
-
-
     /** METODO CERRAR 
      * @return boolean
      */
@@ -120,6 +118,28 @@ class Session{
     public function getRolActual(){
         return $_SESSION["idRol"];
     }
+
+    /**
+     * METODO permisos de headPrivado
+     * @return boolean
+     */
+    public function permisos(){
+        $objAbmRol = new AbmRol();
+        $objAbmMenuRol = new AbmMenuRol();
+        $resp = true;
+        $url = $_SERVER['SCRIPT_NAME'] ;
+        $url = strchr($url, "vista");
+        $url = str_replace("vista","", $url);
+        $idrol = $this->getRolActual();
+        $objAbmRol->buscar($idrol);
+        $objAbmMenuRol->buscar($idrol);
+
+
+        return $resp;
+    }
+
+
+
 }// fin clase Session 
 
 ?>

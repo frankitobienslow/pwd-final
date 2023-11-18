@@ -8,7 +8,6 @@ if (isset($datos) && isset($datos['logeado']) && $datos['logeado'] == 'si') {
   include_once '../estructura/headLibre.php';
   echo ("<script> let a=false; </script>");
 } //fin else
-include_once("../estructura/carritoIcono.php");
 $token = bin2hex(random_bytes(32));
 $_SESSION['csrf_token'] = $token;
 $objProducto = new AbmProducto();
