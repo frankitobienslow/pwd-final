@@ -1,8 +1,7 @@
 <?php
     include_once '../../configuracion.php';
     $Titulo = "Lista de Compras";
-    include_once '../estructura/header.php';
-    $hoja = "Compras";
+    include_once '../estructura/headPrivado.php';
     
 
     $resp=false; 

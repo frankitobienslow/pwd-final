@@ -1,9 +1,6 @@
 <?php
     include_once '../../configuracion.php';
-    $Titulo = "Lista de Compras";
-    include_once '../estructura/headPrivado.php';
-    $hoja = "Compras";
-    
+   
 
     $resp=false; 
     $objUsuario=new AbmUsuario();

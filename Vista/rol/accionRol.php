@@ -1,7 +1,6 @@
 <?php
     include_once '../../configuracion.php';
-    $Titulo = "Rol";
-    include_once '../estructura/header.php';
+  
 
     
     $resp=false; 

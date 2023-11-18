@@ -7,7 +7,7 @@ $datos=data_submitted();
 
 // Validacion 
 if($datos['accion']=='login'){
-    //$datos['password']=md5($datos['password']);
+    $datos['password']=md5($datos['password']);
     $session=new Session();
     $salida=$session->iniciar($datos['nombre'],$datos['password']);
     if($salida){
