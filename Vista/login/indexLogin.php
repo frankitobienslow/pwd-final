@@ -14,7 +14,7 @@ include_once '../Estructura/headLibre.php';
             <div class="card" style="width: 18rem;">
                 <img src="../imagenes/autenticacion.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title fw-bold text-center">Registro</h5>
+                    <h5 class="card-title fw-bold text-center">Iniciar sesión</h5>
 
                     
                     <div class="col-md">

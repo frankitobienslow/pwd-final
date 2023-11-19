@@ -82,9 +82,9 @@ function RealizaMenu(valor){
           </li>
           <?php    
           echo $menu;
+          include_once ("carritoIcono.php");
           ?>
-
-
+          
           <!--DROPDOWN TP4 -->
           <li style="float: left;"  class="nav-item">
             <a class="nav-link" onclick="<?php //$objSession->cerrar(); ?>" href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">

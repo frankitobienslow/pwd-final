@@ -4,8 +4,8 @@ include_once '../estructura/headPrivado.php';
 
 // RECORIDO DE LOS PRODUCTOS CON SU IMAGEN, NOMBRE Y PRECIO
 ?>
-<form class="form-group" action="./accionCarrito.php">
-  <div class="container mt-3 text-center">
+<form class="form-group" action="./accionCarrito.php" method='POST'>
+  <div class="container mt-3 text-center" id="tablaContainer">
     <h2 style="text-align: center; color:dodgerblue;">Carrito</h2>
     <table class="table-striped d-flex justify-content-center text-center" style="display:none" id="tablaProductos">
       <tr>
@@ -17,7 +17,7 @@ include_once '../estructura/headPrivado.php';
       </tr>
         
     </table>
-    <div class="btn btn-success mt-2 text-center" name="confirmarCompra" id="confirmarCompra">Confirmar compra</div>
+    
   </div>
 
 </form>
