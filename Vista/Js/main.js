@@ -105,7 +105,7 @@ $(document).ready(function () {
                     var filaProducto = $('<tr class="producto">' +
                         '<td style="border:2px solid dodgerblue;" class="nombre"></td>' +
                         '<td style="border: 2px solid dodgerblue; text-align:center" class="detalle"></td>' +
-                        '<td style="border:2px solid dodgerblue;" class="cantidad"><input class="form-control mx-auto" style="width:60px;" type="number" min="1" step="1" value="1"></input></td>' +
+                        '<td style="border:2px solid dodgerblue;" class="cantidad"><input class="form-control mx-auto" style="width:60px;" onkeydown="return false" type="number" min="1" step="1" value="1"></input></td>' +
                         '<td style="border:2px solid dodgerblue;" class="stock"></td>' +
                         '<td style="border:2px solid dodgerblue;" class="precio"></td>' +
                         '<td><i class="btn btn-danger bi bi-x p-1 m-1 eliminar"></i></td>' +
@@ -147,6 +147,7 @@ $(document).ready(function () {
                         method: 'POST',
                         data: { enviarCantidades: cantidades },
                         success: function (response) {
+                            console.log(response)
                             alert("La compra está siendo procesada")
                             window.location.href = '../grilla/indexGrilla.php';
                         }
