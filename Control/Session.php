@@ -120,6 +120,15 @@ class Session{
     public function getRolActual(){
         return $_SESSION["idRol"];
     }
+
+    //METODO GETCARRITO
+    public function getCarrito(){
+        if(isset($_SESSION["carrito"])){
+            return $_SESSION["carrito"];
+        }else{
+            $_SESSION["carrito"]=[];
+        }
+    }
 }// fin clase Session 
 
 ?>

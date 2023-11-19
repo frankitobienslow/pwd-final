@@ -48,6 +48,7 @@ if (window.location.href.indexOf('http://localhost/PWD_2023_TPFINAL/Vista/grilla
 
                     success: function (response) {
                         console.log($(boton).data('id'))
+                        $("#prueba").html(response);
                         //cantCarrito += 1;
                         //
                        actualizarIcono();
@@ -110,7 +111,7 @@ if (window.location.href.indexOf('http://localhost/PWD_2023_TPFINAL/Vista/carrit
             cantCarrito -= 1;
             $("#cantCarrito").text(cantCarrito);
         } else {
-            $("#confirmarCompra").css("display", "none");
+            //$("#confirmarCompra").css("display", "none");
             console.log("Producto eliminado")
         }
 

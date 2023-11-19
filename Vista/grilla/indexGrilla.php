@@ -19,6 +19,7 @@ $count = 0;
 ?>
 
 <div class="d-flex flex-wrap pb-5 justify-content-center">
+  <span id="prueba"></span>
   <?php
   foreach ($listaProductos as $unProducto) {
 
