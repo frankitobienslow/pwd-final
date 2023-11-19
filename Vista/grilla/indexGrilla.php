@@ -8,7 +8,6 @@ if (isset($datos) && isset($datos['logeado']) && $datos['logeado'] == 'si') {
   include_once '../estructura/headLibre.php';
   echo ("<script> let a=false; </script>");
 } //fin else
-include_once("../estructura/carritoIcono.php");
 $token = bin2hex(random_bytes(32));
 $_SESSION['csrf_token'] = $token;
 $objProducto = new AbmProducto();
@@ -19,7 +18,7 @@ $count = 0;
 ?>
 
 <div class="d-flex flex-wrap pb-5 justify-content-center">
-  <span id="prueba"></span>
+  <div id="prueba"></div>
   <?php
   foreach ($listaProductos as $unProducto) {
 
@@ -31,7 +30,7 @@ $count = 0;
         <h5 class="card-title"><?php echo ($unProducto->getNombre()) ?></h5>
         <p class="card-text"> <?php echo ($unProducto->getDetalle()) ?> </p>
         <p class="card-text"> <?php echo ("$" . $unProducto->getPrecio()) ?> </p>
-        <a href="#" class="btn btn-primary carrito" data-id="<?php echo $unProducto->getId() ?>">Añadir al Carrito</a>
+        <btn class="btn btn-primary carrito" data-id="<?php echo $unProducto->getId() ?>">Añadir al Carrito</btn>
       </div>
     </div>
   <?php

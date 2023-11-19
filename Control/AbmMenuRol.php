@@ -138,6 +138,43 @@
     }// fin metodo
 
 
+    function menuPrincipal($objSession){
+    
+        $menu = "";    
+        $opcionRol = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">Rol</a><ul class="dropdown-menu">';
+        $listaRol=$objSession->getRol(); // getRol llama al Abmrol
+        foreach($listaRol as $rol){
+          
+          $opcionRol .= '<li><a onclick="menurol('.$rol->getId().')" id=menurol'.$rol->getId().' class="dropdown-item" > '.$rol->getDescripcion().'</a></li>'; 
+          //href="../estructura/accionEstructura.php?menurol='.$rol->getId().'"  id=menurol'.$rol->getId().'
+          // id=menurol'.$rol->getId().' onclick="menurol('.$rol->getId().')"
+      
+        }// fin for 
+        // GENERACION DEL MENU DINAMICO 
+        $param['idrol'] = $objSession->getRolActual();
+        $listaMenuRol=$this->buscar($param);
+        $listaPadre=array();
+        $listaHijos=array();
+        
+        foreach($listaMenuRol as $obj){
+          if($obj->getObjMenu()->getObjMenuPadre()==null){array_push($listaPadre,$obj->getObjMenu());}// fin if 
+          else{array_push($listaHijos,$obj->getObjMenu());}// fin else
+        }// fin for 
+        foreach($listaPadre as $objMenuPadre){
+          $menu.='<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">';
+          $menu .= $objMenuPadre->getNombre() . '</a><ul class="dropdown-menu">';
+          foreach($listaHijos as $objMenuHijo){
+            if($objMenuHijo->getobjMenuPadre()->getId() == $objMenuPadre->getId()){
+              $menu .= '<li><a class="dropdown-item" href="'. $objMenuHijo->getDescripcion(). '">'.$objMenuHijo->getNombre().'</a></li>';  
+            }// fin if 
+          }// fin for
+          $menu.='</ul></li>';
+        }// fin for  
+        $menu .= $opcionRol . '</ul></li>';;
+        return $menu;
+      }   
+
+
 }// fin AbmMenuRol
 
 ?>
