@@ -68,7 +68,7 @@ function RealizaMenu(valor){
 
 <body>
 
-  <nav class="navbar navbar-expand-lg bg-light p-2 fs-3">
+  <nav class="navbar navbar-expand-sm bg-light p-2 fs-3">
     <div class="container-fluid" >
       <a class="navbar-brand" id="pagina-principal" href="../../index.php">Grupo N°5</a>
 
@@ -86,8 +86,8 @@ function RealizaMenu(valor){
 
 
           <!--DROPDOWN TP4 -->
-          <li style="float: left;"  class="nav-item">
-            <a class="nav-link" onclick="<?php //$objSession->cerrar(); ?>" href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">
+          <li  class="nav-item fixed-left";>
+            <a class="nav-link fixed-left"  href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">
               Salir
             </a>
           </li>
