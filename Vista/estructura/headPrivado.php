@@ -37,11 +37,23 @@
 
 <!--   pruebaaaa      -->
 <script>
-function menurol(data){
-
+function RealizaMenu(valor){
+        var parametros = {
+                "menurol" : valor
+        };
+        $.ajax({
+                data:  parametros,
+                url:   '../estructura/accionEstructura.php',
+                type:  'post',
+              //  beforeSend: function () {
+               //         $("#resultadoMenu").html("Procesando, espere por favor...");
+                //},
+                success:  function (response) {
+                        $("#resultadoMenu").html(response);
+                }
+        });
 }
 </script>
-
 
 <!--  fin    pruebaaaa      -->
 </head>
@@ -50,27 +62,24 @@ function menurol(data){
 <body>
 
   <nav class="navbar navbar-expand-lg bg-light p-2 fs-3">
-    <div class="container-fluid">
+    <div class="container-fluid" >
       <a class="navbar-brand" id="pagina-principal" href="../../index.php">Grupo N°5</a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul id="menuCompleto" class="navbar-nav">
+        <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="https://github.com/Matias-Ignacio/PWD_2023_TPFinal"> <i class="bi bi-github"></i> </a>
           </li>
-          <?php    
-          echo $menu;
-          ?>
-
-
+          <!-- Menu Dinamico -->
+          <ul class="navbar-nav" id="resultadoMenu">
+            <?php    echo $menu; ?>
+          </ul>
           <!--DROPDOWN TP4 -->
           <li style="float: left;"  class="nav-item">
-            <a class="nav-link" onclick="<?php //$objSession->cerrar(); ?>" href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">
-              Salir
-            </a>
+            <a class="nav-link" href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">Salir</a>
           </li>
           
        <?php 
