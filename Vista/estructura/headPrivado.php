@@ -3,8 +3,7 @@ include_once("../../configuracion.php");
 $objSession = new Session();
 $objAbmMenuRol = new AbmMenuRol();
 
-
-if ($objSession->validar()) {    //&& $objSession->permisos()
+if ($objSession->validar() ) {    //&& $objSession->permisos()
   $menu = $objAbmMenuRol->menuPrincipal($objSession);
 } else {
   header("Location: ../index.php");
@@ -16,33 +15,19 @@ if ($objSession->validar()) {    //&& $objSession->permisos()
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <!--LINK BOOSTRAP -->
   <link rel="stylesheet" href="../librerias/bootstrap5/css/bootstrap.min.css">
-
-
   <!--LINK ICONOS BOOTSTRAP  -->
   <link rel="stylesheet" href="../librerias/node_modules/bootstrap-icons/font/bootstrap-icons.css">
-
   <!-- LINK CSS -->
   <link rel="stylesheet" type="text/css" href="../css/estilos.css">
-
-
   <!--LINK JS - BOOTSTRAP-->
   <script src="../librerias/bootstrap5/js/bootstrap.min.js"></script>
-
 
   <!--LINK JS - JQUERY-->
   <script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="../Js/main.js"></script>
-  <!--   pruebaaaa      -->
-  <script>
-    function menurol(data) {
 
-    }
-  </script>
-
-<!--   pruebaaaa      -->
 <script>
 function RealizaMenu(valor){
         var parametros = {
@@ -62,9 +47,7 @@ function RealizaMenu(valor){
 }
 </script>
 
-  <!--  fin    pruebaaaa      -->
 </head>
-
 
 <body>
 
@@ -80,9 +63,11 @@ function RealizaMenu(valor){
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="https://github.com/Matias-Ignacio/PWD_2023_TPFinal"> <i class="bi bi-github"></i> </a>
           </li>
-          <?php    
-          echo $menu;
-          include_once ("carritoIcono.php");
+          <!-- Menu Dinamico -->
+          <ul class="navbar-nav" id="resultadoMenu">
+            <?php    echo $menu; ?>
+          </ul>
+          <?php include_once ("carritoIcono.php");
           ?>
           
           <!--DROPDOWN TP4 -->
@@ -91,9 +76,6 @@ function RealizaMenu(valor){
               Salir
             </a>
           </li>
-
-
-
 
         </ul>
       </div>
