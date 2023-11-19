@@ -185,5 +185,10 @@ class Session
         // Si el producto no se encontró, devolvemos la cantidad actual de productos en el carrito
         return $cantProductos;
     }
+
+    //METODO VACIAR CARRITO
+    public function vaciarCarrito(){
+        $_SESSION["carrito"]=[];
+    }
 // fin clase Session 
 }
