@@ -139,17 +139,12 @@
 
 
     function menuPrincipal($objSession){
-    
         $menu = "";    
         $opcionRol = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">Rol</a><ul class="dropdown-menu">';
-        $listaRol=$objSession->getRol(); // getRol llama al Abmrol
-        foreach($listaRol as $rol){
-          
-          $opcionRol .= '<li><a onclick="menurol('.$rol->getId().')" id=menurol'.$rol->getId().' class="dropdown-item" > '.$rol->getDescripcion().'</a></li>'; 
-          //href="../estructura/accionEstructura.php?menurol='.$rol->getId().'"  id=menurol'.$rol->getId().'
-          // id=menurol'.$rol->getId().' onclick="menurol('.$rol->getId().')"
-      
-        }// fin for 
+        $listaRol=$objSession->getRol();
+        foreach($listaRol as $rol){      
+          $opcionRol .= '<li><a href="javascript:;" onclick="RealizaMenu('.$rol->getId().');return false;" class="dropdown-item" > '.$rol->getDescripcion().'</a></li>'; 
+        }
         // GENERACION DEL MENU DINAMICO 
         $param['idrol'] = $objSession->getRolActual();
         $listaMenuRol=$this->buscar($param);
