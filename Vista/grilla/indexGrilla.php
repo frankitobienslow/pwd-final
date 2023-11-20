@@ -6,14 +6,8 @@ if (isset($datos) && isset($datos['logeado']) && $datos['logeado'] == 'si') {
   include_once '../estructura/headPrivado.php';
 } else {
   include_once '../estructura/headLibre.php';
-<<<<<<< HEAD
   //echo("<script> let a=false; </script>");
 }//fin else
-=======
-  echo ("<script> let a=false; </script>");
-} //fin else
-include_once("../estructura/carritoIcono.php");
->>>>>>> 4f08fe7b882a17fbe11b84cdc0204025e2628514
 $token = bin2hex(random_bytes(32));
 $_SESSION['csrf_token'] = $token;
 $objProducto = new AbmProducto();
@@ -43,11 +37,8 @@ $count = 0;
   } //fin for 
   ?>
 </div>
-<<<<<<< HEAD
 <script src="../Js/main.js"> 
 </script>
-=======
->>>>>>> 4f08fe7b882a17fbe11b84cdc0204025e2628514
 
 <?php
 include_once "../estructura/footer.php"; ?>

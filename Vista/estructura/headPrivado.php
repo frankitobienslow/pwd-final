@@ -6,15 +6,8 @@ $objSession=new Session();
   // Parte de verificacion de permisos 
   $menu = "";    
   $opcionRol = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">Rol</a><ul class="dropdown-menu">';
-<<<<<<< HEAD
   $respuesta=$objSession->validar();
   //var_dump($respuesta);
-=======
-
- 
-
-  $respuesta=$objSession->validar();
->>>>>>> 4f08fe7b882a17fbe11b84cdc0204025e2628514
   if($respuesta){
     // pregunta que rol tiene el usuario para mostrar la
     // informacion en funcion de su rol  
@@ -29,15 +22,11 @@ $objSession=new Session();
       // id=menurol'.$rol->getId().' onclick="menurol('.$rol->getId().')"
       $i++;
     }// fin for 
-<<<<<<< HEAD
   
 
 //echo $objSession->getRolActual();
     // GENERACION DEL MENU DINAMICO
      
-=======
-    // GENERACION DEL MENU DINAMICO 
->>>>>>> 4f08fe7b882a17fbe11b84cdc0204025e2628514
     $param['idrol'] = $objSession->getRolActual();
     $listaMenuRol=$objMenuRol->buscar($param);
     $listaPadre=array();
@@ -146,7 +135,9 @@ function menurol(data){
             </a>
           </li>
           
-       <?php //include_once ("carritoIcono.php");?>
+       <?php if($param['idrol']==3){
+        include_once 'carritoIcono.php';
+       } ?>
        
        
         </ul>

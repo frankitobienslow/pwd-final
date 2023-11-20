@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 //Implementación carrito
 document.addEventListener("DOMContentLoaded", function () {
-    var botonesCarrito = document.querySelectorAll('.carrito');
+    var botonesCarrito = document.querySelectorAll('.carrito'); // obtiene los botones de la clase=> carrito  
     var cantCarrito = parseInt($("#cantCarrito").text());
     botonesCarrito.forEach(function (boton) {
         //console.log("hola");
@@ -18,8 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
         $.ajax({
             url: '../carrito/carrito.php',
             method: 'POST',
-            data: { idProducto: idProducto },
-            success: function (response) {
+            data: { idProducto: idProducto }, // formato JSON
+            success: function (response){
                 // Actualizar el contenido de #cantCarrito
                 $.ajax({
                     url: '../estructura/carritoIcono.php',
@@ -43,8 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-=======
->>>>>>> 4f08fe7b882a17fbe11b84cdc0204025e2628514
 $(document).ready(function () {
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
