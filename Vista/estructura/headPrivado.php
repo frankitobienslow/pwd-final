@@ -5,6 +5,7 @@ $objAbmMenuRol = new AbmMenuRol();
 
 if ($objSession->validar() && $objSession->permisos()) {    //&& $objSession->permisos()
   $menu = $objAbmMenuRol->menuPrincipal($objSession);
+  $UsuarioNombre = $objSession->getUsuario()->getNombre();
 } else {
   header("Location: ../index.php");
 }
@@ -27,31 +28,13 @@ if ($objSession->validar() && $objSession->permisos()) {    //&& $objSession->pe
   <!--LINK JS - JQUERY-->
   <script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="../Js/main.js"></script>
-
-<script>
-function RealizaMenu(valor){
-        var parametros = {
-                "menurol" : valor
-        };
-        $.ajax({
-                data:  parametros,
-                url:   '../estructura/accionEstructura.php',
-                type:  'post',
-              //  beforeSend: function () {
-               //         $("#resultadoMenu").html("Procesando, espere por favor...");
-                //},
-                success:  function (response) {
-                        $("#resultadoMenu").html(response);
-                }
-        });
-}
-</script>
+  <script src="../Js/menu.js"></script>
 
 </head>
 
 <body>
 
-  <nav class="navbar navbar-expand-sm bg-light p-2 fs-3">
+  <nav class="navbar navbar-expand-lg bg-ligth p-2 fs-3 ">
     <div class="container-fluid" >
       <a class="navbar-brand" id="pagina-principal" href="../../index.php">Grupo N°5</a>
 
@@ -59,24 +42,23 @@ function RealizaMenu(valor){
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav me-auto">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="https://github.com/Matias-Ignacio/PWD_2023_TPFinal"> <i class="bi bi-github"></i> </a>
           </li>
           <!-- Menu Dinamico -->
           <ul class="navbar-nav" id="resultadoMenu">
-            <?php    echo $menu; ?>
+            <?php   echo $menu; ?>
           </ul>
-          <?php include_once ("carritoIcono.php");
-          ?>
-          
-          <!--DROPDOWN TP4 -->
-          <li  class="nav-item fixed-left";>
-            <a class="nav-link fixed-left"  href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">
-              Salir
-            </a>
-          </li>
-
+          <?php include_once ("carritoIcono.php");?> 
+        </ul>  
+        <ul class="navbar-nav" >    
+          <li class="navbar-item">
+            <a class="nav-link "  role="button" aria-expanded="false">Usuario: <?php echo $UsuarioNombre."  "; ?></a>   
+          </li>        
+          <li  class="nav-item ">
+            <a class="nav-link "  href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">Salir</a>              
+          </li>          
         </ul>
       </div>
     </div>

@@ -5,21 +5,16 @@
 <html lang="en">
 
 <head>
-
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <!--LINK BOOSTRAP -->
   <link rel="stylesheet" href="../librerias/bootstrap5/css/bootstrap.min.css">
-
 
   <!--LINK ICONOS BOOTSTRAP  -->
   <link rel="stylesheet" href="../librerias/node_modules/bootstrap-icons/font/bootstrap-icons.css">
 
   <!-- LINK CSS -->
   <link rel="stylesheet" type="text/css" href="../css/estilos.css">
-
 
   <!--LINK JS - BOOTSTRAP-->
   <script src="../librerias/bootstrap5/js/bootstrap.min.js"></script>
