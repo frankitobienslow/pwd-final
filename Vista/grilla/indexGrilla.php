@@ -6,8 +6,8 @@ if (isset($datos) && isset($datos['logeado']) && $datos['logeado'] == 'si') {
   include_once '../estructura/headPrivado.php';
 } else {
   include_once '../estructura/headLibre.php';
-  //echo("<script> let a=false; </script>");
-}//fin else
+  echo ("<script> let a=false; </script>");
+} //fin else
 $token = bin2hex(random_bytes(32));
 $_SESSION['csrf_token'] = $token;
 $objProducto = new AbmProducto();
@@ -38,8 +38,6 @@ $count = 0;
   } //fin for 
   ?>
 </div>
-<script src="../Js/main.js"> 
-</script>
 
 <?php
 include_once "../estructura/footer.php"; ?>

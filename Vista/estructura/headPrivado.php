@@ -3,66 +3,12 @@ include_once("../../configuracion.php");
 $objSession = new Session();
 $objAbmMenuRol = new AbmMenuRol();
 
-$objSession=new Session();
-
-  // Parte de verificacion de permisos 
-  $menu = "";    
-  $opcionRol = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">Rol</a><ul class="dropdown-menu">';
-  $respuesta=$objSession->validar();
-  //var_dump($respuesta);
-  if($respuesta){
-    // pregunta que rol tiene el usuario para mostrar la
-    // informacion en funcion de su rol  
-    $listaRol=$objSession->getRol(); // getRol llama al Abmrol
-    $idRoles=[]; // guarda los id de roles en caso que tenga mas de 1 rol
-    $objMenuRol=new AbmMenuRol();
-    $i=0;
-    foreach($listaRol as $rol){
-      $idRoles[$i]=$rol->getId();
-      $opcionRol .= '<li><a href="../estructura/accionEstructura.php?menurol='.$rol->getId().'" class="dropdown-item" > '.$rol->getDescripcion().'</a></li>'; 
-      //href="../estructura/accionEstructura.php?menurol='.$rol->getId().'"  id=menurol'.$rol->getId().'
-      // id=menurol'.$rol->getId().' onclick="menurol('.$rol->getId().')"
-      $i++;
-    }// fin for 
-  
-
-//echo $objSession->getRolActual();
-    // GENERACION DEL MENU DINAMICO
-     
-    $param['idrol'] = $objSession->getRolActual();
-    $listaMenuRol=$objMenuRol->buscar($param);
-    $listaPadre=array();
-    $listaHijos=array();
-    //echo $_SESSION["idRol"];
-    foreach($listaMenuRol as $obj){
-      if($obj->getObjMenu()->getObjMenuPadre()==null){
-        array_push($listaPadre,$obj->getObjMenu());
-      }// fin if 
-      else{
-        array_push($listaHijos,$obj->getObjMenu());
-      }// fin else
-      
-    }// fin for 
-    var_dump(count($listaPadre));
-      // ARMADO DEL MENU SEGUN EL ROL 
-      foreach($listaPadre as $objMenuPadre){
-        $menu.='<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">';
-        $menu .= $objMenuPadre->getNombre() . '</a><ul class="dropdown-menu">';
-        foreach($listaHijos as $objMenuHijo){
-          if($objMenuHijo->getobjMenuPadre()->getId() == $objMenuPadre->getId()){
-            $menu .= '<li><a class="dropdown-item" href="'. $objMenuHijo->getDescripcion(). '">'.$objMenuHijo->getNombre().'</a></li>';  
-          }// fin if 
-        }// fin for
-        $menu.='</ul></li>';
-      }// fin for  
-
-     $menu .= $opcionRol . '</ul></li>';;
-
-  }// fin if 
-  else{
-    // Manda al usuario no validado al login 
-    header("Location: ../index.php");
-  }// fin else
+if ($objSession->validar() && $objSession->permisos()) {    //&& $objSession->permisos()
+  $menu = $objAbmMenuRol->menuPrincipal($objSession);
+  $UsuarioNombre = $objSession->getUsuario()->getNombre();
+} else {
+  header("Location: ../index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -100,24 +46,19 @@ $objSession=new Session();
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="https://github.com/Matias-Ignacio/PWD_2023_TPFinal"> <i class="bi bi-github"></i> </a>
           </li>
-          <?php    
-          if($objSession->activa()) echo $menu;
-      ?>
-
-
-          <!--DROPDOWN TP4 -->
-          <li class="nav-item">
-            <a class="nav-link" href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">
-            
-              Salir
-            </a>
-          </li>
-          
-       <?php if($param['idrol']==3){
-        include_once 'carritoIcono.php';
-       } ?>
-       
-       
+          <!-- Menu Dinamico -->
+          <ul class="navbar-nav" id="resultadoMenu">
+            <?php   echo $menu; ?>
+          </ul>
+          <?php include_once ("carritoIcono.php");?> 
+        </ul>  
+        <ul class="navbar-nav" >    
+          <li class="navbar-item">
+            <a class="nav-link "  role="button" aria-expanded="false">Usuario: <?php echo $UsuarioNombre."  "; ?></a>   
+          </li>        
+          <li  class="nav-item ">
+            <a class="nav-link "  href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">Salir</a>              
+          </li>          
         </ul>
       </div>
     </div>

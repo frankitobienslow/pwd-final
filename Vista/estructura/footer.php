@@ -9,17 +9,7 @@
             <div class="col-sm-12 col-md-3 d-flex justify-content-center fs-4">Matias Rivero </div>
         </div>
     </div>
-<<<<<<< HEAD
-</footer>
-
-<script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	
-
-
-=======
 </footer>	
->>>>>>> da85e0abd4245b3cba813c38d0a7342b6ef71cf1
 </body>
 </html>
 
