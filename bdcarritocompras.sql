@@ -102,21 +102,21 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
-(1, 'Producto', 'Productos Disponibles', NULL, NULL),
+(1, 'Producto', '../grilla/indexGrilla.php', NULL, NULL),
 (2, 'Usuario', 'Administracion de Usuarios', NULL, NULL),
 (3, 'compras', 'Administracion de Compras', NULL, NULL),
 (4, 'Rol', 'Administracion de Roles', NULL, NULL),
-(11, 'Nuevo', './producto/altaProducto.php', 1, NULL),
-(12, 'Listar', './producto/indexProducto.php', 1, NULL),
-(13, 'Editar', './producto/editarProducto.php', 1, NULL),
-(22, 'Listar', './usuario/indexUsuario.php', 2, NULL),
-(23, 'Editar', './usuario/editarUsuario.php', 2, NULL),
-(32, 'Listar', './compras/indexCompra.php', 3, NULL),
-(33, 'Editar', './compras/editarCompra.php', 3, NULL),
-(41, 'Nuevo', './menu/altaMenu.php', 4, NULL),
-(42, 'Editar', './menu/editarMenu.php', 4, NULL),
-(43, 'Listar', './menu/indexMenu.php', 4, NULL),
-(44, 'eliminar', './menu/editarMenu.php', 4, NULL);
+(11, 'Nuevo', '../producto/altaProducto.php', 1, NULL),
+(12, 'Listar', '../producto/indexProducto.php', 1, NULL),
+(13, 'Editar', '../producto/editarProducto.php', 1, NULL),
+(22, 'Listar', '../usuario/indexUsuario.php', 2, NULL),
+(23, 'Editar', '../usuario/editarUsuario.php', 2, NULL),
+(32, 'Listar', '../compras/indexCompra.php', 3, NULL),
+(33, 'Editar', '../compras/editarCompra.php', 3, NULL),
+(41, 'Nuevo', '../menu/altaMenu.php', 4, NULL),
+(42, 'Editar', '../menu/editarMenu.php', 4, NULL),
+(43, 'Listar', '../menu/indexMenu.php', 4, NULL),
+(44, 'eliminar', '../menu/editarMenu.php', 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -155,6 +155,7 @@ INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 (3, 2),
 (32, 2),
 (33, 2),
+(1, 3),
 (12, 3),
 (3, 3),
 (2, 1);
