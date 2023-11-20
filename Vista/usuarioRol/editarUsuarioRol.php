@@ -4,7 +4,7 @@ $Titulo = "Compras";
 include_once '../estructura/headPrivado.php';
 $data=data_submitted();
 $objUsuarioRol = new AbmUsuarioRol();
-if (isset($data['idusuario']) && $data['idrol']){
+if(isset($data['idusuario']) && $data['idrol']){
     $respuesta = $objUsuarioRol->baja($data);
     
     if (!$respuesta){

@@ -3,7 +3,7 @@ include_once("../../configuracion.php");
 $objSession = new Session();
 $objAbmMenuRol = new AbmMenuRol();
 
-if ($objSession->validar() && $objSession->permisos()) {    //&& $objSession->permisos()
+if ($objSession->validar() ) {    //&& $objSession->permisos()
   $menu = $objAbmMenuRol->menuPrincipal($objSession);
   $UsuarioNombre = $objSession->getUsuario()->getNombre();
 } else {
