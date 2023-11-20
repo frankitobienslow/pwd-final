@@ -139,7 +139,7 @@ class AbmRol{
 
  /**
      * METODO BUSCAR
-     * Si el parametro es null, devolverá todos los registros de la tabla auto 
+     * Si el parametro es null, devolverá todos los registros de la tabla rol 
      * si se llena con los campos de la tabla devolverá el registro pedido
      * @param array $param
      * @return array

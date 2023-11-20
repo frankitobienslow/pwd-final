@@ -181,7 +181,7 @@ class CompraEstadoTipo{
     /**
      * METODO LISTAR 
      * DEVUELVE TODOS LOS USUARIOS EN LA BASE DE DATOS
-     * @param parametro
+     * @param string $parametro
      * @return array 
      */
     public function listar($parametro=""){
