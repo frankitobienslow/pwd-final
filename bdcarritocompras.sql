@@ -117,6 +117,7 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (42, 'Editar', '../menu/editarMenu.php', 4, NULL),
 (43, 'Listar', '../menu/indexMenu.php', 4, NULL),
 (44, 'eliminar', '../menu/editarMenu.php', 4, NULL);
+(6, 'Ingresar', '../login/indexLogin.php', NULL, NULL)
 
 -- --------------------------------------------------------
 
@@ -158,7 +159,9 @@ INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 (1, 3),
 (12, 3),
 (3, 3),
-(2, 1);
+(2, 1),
+(1, 4),
+(6, 4);
 
 -- --------------------------------------------------------
 
@@ -207,7 +210,8 @@ CREATE TABLE `rol` (
 INSERT INTO `rol` (`idrol`, `rodescripcion`) VALUES
 (1, 'administrador'),
 (2, 'deposito'),
-(3, 'cliente');
+(3, 'cliente'),
+(4, 'anonimo');
 
 -- --------------------------------------------------------
 
