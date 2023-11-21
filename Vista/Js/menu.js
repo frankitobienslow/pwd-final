@@ -1,4 +1,3 @@
-//$(document).ready(function () {
 
     function RealizaMenu(valor){
         var parametros = {
@@ -13,6 +12,3 @@
                 }
         });
     };
-
-
-//})

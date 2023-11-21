@@ -66,9 +66,8 @@ CREATE TABLE `compraestadotipo` (
 INSERT INTO `compraestadotipo` (`idcompraestadotipo`, `cetdescripcion`, `cetdetalle`) VALUES
 (1, 'inicio ', 'se añade los productos al carrito'),
 (2, 'pagado', 'el cliente paga la compra realizada'),
-(3, 'preparacion', 'el deposito realiza el pedido del cliente'),
-(4, 'enviado', 'el deposito confirma el envio de la compra'),
-(5, 'cancelado', 'cancelado se cancela la compra / producto');
+(3, 'enviado', 'el deposito confirma el envio de la compra'),
+(4, 'cancelado', 'cancelado se cancela la compra / producto');
 
 -- --------------------------------------------------------
 
@@ -106,18 +105,18 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (2, 'Usuario', 'Administracion de Usuarios', NULL, NULL),
 (3, 'compras', 'Administracion de Compras', NULL, NULL),
 (4, 'Rol', 'Administracion de Roles', NULL, NULL),
+(6, 'Ingresar', '../login/indexLogin.php', NULL, NULL),
 (11, 'Nuevo', '../producto/altaProducto.php', 1, NULL),
 (12, 'Listar', '../producto/indexProducto.php', 1, NULL),
 (13, 'Editar', '../producto/editarProducto.php', 1, NULL),
 (22, 'Listar', '../usuario/indexUsuario.php', 2, NULL),
 (23, 'Editar', '../usuario/editarUsuario.php', 2, NULL),
-(32, 'Listar', '../compras/indexCompra.php', 3, NULL),
-(33, 'Editar', '../compras/editarCompra.php', 3, NULL),
+(32, 'Listar', '../compra/indexCompra.php', 3, NULL),
+(33, 'Editar', '../compra/editarCompra.php', 3, NULL),
 (41, 'Nuevo', '../menu/altaMenu.php', 4, NULL),
 (42, 'Editar', '../menu/editarMenu.php', 4, NULL),
 (43, 'Listar', '../menu/indexMenu.php', 4, NULL),
 (44, 'eliminar', '../menu/editarMenu.php', 4, NULL);
-(6, 'Ingresar', '../login/indexLogin.php', NULL, NULL)
 
 -- --------------------------------------------------------
 

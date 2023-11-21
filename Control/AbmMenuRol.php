@@ -146,7 +146,7 @@
           $opcionRol .= '<li><a href="javascript:;" onclick="RealizaMenu('.$rol->getId().');return false;" class="dropdown-item" > '.$rol->getDescripcion().'</a></li>'; 
         }
         // GENERACION DEL MENU DINAMICO 
-        $param['idrol'] = $objSession->getRolActual();
+        $param['idrol'] = $objSession->getRolActual()->getId();
         $listaMenuRol=$this->buscar($param);
         $listaPadre=array();
         $listaHijos=array();

@@ -117,11 +117,14 @@ class Session
         $_SESSION["idRol"] = $param;
     }
     /** METODO SETROL
-     * @return int
+     * @return Rol
      */
     public function getRolActual()
     {
-        return $_SESSION["idRol"];
+        $objAbmRol = New AbmRol;
+        $param['idrol'] = $_SESSION["idRol"];
+        $listaObj = $objAbmRol->buscar($param);
+        return $listaObj[0];
     }
 
     /**
@@ -134,7 +137,7 @@ class Session
         $url = $_SERVER['SCRIPT_NAME'];
         $url = strchr($url, "vista");
         $url = str_replace("vista", "..", $url);
-        $param['idrol'] = $this->getRolActual();
+        $param['idrol'] = $this->getRolActual()->getId();
         $listaAbmMenuRol = $objAbmMenuRol->buscar($param);
         foreach ($listaAbmMenuRol as $obj) {
             if ($obj->getObjMenu()->getDescripcion() == $url) {
