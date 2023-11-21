@@ -1,5 +1,4 @@
 <?php
-include_once '../../configuracion.php';
 
 ?>
 <li style="float: left;" class="nav-item">

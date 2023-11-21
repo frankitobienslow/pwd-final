@@ -4,7 +4,9 @@ class Session
 
     public function __construct()
     {
-        session_start(); // Inicia la sessión 
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start(); // Inicia la sessión 
+        }
     } // fin metodo constructor 
 
 

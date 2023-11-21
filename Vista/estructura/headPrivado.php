@@ -5,12 +5,13 @@ $objAbmMenuRol = new AbmMenuRol();
 
 $menu="";
 $UsuarioNombre="";
-if ($objSession->validar() ) {    //&& $objSession->permisos()
+if ($objSession->validar() && $objSession->permisos()) {    //&& $objSession->permisos()
   $menu = $objAbmMenuRol->menuPrincipal($objSession);
   $UsuarioRol = $objSession->getRolActual()->getDescripcion();
   $UsuarioNombre .=$objSession->getUsuario()->getNombre()." (".$UsuarioRol.")  ";
 }else {
-  header("Location: ../index.php");   
+  //header("Location: ../grilla/indexGrilla.php");   
+  header("Location: ../login/indexLogin.php");
 }
 ?>
 <!DOCTYPE html>
@@ -53,7 +54,10 @@ if ($objSession->validar() ) {    //&& $objSession->permisos()
           <ul class="navbar-nav" id="resultadoMenu">
             <?php   echo $menu; ?>
           </ul>
-          <?php include_once ("carritoIcono.php");?> 
+          <li style="float: left;" class="nav-item">
+            <a aria-current="page" href="../carrito/carrito.php" style="text-decoration:none"> <i class="bi bi-cart4"></i> <span id="cantCarrito" style="font-size:20px;font-weight:bolder;"><span></a>
+          </li>
+          <?php // include_once ("carritoIcono.php");?> 
         </ul>  
         <ul class="navbar-nav" >    
           <li class="navbar-item">
