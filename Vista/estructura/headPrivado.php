@@ -3,12 +3,14 @@ include_once("../../configuracion.php");
 $objSession = new Session();
 $objAbmMenuRol = new AbmMenuRol();
 
+$menu="";
+$UsuarioNombre="";
 if ($objSession->validar() ) {    //&& $objSession->permisos()
   $menu = $objAbmMenuRol->menuPrincipal($objSession);
-  $UsuarioNombre = $objSession->getUsuario()->getNombre();
   $UsuarioRol = $objSession->getRolActual()->getDescripcion();
-} else {
-  header("Location: ../index.php");
+  $UsuarioNombre .=$objSession->getUsuario()->getNombre()." (".$UsuarioRol.")  ";
+}else {
+  header("Location: ../index.php");   
 }
 ?>
 <!DOCTYPE html>
@@ -55,7 +57,7 @@ if ($objSession->validar() ) {    //&& $objSession->permisos()
         </ul>  
         <ul class="navbar-nav" >    
           <li class="navbar-item">
-            <a class="nav-link "  role="button" aria-expanded="false">Usuario: <?php echo $UsuarioNombre." (".$UsuarioRol.")  "; ?></a>   
+            <a class="nav-link "  role="button" aria-expanded="false">Usuario: <?php echo $UsuarioNombre; ?></a>   
           </li>        
           <li  class="nav-item ">
             <a class="nav-link "  href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">Salir</a>              
