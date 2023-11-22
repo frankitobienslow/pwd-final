@@ -5,7 +5,7 @@ $objAbmMenuRol = new AbmMenuRol();
 
 $menu="";
 $UsuarioNombre="";
-if ($objSession->validar() && $objSession->permisos()) {    //&& $objSession->permisos()
+if ($objSession->validar()&& $objSession->permisos()) {    //&& $objSession->permisos()
   $menu = $objAbmMenuRol->menuPrincipal($objSession);
   $UsuarioRol = $objSession->getRolActual()->getDescripcion();
   $UsuarioNombre .=$objSession->getUsuario()->getNombre()." (".$UsuarioRol.")  ";
@@ -54,9 +54,11 @@ if ($objSession->validar() && $objSession->permisos()) {    //&& $objSession->pe
           <ul class="navbar-nav" id="resultadoMenu">
             <?php   echo $menu; ?>
           </ul>
+          <!-- Carrito -->
           <li style="float: left;" class="nav-item">
             <a aria-current="page" href="../carrito/carrito.php" style="text-decoration:none"> <i class="bi bi-cart4"></i> <span id="cantCarrito" style="font-size:20px;font-weight:bolder;"><span></a>
           </li>
+          <!-- Carrito -->
           <?php // include_once ("carritoIcono.php");?> 
         </ul>  
         <ul class="navbar-nav" >    
