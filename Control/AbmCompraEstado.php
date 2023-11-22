@@ -193,7 +193,7 @@ class AbmCompraEstado{
                     $where.=" and cefechaini ='".$param['cefechaini']."'";
                 }// fin if 
                 if(isset($param['cefechafin'])){// identifica si esta la clave (atributo de la tabla)
-                    $where.=" and cefechafin ='".$param['cefechafin']."'";
+                    $where.=" and cefechafin ".$param['cefechafin'];
                 }// fin if  
         }// fin if
         $arreglo=$objCompraEstado->listar($where);
