@@ -11,8 +11,8 @@ class CompraItem{
     // CONSTRUCTOR 
     public function __construct(){
         $this->idItem=0;
-       // $this->objProducto=new Producto();
-        //$this->objCompra=new Compra();
+        $this->objProducto=new Producto();
+        $this->objCompra=new Compra();
         $this->mensaje=""; 
     }// fin constructor
 
