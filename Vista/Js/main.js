@@ -143,13 +143,14 @@ $(document).ready(function () {
                     });
                     // Ahora en el array "cantidades" tendrás los pares id y cantidad para cada producto
                     $.ajax({
-                        url: '../carrito/accionCarrito.php',
+                        url: '../carrito/gestionCompra.php',
                         method: 'POST',
                         data: { enviarCantidades: cantidades },
                         success: function (response) {
-                            console.log(response)
-                            alert("La compra está siendo procesada")
-                            window.location.href = '../grilla/indexGrilla.php';
+                            console.log(response);
+                            //console.log(location.href);
+                            //alert("La compra está siendo procesada")
+                            //window.location.href = '../grilla/indexGrilla.php';
                         }
                     });
                 });
