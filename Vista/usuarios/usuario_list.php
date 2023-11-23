@@ -3,7 +3,7 @@
 ?>
 <head>
     <meta charset="UTF-8">
-    <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
+    <title>Lista de Usuarios</title>
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/color.css">
@@ -14,7 +14,7 @@
 <body style="margin:0; padding:0">
     <h1>Lista de Todos los usuarios</h1>
     
-    <table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:250px"
+    <table id="dg" title="Usuarios" class="easyui-datagrid" style="width:700px;height:450px"
             url="accion/list_usuario.php"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
@@ -31,6 +31,7 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">Nuevo Usuario</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Editar Usuario</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Dar de baja Usuario</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="habilitarUser()">Habilitar Usuario</a>
     </div>
     
     <div id="dlg_nuevo" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-boton'">
@@ -71,7 +72,7 @@
         </form>
     </div>
     <div id="dlg-buttons">
-        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUserEdit()" style="width:90px">Save</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUserEdit()" style="width:90px">Guardar</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_edit').dialog('close')" style="width:90px">Cancel</a>
     </div>
     <div id="dlg-boton">
@@ -157,6 +158,27 @@
                     });
                 }
             }
+            function habilitarUser(){
+                var row = $('#dg').datagrid('getSelected');
+                if (row){
+                    $.messager.confirm('Confirm','Seguro que desea habilitar al usuario?', function(r){
+                        if (r){
+                            $.post('accion/habilitar_usuario.php?idusuario='+row.idusuario,{idusuario:row.id},
+                               function(result){ 
+                                 if (result.respuesta){
+                                   	 
+                                    $('#dg').datagrid('reload');    // reload the  data
+                                } else {
+                                    $.messager.show({    // show error message
+                                        title: 'Error',
+                                        msg: result.errorMsg
+                                  });
+                                }
+                            },'json');
+                        }
+                    });
+                }
+            }            
     </script>
 </body>
 <?php
