@@ -3,11 +3,15 @@ include_once("../../configuracion.php");
 $objSession = new Session();
 $objAbmMenuRol = new AbmMenuRol();
 
-if ($objSession->validar() ) {    //&& $objSession->permisos()
+$menu="";
+$UsuarioNombre="";
+if ($objSession->validar()&& $objSession->permisos()) {    //&& $objSession->permisos()
   $menu = $objAbmMenuRol->menuPrincipal($objSession);
-  $UsuarioNombre = $objSession->getUsuario()->getNombre();
-} else {
-  header("Location: ../index.php");
+  $UsuarioRol = $objSession->getRolActual()->getDescripcion();
+  $UsuarioNombre .=$objSession->getUsuario()->getNombre()." (".$UsuarioRol.")  ";
+}else {
+  //header("Location: ../grilla/indexGrilla.php");   
+  header("Location: ../login/indexLogin.php");
 }
 ?>
 <!DOCTYPE html>
@@ -50,11 +54,16 @@ if ($objSession->validar() ) {    //&& $objSession->permisos()
           <ul class="navbar-nav" id="resultadoMenu">
             <?php   echo $menu; ?>
           </ul>
-          <?php include_once ("carritoIcono.php");?> 
+          <!-- Carrito -->
+          <li style="float: left;" class="nav-item">
+            <a aria-current="page" href="../carrito/carrito.php" style="text-decoration:none"> <i class="bi bi-cart4"></i> <span id="cantCarrito" style="font-size:20px;font-weight:bolder;"><span></a>
+          </li>
+          <!-- Carrito -->
+          <?php // include_once ("carritoIcono.php");?> 
         </ul>  
         <ul class="navbar-nav" >    
           <li class="navbar-item">
-            <a class="nav-link "  role="button" aria-expanded="false">Usuario: <?php echo $UsuarioNombre."  "; ?></a>   
+            <a class="nav-link "  role="button" aria-expanded="false">Usuario: <?php echo $UsuarioNombre; ?></a>   
           </li>        
           <li  class="nav-item ">
             <a class="nav-link "  href="../login/accionLogin.php?accion=cerrar" role="button" aria-expanded="false">Salir</a>              

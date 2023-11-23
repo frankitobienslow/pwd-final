@@ -2,9 +2,11 @@
 $Titulo = "Lista Usuariorols";
 include_once("../estructura/headPrivado.php");
 $objAbmUsuariorol = new AbmUsuariorol();
+$objAbmUsuario = new AbmUsuario();
 
+$listaUsuario = $objAbmUsuario->buscar(null);
 $listaUsuariorol = $objAbmUsuariorol->buscar(null);
-echo count($listaUsuariorol);
+
 ?>	
 
 <div class="container mt-3">
@@ -17,16 +19,23 @@ echo count($listaUsuariorol);
             <th style="width:40%">Roles</th>
         </tr>
         
-            <?php if(count($listaUsuariorol)>0){
+            <?php if(count($listaUsuario)>0){
+
+              foreach ($listaUsuario as $objUsuario){  ?>
+                <tr>
+                <td> <?php echo($objUsuario->getNombre()) ?></td>
+                <?php
                 foreach($listaUsuariorol as $Usuariorol){?>
-                    <tr>
-                    <td> <?php echo($Usuariorol->getObjUsuario()->getNombre()) ?></td>
+                    
+                    <?php if ($objUsuario->getId() == $Usuariorol->getObjUsuario()->getId()){?>
                     <td> <?php echo($Usuariorol->getObjRol()->getDescripcion())?></td>
-                    <td><a href="editarUsuarioRol.php?idusuario=<?php echo ($Usuariorol->getObjUsuario()->getId()) ?>&idrol=<?php echo ($Usuariorol->getObjRol()->getId()) ?>" class="btn btn-danger">Eliminar</a>
-                    </td>
-                    </tr>
-                <?php    
-                }// fin for 
+                    
+                    
+                <?php }}?>
+                </tr>
+              <?php }
+
+
             } ?>
     </table>
   </form>
@@ -38,3 +47,4 @@ echo count($listaUsuariorol);
 <?php
 include_once("../estructura/footer.php");
 ?>
+<!-- <td><a href="editarUsuarioRol.php?idusuario=<?php //echo ($Usuariorol->getObjUsuario()->getId()) ?>&idrol=<?php //echo ($Usuariorol->getObjRol()->getId()) ?>" class="btn btn-danger">Eliminar</a></td> -->

@@ -1,10 +1,21 @@
 <?php
     $Titulo="Lista Compra Cliente y estado";
     include_once "../estructura/headPrivado.php";
+    $objUsuario=$objSession->getUsuario();
     $objAbmCompraEstado=new AbmCompraEstado();
+    $objAbmCompra=new AbmCompra();
     //$param["idcompraestadotipo"]=2;
-    $listaobjEstado= $objAbmCompraEstado->buscar(null);
-    var_dump($listaobjEstado);
+    //$listaobjEstado= $objAbmCompraEstado->buscar(null);
+    //var_dump($listaobjEstado);
+    $dato["idusuario"]=$objUsuario->getId();
+    $listaCompraCliente=$objAbmCompra->buscar($dato);
+    for($i=0;$i<count($listaCompraCliente);$i++){
+        $idcompra["idcompra"]=$listaCompraCliente[$i]->getId();
+        $listaObjCompraEstado[$i]=$objAbmCompraEstado->buscar($idcompra);
+    }
+    
+    //var_dump($listaCompraCliente);
+    var_dump($listaObjCompraEstado);
 ?>
 <div class="container mt-5">
     <table class="table table-hover  justify-content-center">

@@ -1,8 +1,11 @@
 <?php
 include_once '../../configuracion.php';
-
 $datos = data_submitted();
-if (isset($datos) && isset($datos['logeado']) && $datos['logeado'] == 'si') {
+
+$objSession = new Session();    //Cambio
+if ($objSession->validar() ) {  //Cambio
+  
+//if (isset($datos) && isset($datos['logeado']) && $datos['logeado'] == 'si') {  //Cambio
   include_once '../estructura/headPrivado.php';
 } else {
   include_once '../estructura/headLibre.php';
