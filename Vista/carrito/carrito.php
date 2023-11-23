@@ -2,6 +2,8 @@
 include_once '../../configuracion.php';
 include_once '../estructura/headPrivado.php';
 
+$objSession->getCarrito();
+
 // RECORIDO DE LOS PRODUCTOS CON SU IMAGEN, NOMBRE Y PRECIO
 ?>
 <form class="form-group" action="./accionCarrito.php" method='POST'>
@@ -22,6 +24,14 @@ include_once '../estructura/headPrivado.php';
 
 </form>
 
+
+<script>
+ 
+
+</script>
+
+
 <?php
 include_once '../estructura/footer.php';
 ?>
+
