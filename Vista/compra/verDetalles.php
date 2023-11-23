@@ -4,10 +4,10 @@
     $datos=data_submitted();
     $objCompraItem=new AbmCompraItem();
     $listaCompraItem=$objCompraItem->buscar($datos);
-    var_dump($listaCompraItem);
+    /*var_dump($listaCompraItem);
     echo "<br>";
     echo "<br>";
-    echo ($listaCompraItem[1]->getObjProducto()->getId());
+    echo ($listaCompraItem[1]->getObjProducto()->getId());*/
 ?>
 <h1>Lista de Productos</h1>
 <div class="container mt-5">
@@ -40,4 +40,8 @@
             <?php } ?>
     </tbody>
     </table>
+    <div><a href="indexCompraCliente.php" class="btn btn-secondary">Atrás</a></div>
 </div>
+<?php
+    include_once "../estructura/footer.php";
+?>

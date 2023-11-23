@@ -17,7 +17,7 @@
     }
     
     //var_dump($listaCompraCliente);
-    var_dump($listaObjCompraEstado);
+    //var_dump($listaObjCompraEstado);
 
 
 
