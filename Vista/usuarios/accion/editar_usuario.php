@@ -7,7 +7,10 @@ $id=$data["idusuario"]-1;
 $data["uspass"] = $listaObj[$id]->getPassword();
 $respuesta = false;
 if (isset($data['idusuario']) && $data['uspass'] && isset($data['usnombre']) && isset($data['usmail']) && isset($data['usdeshabilitado'])){
-    $respuesta = $objC->modificacion($data);
+    if($data['usdeshabilitado'] == "Si"){
+        $data['usdeshabilitado'] = "0000-00-00 00:00:00";
+    }
+        $respuesta = $objC->modificacion($data);
     
     if (!$respuesta){
 
