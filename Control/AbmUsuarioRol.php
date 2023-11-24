@@ -133,9 +133,9 @@ class AbmUsuarioRol
         $where = " true ";
         if ($param <> NULL) {
             if (isset($param['idusuario']))
-            $where .= " and idusuario=" . $param['idusuario'] ;
+            $where .= " and idusuario = " . $param['idusuario'] ;
             if (isset($param['idrol']))
-            $where .= " and idrol =" . $param['idrol'] ;
+            $where .= " and idrol = " . $param['idrol'] ;
         }
         $objUserRol=new UsuarioRol();
         $arreglo = $objUserRol->listar($where);

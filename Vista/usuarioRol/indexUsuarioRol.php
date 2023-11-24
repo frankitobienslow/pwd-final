@@ -15,28 +15,20 @@ $listaUsuariorol = $objAbmUsuariorol->buscar(null);
   <form action="editarUsuariorol.php" method="post">
     <table class="table-striped">
         <tr>
-            <th style="width:10%">Nombre Usuario</th>
+            <th style="width:10%">Lista de usuarios</th>
             <th style="width:40%">Roles</th>
         </tr>
         
-            <?php if(count($listaUsuario)>0){
-
+            <?php
               foreach ($listaUsuario as $objUsuario){  ?>
                 <tr>
-                <td> <?php echo($objUsuario->getNombre()) ?></td>
-                <?php
-                foreach($listaUsuariorol as $Usuariorol){?>
-                    
-                    <?php if ($objUsuario->getId() == $Usuariorol->getObjUsuario()->getId()){?>
-                    <td> <?php echo($Usuariorol->getObjRol()->getDescripcion())?></td>
-                    
-                    
-                <?php }}?>
+                <td> <?php echo($objUsuario->getNombre()); 
+                echo ($objUsuario->getId());?></td>
+                <td><a href="./editarUsuarioRol.php?idusuario=<?php echo ($objUsuario->getId()); ?>" class="btn btn-info">Editar</a></td>
+
                 </tr>
               <?php }
-
-
-            } ?>
+             ?>
     </table>
   </form>
 
