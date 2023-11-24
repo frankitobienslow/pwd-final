@@ -64,9 +64,14 @@ if (isset($_POST["enviarCantidades"])) {
         }
         //Como ya se envió la compra, vaciamos el carrito
         $objSession->vaciarCarrito();
+        $idUsuario=$objSession->getUsuario()->getId();
         //Ejemplo para trabajar con las asociaciones
+        $i=0;
         foreach ($arregloCantidades as $producto) {
-            echo "ID:" . $producto["id"] . " Cantidad: " . $producto["cantidad"] . "\n";
+            $datos[$i]= "idproducto:" . $producto["id"] . "cantidad: " . $producto["cantidad"];
+            
         } //...Haciendo uso de arregloCantidades, se pueden crear los objetos compraItem
+        //$datos['idusuario']=$idUsuario;
+        echo $datos;
     }
 }

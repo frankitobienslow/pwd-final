@@ -35,7 +35,7 @@ class AbmCompra{
      */
     private function cargarObjeto($datos){
         $obj=null; 
-        echo("entro cragar objeto");
+        //echo("entro cragar objeto");
         if(array_key_exists('idcompra',$datos) && array_key_exists('cofecha',$datos) && array_key_exists('idusuario',$datos)){
             
             // creo al obj usuario
@@ -79,13 +79,13 @@ class AbmCompra{
      */
     private function setadosCamposClaves($datos){
         $resp=false;
-        var_dump($datos);
+       // var_dump($datos);
         if(isset($datos['idcompra']) && isset($datos['cofecha']) && isset($datos['idusuario'])){
             echo("entro isset");
             $resp=true;
 
         }// fin if 
-        var_dump($resp);
+        //var_dump($resp);
         return $resp;
 
     }// fin function 

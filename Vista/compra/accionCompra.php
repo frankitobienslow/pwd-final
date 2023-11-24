@@ -27,6 +27,7 @@
             if($objCompra->alta($datos)){
                 $resp=true;
             }// fin if 
+            //echo(json_encode($resp));
 
         }// fin if
 

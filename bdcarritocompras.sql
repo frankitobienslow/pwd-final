@@ -103,7 +103,7 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
 (1, 'Producto', '../grilla/indexGrilla.php', NULL, NULL),
 (2, 'Usuario', 'Administracion de Usuarios', NULL, NULL),
-(3, 'compras', 'Administracion de Compras', NULL, NULL),
+(3, 'compra', 'Administracion de Compras', NULL, NULL),
 (4, 'Rol', 'Administracion de Roles', NULL, NULL),
 (6, 'Ingresar', '../login/indexLogin.php', NULL, NULL),
 (11, 'Nuevo', '../producto/altaProducto.php', 1, NULL),
