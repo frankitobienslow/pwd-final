@@ -11,32 +11,42 @@ $listaObjUsuario = $objAbmUsuario->buscar($data);
 $objUsuario = $listaObjUsuario[0];
 $listaObjUsuarioRol = $objAbmUsuarioRol->buscar($data);
 
-//echo $listaObjUsuario[0]->getNombre();
-//var_dump($listaObjUsuarioRol);
-
 ?>
 <div class="container mt-3">
   <h2 style="text-align: center; color:dodgerblue;">Tabla </h2>
   <h5 style="text-align: left; color:dodgerblue;">Gestion de Roles</h5>            
   <form action="editarUsuariorol.php" method="post">
-    <table class="table-striped">
+    <table class="table table-striped">
         <tr>
             <th style="width:10%">Usuario: <?php echo($objUsuario->getNombre()); ?></th>
         </tr>
 
             <?php
+            $i=0;
               foreach ($listaObjRol as $objRol){  ?>
-                <tr>
-                
+               
+                <tr>               
                 <td><?php echo ($objRol->getDescripcion());?></td>
-                <td><a href="./editarUsuarioRol.php?idusuario=<?php echo ($objRol->getId()); ?>" class="btn btn-info">Editar</a></td>
+                <td>
+                  <?php
+                    $rol = "rol".$objRol->getId();
+                    $rol = '<input type="checkbox" id="'.$rol.'" name="'.$rol.'" value="'.$rol;
+                    if ($objRol->getId() == $listaObjUsuarioRol[$i]->getObjRol()->getId()){
+                  
+                      $rol .= ' checked">';
+                    }else{ $rol .= '">';}
+                    echo $rol;
+                  $i++;
+                  ?>
+                </td>
 
                 </tr>
               <?php }
              ?>
     </table>
   </form>
-
+  <td><a href="./accionUsuarioRol.php?idusuario=<?php echo ($objRol->getId()); ?>" class="btn btn-info">Guardar</a></td>
+  <td><a href="./indexUsuarioRol.php" class="btn btn-info">Volver</a></td>
 <?php
 
 

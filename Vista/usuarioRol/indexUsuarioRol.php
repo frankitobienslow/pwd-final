@@ -13,7 +13,7 @@ $listaUsuariorol = $objAbmUsuariorol->buscar(null);
   <h2 style="text-align: center; color:dodgerblue;">Tabla </h2>
   <h5 style="text-align: left; color:dodgerblue;">Gestion de Roles</h5>            
   <form action="editarUsuariorol.php" method="post">
-    <table class="table-striped">
+    <table class="table table-striped">
         <tr>
             <th style="width:10%">Lista de usuarios</th>
             <th style="width:40%">Roles</th>
@@ -22,8 +22,7 @@ $listaUsuariorol = $objAbmUsuariorol->buscar(null);
             <?php
               foreach ($listaUsuario as $objUsuario){  ?>
                 <tr>
-                <td> <?php echo($objUsuario->getNombre()); 
-                echo ($objUsuario->getId());?></td>
+                <td> <?php echo($objUsuario->getNombre()); ?></td>
                 <td><a href="./editarUsuarioRol.php?idusuario=<?php echo ($objUsuario->getId()); ?>" class="btn btn-info">Editar</a></td>
 
                 </tr>
