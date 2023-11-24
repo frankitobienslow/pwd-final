@@ -154,7 +154,7 @@ class AbmCompraEstado{
      */
     public function modificacion($datos){
         $resp=false;
-        
+        var_dump($datos);
         if($this->setadosCamposClaves($datos)){
             $objCompraEstado=$this->cargarObjeto($datos);
             

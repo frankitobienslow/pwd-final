@@ -128,8 +128,10 @@ class AbmProducto{
         $resp=false;
         if($this->setadosCamposClaves($datos)){
             $objProducto=$this->cargarObjeto($datos);
+            var_dump($datos);
             if($objProducto!=null && $objProducto->modificar()){
                 $resp=true; 
+                
 
             }// fin if 
 

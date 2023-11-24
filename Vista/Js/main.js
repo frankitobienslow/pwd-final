@@ -72,13 +72,13 @@ $(document).ready(function () {
                 method: 'POST',
                 data: { idAgregar: id },
                 success: function (cantCarrito) {
-                    console.log(id)
+ //                   console.log(id)
                     $("#cantCarrito").text(cantCarrito);
                     botonIrAlCarrito = $('<a href="../carrito/carrito.php" class="btn btn-info">Ir al carrito</a>');
                     $(boton).replaceWith(botonIrAlCarrito);
                 },
                 error: function (error) {
-                    console.log("No se agregó al carrito")
+   //                 console.log("No se agregó al carrito")
                 }
             });
         });
@@ -145,12 +145,13 @@ $(document).ready(function () {
                     $.ajax({
                         url: '../carrito/gestionCompra.php',
                         method: 'POST',
-                        data: { enviarCantidades: cantidades },
-                        success: function (response) {
-                            console.log(response);
-                            //console.log(location.href);
-                            //alert("La compra está siendo procesada")
-                            //window.location.href = '../grilla/indexGrilla.php';
+                        data: { enviarCantidades: cantidades,vaciar:'si'},
+                        success: function () {
+                            $('#exampleModal').modal('show');
+                            $("#cerrarModal").on('click',function(){
+                                location.href='../grilla/indexGrilla.php?logeado=si';
+                            });
+                            //console.log(r);
                         }
                     });
                 });
