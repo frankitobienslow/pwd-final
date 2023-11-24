@@ -169,7 +169,7 @@ class AbmCompraItem{
     public function buscar ($param){
         $objCI=new CompraItem();
         $where=" true ";
-        var_dump($param);
+        //var_dump($param);
         if($param<>null){
             // Va preguntando si existe los campos de la tabla 
                 if(isset($param['idcompraitem'])){  

@@ -11,27 +11,28 @@ $objCE=new AbmCompraEstado();
 
 if(isset($datoCI['idcompraitem'])){
     // obtengo el obj producto con el id Item 
-    $datoCI['idcompraitem']=intval($datoCI['idcompraitem']);
-    $unItem=$objCI->buscar($datoCI);
+    $datoCI['idcompraitem']=$datoCI['idcompraitem'];
+    $unItem=$objCI->buscar($datoCI['idcompraitem']);
     //var_dump($unItem[0]->getObjProducto()->getId());
     //var_dump($unItem[0]); 
     $datoCI['idproducto']=$unItem[0]->getObjProducto()->getId();
     $datoCI['idcompra']=$unItem[0]->getObjCompra()->getId();
     $datoCI['cicantidad']=0; // se realiza un borrado logico del item de la compra
     $respCI=$objCI->modificacion($datoCI);
-    var_dump($respCI);
+    //var_dump($respCI);
     // llenado de datos para cambiar el stock de producto
 
-    //$unProducto=$objP->buscar($datosP); // encuentra el obj con el id producto
-    //$stockNuevo=intval($unItem[0]->getCantidad())+intval($unProducto[0]->getStock()) ; // devuelve el stock al producto
-    //$datosP['idproducto']=$unProducto[0]->getId();
-    //$datosP['procantstock']=$stockNuevo;
-    //$datosP['pronombre']=$unProducto[0]->getNombre();
-    //$datosP['prodetalle']=$unProducto[0]->getDetalle();
+    $unProducto=$objP->buscar($datosP); // encuentra el obj con el id producto
+    $stockNuevo=intval($unItem[0]->getCantidad())+intval($unProducto[0]->getStock()) ; // devuelve el stock al producto
+    $datosP['idproducto']=$unProducto[0]->getId();
+    $datosP['procantstock']=$stockNuevo;
+    $datosP['pronombre']=$unProducto[0]->getNombre();
+    $datosP['prodetalle']=$unProducto[0]->getDetalle();
 
     // Llamamos a los modificacion de compra item y producto
-    ;
-    //$respP=$objP->modificacion($datosP);
+    
+    $respP=$objP->modificacion($datosP);
+    var_dump($respP);
     
     
 }// fin if

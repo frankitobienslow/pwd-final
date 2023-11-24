@@ -33,7 +33,8 @@ foreach($listaObjCE as $unaCE){
 ?>
 
 <main>
-    <div class="container">
+    <div class="container mt-5">
+        <h3 class="text-center">Listado de Compras para ser enviadas</h3>
     <table class="table table-striped table-bordered mt-5">
         <thead>
             <tr>
@@ -50,7 +51,7 @@ foreach($listaObjCE as $unaCE){
                 <tr>
                 <th scope="row" class="h5 fw-bolder"><?php echo($idcompra) ?></th>
                 <td class="h5"><?php echo($unaCE->getObjCompraEstadoTipo()->getDescripcion()); ?></td>
-                <td class="h5"><button type="button" id="<?php echo($idcompra) ?>" class="btn btn-info productos"><a href="verProductos.php?idcompra=<?php echo($idcompra);?>">Ver Productos</a></button></td>
+                <td class="h5"><button type="button" id="<?php echo($idcompra) ?>" class="btn btn-info productos"><a class="text-dark" href="verProductos.php?idcompra=<?php echo($idcompra);?>">Ver Productos</a></button></td>
                 </tr>
                 <?php
 
