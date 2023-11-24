@@ -11,7 +11,7 @@ if (isset($data['idproducto']) && isset($data['pronombre']) && isset($data['prod
 
         $sms_error = " La accion  MODIFICACION No pudo concretarse";
         
-    }else $respuesta =true;
+    }//else $respuesta =true;
     
 }
 $retorno['respuesta'] = $respuesta;

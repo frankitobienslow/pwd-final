@@ -8,7 +8,7 @@ $UsuarioNombre="";
 if ($objSession->validar()&& $objSession->permisos()) {    //&& $objSession->permisos()
   $menu = $objAbmMenuRol->menuPrincipal($objSession);
   $UsuarioRol = $objSession->getRolActual()->getDescripcion();
-  $UsuarioNombre .=$objSession->getUsuario()->getNombre()." (".$UsuarioRol.")  ";
+  $UsuarioNombre .=$objSession->getUsuario()->getNombre();//." (".$UsuarioRol.")  ";
 }else {
   //header("Location: ../grilla/indexGrilla.php");   
   header("Location: ../login/indexLogin.php");

@@ -161,15 +161,18 @@ class UsuarioRol{
      * @return array
      */
     public function listar($parametro=""){
-        $arrayUusarioRol=array();
+        $arrayUsarioRol=array();
         $baseDatos=new BaseDatos();
-        $sql="SELECT * FROM usuariorol";
+        $salida = 0;
+        $sql="SELECT * FROM usuariorol ";
         if($parametro!=""){
             $sql.=' WHERE '.$parametro; 
         }// fin if 
         if($baseDatos->Iniciar()){
             $salida=$baseDatos->Ejecutar($sql);
-            //var_dump($salida);
+           // echo $sql;
+           //var_dump($salida);
+       
             if($salida>-1){
                 if($salida>0){
                     while($row=$baseDatos->Registro()){
@@ -177,19 +180,15 @@ class UsuarioRol{
                         $obj->getObjUsuario()->setId($row['idusuario']);
                         $obj->getObjRol()->setId($row['idrol']);
                         $obj->cargar();
-                        array_push($arrayUusarioRol,$obj); 
-
+                        array_push($arrayUsarioRol,$obj); 
                     }// fin while 
                 }// fin if 
-
             }// fin if
-
         }// fin if
         else{
             $this->setMensaje("Usuario -> listar: ".$baseDatos->getError());
         }// fin else
-
-        return $arrayUusarioRol; 
+        return $arrayUsarioRol; 
     }// fin metodo listar 
 
 
