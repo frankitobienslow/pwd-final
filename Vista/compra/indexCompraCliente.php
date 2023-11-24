@@ -17,7 +17,7 @@
     }
     
     //var_dump($listaCompraCliente);
-    //var_dump($listaObjCompraEstado);
+    //var_dump($listaObjCompraEstado[0][0]);
 
 
 
@@ -46,9 +46,9 @@
         <?php if(count($listaObjCompraEstado)>0){
             for($i=0;$i<count($listaObjCompraEstado);$i++){?>
                 <tr>
-                <th> <?php echo($listaObjCompraEstado[$i][0]->getObjCompra()->getId()) ?></th>
+                <th> <?php echo($listaObjCompraEstado[0][$i]->getObjCompra()->getId()) ?></th>
                 <td><a href="verDetalles.php?idcompra=<?php echo($listaObjCompraEstado[$i][0]->getObjCompra()->getId()) ?>" class="btn btn-info">ver detalles</a></td>
-                <td> <?php echo($listaObjCompraEstado[$i][0]->getObjCompraEstadoTipo()->getDescripcion())?></td>
+                <td> <?php echo($listaObjCompraEstado[0][$i]->getObjCompraEstadoTipo()->getDescripcion())?></td>
                 </tr>
             <?php }
             }else{?>

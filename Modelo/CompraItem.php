@@ -146,7 +146,7 @@ class CompraItem{
         $idCompra=$this->getObjCompra()->getId();
         $baseDatos=new BaseDatos();
         $sql="UPDATE compraitem SET idproducto=$idProducto, idcompra=$idCompra, cicantidad=".$this->getCantidad()." WHERE idcompraitem=".$this->getId();
-
+        //var_dump($sql);
         if($baseDatos->Iniciar()){
             if($baseDatos->Ejecutar($sql)){
                 $salida=true;

@@ -6,6 +6,7 @@ $datos=data_submitted();
 // Validacion 
 if($datos['accion']=='login'){
     $datos['password']=md5($datos['password']);
+    
     $session=new Session();
     $salida=$session->iniciar($datos['nombre'],$datos['password']);
     if($salida){
@@ -30,6 +31,7 @@ if($datos['accion']=="cerrar"){
 
 if($datos['accion']=='nuevo'){
     $objAbmUsuario=new AbmUsuario();
+    $datos['uspass']=md5($datos['uspass']);
     $respuesta=$objAbmUsuario->alta($datos);
     if($respuesta){
         $objAbmUsuarioRol=new AbmUsuarioRol();

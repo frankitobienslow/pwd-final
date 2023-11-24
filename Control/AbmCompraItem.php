@@ -186,7 +186,7 @@ class AbmCompraItem{
                 }// fin if 
         }// fin if
         $arreglo=$objCI->listar($where);
-        //var_dump($where); 
+       // var_dump($where); 
         return $arreglo; 
 
     }// fin funcion     
