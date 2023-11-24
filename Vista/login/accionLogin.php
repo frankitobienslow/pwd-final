@@ -30,6 +30,7 @@ if($datos['accion']=="cerrar"){
 
 if($datos['accion']=='nuevo'){
     $objAbmUsuario=new AbmUsuario();
+    $datos['uspass']=md5($datos['uspass']);
     $respuesta=$objAbmUsuario->alta($datos);
     if($respuesta){
         $objAbmUsuarioRol=new AbmUsuarioRol();
