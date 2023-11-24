@@ -5,7 +5,7 @@ $objAbmMenuRol = new AbmMenuRol();
 
 $menu="";
 $UsuarioNombre="";
-if ($objSession->validar()&& $objSession->permisos()) {    //&& $objSession->permisos()
+if ($objSession->validar()) {    //&& $objSession->permisos()
   $menu = $objAbmMenuRol->menuPrincipal($objSession);
   $UsuarioRol = $objSession->getRolActual()->getDescripcion();
   $UsuarioNombre .=$objSession->getUsuario()->getNombre()." (".$UsuarioRol.")  ";

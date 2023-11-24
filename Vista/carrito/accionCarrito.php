@@ -4,18 +4,18 @@ include_once '../../configuracion.php';
 
 //Crea el objeto session
 $objSession = new Session();
-
+$datos=data_submitted();
 //Si se agregó un producto...
-if (isset($_POST["idAgregar"])) {
+if (isset($datos["idAgregar"])) {
     //Agrega el producto al carrito y retorna la cantidad de productos en el carrito
-    echo $objSession->agregarAlCarrito($_POST["idAgregar"]);
+    echo $objSession->agregarAlCarrito($datos["idAgregar"]);
 }
 //Elimina el producto al carrito y retorna la cantidad de productos en el carrito
-if (isset($_POST["idEliminar"])) {
-    echo $objSession->eliminarDelCarrito($_POST['idEliminar']);
+if (isset($datos["idEliminar"])) {
+    echo $objSession->eliminarDelCarrito($datos['idEliminar']);
 }
 
-if (isset($_POST["obtenerCarrito"])) {
+if (isset($datos["obtenerCarrito"])) {
     $arregloProductos = $objSession->getCarrito();
     foreach ($arregloProductos as $producto) {
         $retorno['productos'][] = [
@@ -26,19 +26,20 @@ if (isset($_POST["obtenerCarrito"])) {
             'stock' => $producto->getStock()
         ];
     }
+    //echo($retorno['productos']['stock']);
     header('Content-Type: application/json');
     echo json_encode($retorno);
 }
 
 //Si la llamada es para actualizar el ícono del carrito...
-if (isset($_POST['actualizarIcono'])) {
+if (isset($datos['actualizarIcono'])) {
     //Retorna la cantidad de productos en el carrito
     echo count($objSession->getCarrito());
 }
 
-if (isset($_POST["enviarCantidades"])) {
+if (isset($datos["enviarCantidades"])) {
     // Almacenamos lo que recibimos del post en $cantidades
-    $cantidades = $_POST["enviarCantidades"];
+    $cantidades = $datos["enviarCantidades"];
     //Obtener el carrito
     $carrito = $objSession->getCarrito();
     //Obtener la cantidad de productos en el carrito
