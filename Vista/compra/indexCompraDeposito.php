@@ -9,7 +9,7 @@ $objCI=new AbmCompraItem();
 $objCET=new AbmCompraEstadoTipo();
 $dato['idcompraestadotipo']=2;
 $listaObjCE=$objCE->buscar($dato);
-//var_dump(count($listaObjCE));
+//var_dump($listaObjCE);
 /** 
 foreach($listaObjCE as $unaCE){
     echo("**** COMPRAS CON ESTADO PAGADO ****");
@@ -44,7 +44,7 @@ foreach($listaObjCE as $unaCE){
         </thead>
         <tbody>
         <?php 
-        if(count($listaObjCE)>1){
+        if(count($listaObjCE)>=1){
             foreach($listaObjCE as $unaCE){
                 $idcompra=$unaCE->getObjCompra()->getId();
                 ?>

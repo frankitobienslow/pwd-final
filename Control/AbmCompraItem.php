@@ -173,7 +173,7 @@ class AbmCompraItem{
         if($param<>null){
             // Va preguntando si existe los campos de la tabla 
                 if(isset($param['idcompraitem'])){  
-                    $where.=" and idcompraitem = '".$param['idcompraitem'];
+                    $where.=" and idcompraitem = ".$param['idcompraitem'];
                 }// fin if     
                 if(isset($param['idproducto'])){// identifica si esta la clave (atributo de la tabla)
                     $where.=" and idproducto ='".$param['idproducto']."'";
