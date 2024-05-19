@@ -1,7 +1,7 @@
 # Proyecto PWD Final 2023
 Autor: **Francisco Insua FAI-3013**
 
-*Cursada en el segundo cuatrimestre de 2023*
+*Cursada en el segundo cuatrimestre de 2023. Originalmente desarrollado en conjunto con mis compañeros, pero luego de diciembre lo seguí individualmente*
 ## Introducción
 Para el proyecto final de Programación Web Dinámica desarrollé un e-commerce de gorras.
 ## Funcionalidades ##
