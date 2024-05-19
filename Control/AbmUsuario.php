@@ -36,9 +36,9 @@ class AbmUsuario{
     private function cargarObjeto($datos){
         $obj=null; 
         if(array_key_exists('idusuario',$datos) && array_key_exists('usnombre',$datos) 
-        && array_key_exists('uspass',$datos) && array_key_exists('usmail',$datos) && array_key_exists('usdeshabilitado',$datos)){
+        && array_key_exists('uspass',$datos) && array_key_exists('usmail',$datos) && array_key_exists('habilitado',$datos)){
             $obj=new Usuario();
-            $obj->setear($datos['idusuario'],$datos['usnombre'],$datos['uspass'],$datos['usmail'],$datos['usdeshabilitado']);
+            $obj->setear($datos['idusuario'],$datos['usnombre'],$datos['uspass'],$datos['usmail'],$datos['habilitado']);
             
         }// fin if 
         return $obj; 
@@ -55,7 +55,7 @@ class AbmUsuario{
         $obj=null;
         if(isset($datos['idusuario'])){
             $obj=new Usuario();
-            $obj->setear($datos['idusuario'],$datos['usnombre'],$datos['uspass'],$datos['usmail'],$datos['usdeshabilitado']);
+            $obj->setear($datos['idusuario'],$datos['usnombre'],$datos['uspass'],$datos['usmail'],$datos['habilitado']);
 
         }// fin if 
         return $obj;
@@ -69,7 +69,7 @@ class AbmUsuario{
      */
     private function setadosCamposClaves($datos){
         $resp=false;
-        if(isset($datos['idusuario']) && isset($datos['usnombre']) && isset($datos['uspass']) && isset($datos['usmail']) && array_key_exists('usdeshabilitado',$datos)){
+        if(isset($datos['idusuario']) && isset($datos['usnombre']) && isset($datos['uspass']) && isset($datos['usmail']) && array_key_exists('habilitado',$datos)){
             $resp=true;
 
         }// fin if 
@@ -86,7 +86,7 @@ class AbmUsuario{
     public function alta($datos){
         $resp=false;
         $datos['idusuario'] =null;
-        $datos['usdeshabilitado'] =null;
+        $datos['habilitado'] =1;
         $objUsuario=$this->cargarObjeto($datos);
         
         if($objUsuario!=null && $objUsuario->insertar()){
@@ -159,8 +159,8 @@ class AbmUsuario{
             if(isset($param['usmail'])){// identifica si esta la clave (atributo de la tabla)
                 $where.=" and usmail ='".$param['usmail']."'";
             }// fin if 
-            if(isset($param['usdeshabilitado'])){// identifica si esta la clave (atributo de la tabla)
-                $where.=" and usdeshabilitado ='".$param['usdeshabilitado']."'";
+            if(isset($param['habilitado'])){// identifica si esta la clave (atributo de la tabla)
+                $where.=" and habilitado =".$param['habilitado'];
             }// fin if 
                 
             // fin if 

@@ -37,10 +37,10 @@ class AbmProducto{
         $obj=null; 
         
         if(array_key_exists('idproducto',$datos) && array_key_exists('pronombre',$datos) 
-        && array_key_exists('prodetalle',$datos) && array_key_exists('procantstock',$datos)){
+        && array_key_exists('prodetalle',$datos) && array_key_exists('procantstock',$datos) && array_key_exists('proprecio',$datos)&& array_key_exists('imagen',$datos)&& array_key_exists('habilitado',$datos)){
             
             $obj=new Producto();
-            $obj->setear($datos['idproducto'],$datos['pronombre'],$datos['prodetalle'],$datos['procantstock']);
+            $obj->setear($datos['idproducto'],$datos['pronombre'],$datos['prodetalle'],$datos['procantstock'],$datos['proprecio'],$datos['imagen'],$datos["habilitado"]);
             
         }// fin if 
         return $obj; 
@@ -56,7 +56,7 @@ class AbmProducto{
         $obj=null;
         if(isset($datos['idproducto'])){
             $obj=new Producto();
-            $obj->setear($datos['idproducto'],$datos['pronombre'],$datos['prodetalle'],$datos['procantstock']);
+            $obj->setear($datos['idproducto'],$datos['pronombre'],$datos['prodetalle'],$datos['procantstock'],$datos['proprecio'],$datos['imagen'],$datos["habilitado"]);
 
         }// fin if 
         return $obj;
@@ -70,7 +70,7 @@ class AbmProducto{
      */
     private function setadosCamposClaves($datos){
         $resp=false;
-        if(isset($datos['idproducto'],$datos['pronombre'],$datos['prodetalle'],$datos['procantstock'])){
+        if(isset($datos['idproducto'],$datos['pronombre'],$datos['prodetalle'],$datos['procantstock'],$datos['proprecio'],$datos['imagen'], $datos["habilitado"])){
             $resp=true;
 
         }// fin if 
@@ -165,8 +165,14 @@ class AbmProducto{
                 if(isset($param['procantstock'])){// identifica si esta la clave (atributo de la tabla)
                     $where.=" and procantstock =".$param['procantstock'];
                 }// fin if 
-                if(isset($param['precio'])){// identifica si esta la clave (atributo de la tabla)
-                    $where.=" and precio =".$param['precio']."";
+                if(isset($param['proprecio'])){// identifica si esta la clave (atributo de la tabla)
+                    $where.=" and proprecio =".$param['proprecio']."";
+                }// fin if 
+                if(isset($param['imagen'])){// identifica si esta la clave (atributo de la tabla)
+                    $where.=" and imagen ='".$param['imagen']."'";
+                }// fin if 
+                if(isset($param['habilitado'])){// identifica si esta la clave (atributo de la tabla)
+                    $where.=" and habilitado =".$param['habilitado'];
                 }// fin if 
         }// fin if
         $arreglo=$objProducto->listar($where);

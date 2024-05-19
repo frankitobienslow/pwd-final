@@ -1,107 +1,138 @@
 <?php
-    include_once '../../configuracion.php';
-    include_once '../estructura/headPrivado.php';
-// objCE = obj compra estado
-// objCI = obj compra item
-// oblCET = obj compra estado tipo
-$objCE=new AbmCompraEstado();
-$objCI=new AbmCompraItem();
-$objCET=new AbmCompraEstadoTipo();
-$dato['idcompraestadotipo']=2;
-$listaObjCE=$objCE->buscar($dato);
-//var_dump($listaObjCE);
-/** 
-foreach($listaObjCE as $unaCE){
-    echo("**** COMPRAS CON ESTADO PAGADO ****");
-    $idcompra=$unaCE->getObjCompra()->getId();
-    echo("<br>".$unaCE->getObjCompra()->getId()."<br>");
-    $datoC['idcompra']=$idcompra;
-    $listaItem=$objCI->buscar($datoC);
-    foreach($listaItem as $unItem){
-        echo("----------------------------------");
-        echo("<br> idProducto:  ".$unItem->getObjProducto()->getNombre()."<br>");
-        echo("<br> Cantidad:  ".$unItem->getCantidad()."<br>");
-        echo("---------------------------------- <br>");
+include_once '../../configuracion.php';
 
-    }// fin for 
-    echo("<br> **************************************** <br>");
+$objCE = new AbmCompraEstado();
+$objCI = new AbmCompraItem();
+$objCET = new AbmCompraEstadoTipo();
+$objCompra = new AbmCompra();
 
+// Verificar si se ha hecho clic en alguno de los botones
+$idcompraestadotipo = isset($_GET['idcompraestadotipo']) ? $_GET['idcompraestadotipo'] : null;
 
-}// fin for 
-*/
+$dato['idcompraestadotipo'] = $idcompraestadotipo;
+$dato["cefechafin"] = "null";
 
+$listaObjCE = $objCE->buscar($dato);
+
+// Variable para almacenar el texto dinámico
+$mensajeNoVentas = '';
+$boton = "Ver detalle";
+// Botón "En proceso"
+if ($idcompraestadotipo == 2) {
+    $mensajeNoVentas = 'No se registran ventas en proceso.';
+    $boton = "Gestionar";
+}
+// Botón "Enviadas"
+elseif ($idcompraestadotipo == 3) {
+    $mensajeNoVentas = 'No se registran ventas enviadas.';
+    $boton = "Gestionar";
+}
+// Botón "Entregadas"
+elseif ($idcompraestadotipo == 4) {
+    $mensajeNoVentas = 'No se registran ventas entregadas.';
+    $listaObjCE = $objCE->buscar($dato);
+}
+// Botón "Canceladas"
+elseif ($idcompraestadotipo == 5) {
+    $mensajeNoVentas = 'No se registran ventas canceladas.';
+    $listaObjCE = $objCE->buscar($dato);
+} elseif ($idcompraestadotipo == 6) {
+    $mensajeNoVentas = 'No se registran ventas pendientes.';
+    $listaObjCE = $objCE->buscar($dato);
+}
+ob_clean();
+include_once '../estructura/headPrivado.php';
 ?>
 
-<main>
-    <div class="container mt-5">
-        <h3 class="text-center">Listado de Compras para ser enviadas</h3>
-    <table class="table table-striped table-bordered mt-5">
-        <thead>
-            <tr>
-            <th scope="col" class="h5 fw-bolder"> ID Compra</th>
-            <th scope="col" class="h5 fw-bolder">Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php 
-        if(count($listaObjCE)>=1){
-            foreach($listaObjCE as $unaCE){
-                $idcompra=$unaCE->getObjCompra()->getId();
-                ?>
-                <tr>
-                <th scope="row" class="h5 fw-bolder"><?php echo($idcompra) ?></th>
-                <td class="h5"><?php echo($unaCE->getObjCompraEstadoTipo()->getDescripcion()); ?></td>
-                <td class="h5"><button type="button" id="<?php echo($idcompra) ?>" class="btn btn-info productos"><a class="text-dark" href="verProductos.php?idcompra=<?php echo($idcompra);?>">Ver Productos</a></button></td>
-                </tr>
-                <?php
-
-            }// fin for
-
-        }// fin if 
-        else{
-            ?>
-            <div class="alert alert-danger">
-                No hay compras para ser enviadas. 
+    <div class="container">
+        <div class="row justify-content-center ">
+            <div class="col-md-8">
+            <nav class="navbar navbar-expand-lg navbar-light mt-2 ">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown" style="font-weight:600">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $idcompraestadotipo == 2 ? 'active' : ''; ?>" href="?idcompraestadotipo=2">En proceso</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $idcompraestadotipo == 6 ? 'active' : ''; ?>" href="?idcompraestadotipo=6">Pendientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $idcompraestadotipo == 3 ? 'active' : ''; ?>" href="?idcompraestadotipo=3">Enviadas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $idcompraestadotipo == 4 ? 'active' : ''; ?>" href="?idcompraestadotipo=4">Entregadas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $idcompraestadotipo == 5 ? 'active' : ''; ?>" href="?idcompraestadotipo=5">Canceladas</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
             </div>
-            <?php 
-        }
-        ?>
-            
-        </tbody>
-</table>
+        </div>
+
+        <!-- Lista de compras -->
+        <div id="listaCompras" class="mt-3" <?php echo $idcompraestadotipo ? '' : 'style="display: none;"'; ?>>
+            <?php
+            if (count($listaObjCE) >= 1) {
+            ?>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <table class="table bg-light rounded">
+                            <thead>
+                                <tr>
+                                    <th class="h6 fw-bolder"> ID</th>
+                                    <th class="h6 fw-bolder">Cliente</th>
+                                    <?php if ($idcompraestadotipo != 5) { ?>
+                                        <th class="h6 fw-bolder">Monto</th>
+                                    <?php } ?>
+                                    <th class="h6 fw-bolder">Estado</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($listaObjCE as $unaCE) {
+                                    $monto = 0;
+                                    $idcompra = $unaCE->getObjCompra()->getId();
+                                    $datos["idcompra"] = $idcompra;
+                                    ob_start();
+                                    foreach ($objCI->buscar($datos) as $itemCompra) {
+                                        $monto += ($itemCompra->getObjProducto()->getPrecio()) * ($itemCompra->getCantidad());
+                                    }
+                                    ob_end_clean();
+                                ?>
+                                    <tr>
+                                        <td class="h6 fw-bolder align-middle"><?php echo $idcompra ?></th>
+                                        <td class="h6 align-middle"><?php echo $objCompra->buscar($datos)[0]->getUsuario()->getNombre() ?></th>
+                                            <?php if ($idcompraestadotipo != 5) { ?>
+                                        <td class="h6 align-middle"><?php echo "$" . $monto; ?></th>
+                                        <?php } ?>
+                                        <td class="h6 align-middle"><?php echo $unaCE->getObjCompraEstadoTipo()->getDescripcion(); ?></td>
+                                        <td class="text-center">
+                                            <a href="verCompra.php?idcompra=<?php echo $idcompra; ?>" class="btn btn-info" style="width:100%;"><?php echo $boton ?></a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                } // fin foreach
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            <?php
+            } else {
+            ?>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="alert alert-danger"><?php echo $mensajeNoVentas; ?></div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
     </div>
-</main>    
-
-<script>
-    /** 
-    $(document).ready(function(){
-        let botones=$('.productos');
-            
-            // recorrer los botones - identificar a cual se le hizo click y enviar el idcompra a verProductos
-           //console.log(botones[1].getAttribute('id'));
-           for(var i=0; i<botones.length;i++){
-            botones[i].addEventListener('click',function(e){
-                e.preventDefault();
-                let id=this.getAttribute('id');
-                $.ajax({
-                    url:'verProductos.php',
-                    method:'POST',
-                    data:{idcompra:id},
-                    success:function(){
-                        //location.href='verProductos.php';
-                        console.log(id);
-                    }
-                });
-                
-            });
-                
-            
-
-           }
-        });
-        */
-
-</script>
 
 <?php
 include_once '../estructura/footer.php';

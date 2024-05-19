@@ -126,8 +126,13 @@ class CompraEstado{
         $baseDatos=new BaseDatos();
         $idCompra=$this->getObjCompra()->getId();
         $idCompraEstadoTipo=$this->getObjCompraEstadoTipo()->getId();
+        if($this->getFechaFin()=="null"){
+            $insFechaFin="NULL";
+        }else{
+            $insFechaFin="'".$this->getFechaFin()."'";
+        }
         $sql="INSERT INTO compraestado (idcompra,idcompraestadotipo,cefechaini,cefechafin)
-        VALUES ($idCompra,$idCompraEstadoTipo,'".$this->getFechaInicio()."','".$this->getFechaFin()."');"; 
+        VALUES ($idCompra,$idCompraEstadoTipo,'".$this->getFechaInicio()."',".$insFechaFin.");"; 
         if($baseDatos->Iniciar()){
             if($baseDatos->Ejecutar($sql)){
                 $salida=true;
@@ -217,7 +222,7 @@ class CompraEstado{
         $baseDatos=new BaseDatos();
         $sql="SELECT * FROM compraestado";
         if($parametro!=""){
-            $sql.=' WHERE'.$parametro;
+            $sql.=' WHERE' .$parametro;
         }// fin if 
         if($baseDatos->Iniciar()){
             $respuesta=$baseDatos->Ejecutar($sql);

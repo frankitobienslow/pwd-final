@@ -61,7 +61,7 @@ class AbmCompra{
         if(isset($datos['idcompra'])){
             // creo al obj usuario
             $objU=new Usuario();
-            $objU->setId($datos['idusario']);
+            $objU->setId($datos['idusuario']);
             $objU->cargar(); 
 
             $obj=new Compra();

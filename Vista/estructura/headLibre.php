@@ -1,10 +1,16 @@
 <?php
-//include_once("../../configuracion.php");
+include_once("../../configuracion.php");
+$objSession = new Session();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+  <?php if ($objSession->getPaginaActual() != null) { ?>
+    <title>
+      <?php echo $objSession->getPaginaActual()->getNombre() . " | wesh wesh"; ?>
+    </title>
+  <?php } ?>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--LINK BOOSTRAP -->
@@ -21,51 +27,33 @@
 
   <!--LINK JS - JQUERY-->
   <script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="../Js/main.js"></script>
 
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg d-flex justify-content-around p-2 fs-3">
-    <div class="container-fluid">
-      <a class="navbar-brand" id="pagina-principal" href="../inicio/inicioIndex.php">Grupo N°5</a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="https://github.com/Matias-Ignacio/PWD_2023_TPFinal"> <i class="bi bi-github"></i> </a>
-          </li>
-
-          <!--NOMBRE DE LA PAGINA   -->
-          <li class="nav-item mx-5">
-            <a class="nav-link" href="../inicio/inicioIndex.php" role="button" aria-expanded="false">
-              WESH-WESH
-            </a>
-          </li>
-          <!--PRODUCTOS  -->
-          <li class="nav-item mx-5">
-            <a class="nav-link" href="../grilla/indexGrilla.php" role="button" aria-expanded="false">
-              Productos
-            </a>
-          </li>
-
-          <!--REGISTRARSE-->
-          <li class="nav-item mx-5">
-            <a class="nav-link" href="../login/indexLogin.php" role="button" aria-expanded="false">
-              Ingresar
-            </a>
-          </li>
-          <!-- Carrito -->
-          <li style="float: left;" class="nav-item">
-            <a aria-current="page" href="../carrito/carrito.php" style="text-decoration:none"> <i class="bi bi-cart4"></i> <span id="cantCarrito" style="font-size:20px;font-weight:bolder;"><span></a>
-          </li>
-          <!-- Carrito -->
-          <?php //include_once ("carritoIcono.php");?>
-        </ul>
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="max-height:50px;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../inicio/inicioIndex.php"> <img src='../imagenes/logo.svg' style="max-width:70px; position:relative; top:10px;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="../grilla/indexGrilla.php" role="button" aria-expanded="false">
+                Productos
+              </a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="btn btn-success" href="../login/indexLogin.php" role="button" aria-expanded="false">
+                Iniciar sesión
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-
-  </nav>
+    </nav>
+    <div id="contenido" style="min-height: calc(100vh - 60px); background-image:url(../imagenes/background.jpg);background-repeat:repeat;background-size:800px">

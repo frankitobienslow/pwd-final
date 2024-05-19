@@ -1,10 +1,11 @@
-.imagenInicio:hover{
+.imagenInicio:hover {
     cursor: pointer;
     transform: scale(1.04);
     transition: all ease-in-out .2s;
 }
-.imagenInicio{
-  
+
+.imagenInicio {
+
     background-image: url(../imagenes/ogcollections.png);
     background-repeat: no-repeat;
     background-size: 800px;
@@ -14,6 +15,19 @@
 
 }
 
-.productoImg{
+.productoImg {
     max-width: 200px;
-    max-height: 100px};
+    max-height: 100px
+}
+
+#alerta {
+    display: none;
+    /* Ocultar la alerta inicialmente */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    /* Asegurar que esté por encima de otros elementos */
+}
+

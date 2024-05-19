@@ -1,16 +1,12 @@
 <?php
 class Session
 {
-
     public function __construct()
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
+        if (session_status() !== 2) {
             session_start(); // Inicia la sessión 
         }
     } // fin metodo constructor 
-
-
-
     /** METODO INICIAR 
      * @param $nombreUsuario string
      * @param $pws string
@@ -22,8 +18,7 @@ class Session
         $objAbmUsuario = new AbmUsuario();
         $datos['usnombre'] = $nombreUsuario;
         $datos['uspass'] = $pws;
-        $datos['usdeshabilitado'] = null;
-        //$consulta=['usnombre'=>$nombreUsuario,'uspass'=>$pws,'usdeshabilitado'=>null]; // forma la consulta para el metodo buscar de AbmUsuario 
+        $datos['habilitado'] = 1;
         //echo($consulta);
         $listaUsuario = $objAbmUsuario->buscar($datos);
         // var_dump($listaUsuario);
@@ -37,7 +32,6 @@ class Session
         } // fin if 
         return $resp;
     } // fin metodo iniciar 
-
 
 
     /** METODO VALIDAR
@@ -59,7 +53,7 @@ class Session
     public function activa()
     {
         $salida = false;
-        if (session_status() === PHP_SESSION_ACTIVE) {
+        if (session_status() === 2) {
             $salida = true; // la session esta activa 
         } // fin if 
 
@@ -123,7 +117,7 @@ class Session
      */
     public function getRolActual()
     {
-        $objAbmRol = New AbmRol;
+        $objAbmRol = new AbmRol;
         $param['idrol'] = $_SESSION["idRol"];
         $listaObj = $objAbmRol->buscar($param);
         return $listaObj[0];
@@ -133,67 +127,40 @@ class Session
      * METODO permisos de headPrivado
      * @return boolean
      */
-    public function permisos(){
+    public function permisos()
+    {
         $objAbmMenuRol = new AbmMenuRol();
         $resp = false;
-        $url = $_SERVER['SCRIPT_NAME'];
-        $url = strchr($url, "vista");
-        $url = str_replace("vista", "..", $url);
+        $url = $_SERVER['REQUEST_URI'];
+        $url = strchr($url, "Vista");
+        $url = str_replace("Vista/", "../", $url);
+        $url_parts = explode('?', $url);
+        $url_without_params = $url_parts[0]; // URL sin parámetros
         $param['idrol'] = $this->getRolActual()->getId();
         $listaAbmMenuRol = $objAbmMenuRol->buscar($param);
         foreach ($listaAbmMenuRol as $obj) {
-            if ($obj->getObjMenu()->getDescripcion() == $url) {
+            if ($obj->getObjMenu()->getDescripcion() == $url_without_params) {
                 $resp = true;
             }
         }
         return $resp;
     }
 
-    //METODO GETCARRITO
-    public function getCarrito()
+    public function getPaginaActual()
     {
-        if (isset($_SESSION["carrito"])) {
-            return $_SESSION["carrito"];
+        $objAbmMenu = new AbmMenu();
+        $url = $_SERVER['REQUEST_URI'];
+        $url = strchr($url, "Vista");
+        $url = str_replace("Vista/", "../", $url);
+        $url_parts = explode('?', $url);
+        $url_without_params = $url_parts[0];
+        $retorno=$objAbmMenu->buscar(["medescripcion"=>$url_without_params]);
+        if (!empty($retorno)) {
+            return $retorno[0];
         } else {
-            return [];
+            return null;
         }
     }
 
-    //METODO AGREGAR AL CARRITO
-    public function agregarAlCarrito($id)
-    {
-        //Crea el objeto producto
-        $objProducto = new AbmProducto();
-        //Agrega al carrito el producto con el id indicado
-        $_SESSION["carrito"][] = $objProducto->buscar(["idproducto" => $id])[0];
-        //Retorna la cantidad de productos
-        return count($_SESSION['carrito']);
-    }
-
-    // METODO ELIMINAR DEL CARRITO
-    public function eliminarDelCarrito($id)
-    {
-        // Obtener la cantidad de productos actual
-        $cantProductos = count($_SESSION['carrito']);
-
-        for ($i = 0; $i < $cantProductos; $i++) {
-            // Comparamos el id de cada producto con el id buscado
-            if ($_SESSION["carrito"][$i]->getId() == $id) {
-                // Si coincide, eliminamos el índice del producto en el arreglo
-                unset($_SESSION["carrito"][$i]);
-                // Reindexamos el arreglo para evitar contener posiciones vacías
-                $_SESSION["carrito"] = array_values($_SESSION["carrito"]);
-                // Devolvemos la nueva cantidad de productos en el carrito
-                return count($_SESSION['carrito']);
-            }
-        }
-        // Si el producto no se encontró, devolvemos la cantidad actual de productos en el carrito
-        return $cantProductos;
-    }
-
-    //METODO VACIAR CARRITO
-    public function vaciarCarrito(){
-        $_SESSION["carrito"]=[];
-    }
-// fin clase Session 
+    // fin clase Session 
 }

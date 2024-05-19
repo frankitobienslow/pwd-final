@@ -6,7 +6,7 @@ class Usuario{
     private $usnombre; 
     private $uspass;
     private $usmail;
-    private $usdeshabilitado; 
+    private $habilitado; 
     private $mensaje; 
     private $arrayObjRolUsuario; // delegacion de muchos a muchos entre usuario y rol 
 
@@ -18,18 +18,17 @@ class Usuario{
         $this->usnombre="";
         $this->uspass="";
         $this->usmail="";
-        $this->usdeshabilitado="";
+        $this->habilitado=1;
         $this->mensaje="";
     }// fin constructor
     
     // METODO SETEAR 
-    public function setear($id,$nombre,$pass,$mail,$deshab){
+    public function setear($id,$nombre,$pass,$mail,$hab){
         $this->idusuario=$id;
         $this->usnombre=$nombre;
         $this->uspass=$pass;
         $this->usmail=$mail;
-        $this->usdeshabilitado=$deshab;
-
+        $this->habilitado=$hab;
     }// fin metodo setear
 
     // METODOS GET
@@ -49,8 +48,8 @@ class Usuario{
         return $this->usmail; 
     }// fin metodo get
 
-    public function getDeshabilitado(){
-        return $this->usdeshabilitado; 
+    public function getHabilitado(){
+        return $this->habilitado; 
     }// fin metodo get
 
     public function getMensaje(){
@@ -78,8 +77,8 @@ class Usuario{
         $this->usmail=$mail;
     }// fin metodo set
 
-    public function setDeshabilitado($des){
-        $this->usdeshabilitado=$des;
+    public function setHabilitado($hab){
+        $this->habilitado=$hab;
     }// fin metodo set
 
     public function setMensaje($msj){
@@ -106,7 +105,7 @@ class Usuario{
                     $salida=true; 
                     $R=$baseDatos->Registro(); // recupera los registros de la tabla  con la ID dada
                     
-                    $this->setear($R['idusuario'],$R['usnombre'],$R['uspass'],$R['usmail'],$R['usdeshabilitado']);
+                    $this->setear($R['idusuario'],$R['usnombre'],$R['uspass'],$R['usmail'],$R['habilitado']);
 
                 }// fin if 
 
@@ -129,13 +128,13 @@ class Usuario{
     public function insertar(){
         $salida=false; // inicializacion del valor de retorno
         $baseDatos=new BaseDatos();
-        $sql="INSERT INTO usuario(usnombre, uspass, usmail, usdeshabilitado) 
+        $sql="INSERT INTO usuario(usnombre, uspass, usmail, habilitado) 
             VALUES ('".
                 $this->getNombre()."','".
                 $this->getPassword()."','".
-                $this->getMail()."','".
-                $this->getDeshabilitado().
-                "');"; 
+                $this->getMail()."',".
+                $this->getHabilitado().
+                ");"; 
 
         if($baseDatos->Iniciar()){
             if($elid = $baseDatos->Ejecutar($sql)){
@@ -165,8 +164,8 @@ class Usuario{
         $salida=false;       
         $baseDatos=new BaseDatos();
         $sql="UPDATE usuario SET usnombre='".$this->getNombre().
-        "', uspass='".$this->getPassword()."', usmail='".$this->getMail()."', usdeshabilitado='".$this->getDeshabilitado().
-        "' WHERE idusuario=".$this->getId();
+        "', uspass='".$this->getPassword()."', usmail='".$this->getMail()."', habilitado=".$this->getHabilitado().
+        " WHERE idusuario=".$this->getId();
         //echo($sql);
         if($baseDatos->Iniciar()){
             if($baseDatos->Ejecutar($sql)){
@@ -189,7 +188,7 @@ class Usuario{
     public function eliminar(){
         $salida=false;
         $baseDatos=new BaseDatos();
-        $sql="UPDATE usuario SET usdeshabilitado = NULL WHERE idusuario = ".$this->getId();
+        $sql="UPDATE usuario SET habilitado = 0 WHERE idusuario = ".$this->getId();
         if($baseDatos->Iniciar()){
             if($baseDatos->Ejecutar($sql)){
                 $salida=true;
@@ -229,7 +228,7 @@ class Usuario{
                     
                     while($row=$baseDatos->Registro()){
                     $obj=new Usuario();
-                    $obj->setear($row['idusuario'],$row['usnombre'],$row['uspass'],$row['usmail'],$row['usdeshabilitado']);
+                    $obj->setear($row['idusuario'],$row['usnombre'],$row['uspass'],$row['usmail'],$row['habilitado']);
                         array_push($arrayUsuarios,$obj);   // 
                     }// fin while 
 

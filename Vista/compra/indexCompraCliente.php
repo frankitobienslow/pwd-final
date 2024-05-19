@@ -1,66 +1,74 @@
 <?php
-    $Titulo="Lista Compra Cliente y estado";
-    include_once "../estructura/headPrivado.php";
-    $objUsuario=$objSession->getUsuario();
-    $objAbmCompraEstado=new AbmCompraEstado();
-    $objAbmCompra=new AbmCompra();
-    //$param["idcompraestadotipo"]=2;
-    //$listaobjEstado= $objAbmCompraEstado->buscar(null);
-    //var_dump($listaobjEstado);
-    $i=0;
-    $dato["idusuario"]=$objUsuario->getId();
-    $listaCompraCliente=$objAbmCompra->buscar($dato);
-    for($i=0;$i<count($listaCompraCliente);$i++){
-        $compra["idcompra"]=$listaCompraCliente[$i]->getId();
-        $compra["cefechafin"]="IS NULL";
-        $listaObjCompraEstado[$i]=$objAbmCompraEstado->buscar($compra);
-    }
-    
-    //var_dump($listaCompraCliente);
-    //var_dump($listaObjCompraEstado[0][0]);
-
-
-
-    /*foreach($listaCompraCliente as $unaCompra){
-        $idCompra["idcompra"]=$unaCompra->getId();
-        $listaObjCE=$objAbmCompraEstado->buscar($idCompra);
-        $ultimoObjCE=count($listaObjCE);
-        echo "<br>".$ultimoObjCE."<br>";
-        $listaObjCECliente[$i]=$listaObjCE[$ultimoObjCE-1];
-
-        //echo $listaObjCE[$i]->getFechaFin();
-        $i++;
-    }*/
-    
+$Titulo = "Lista Compra Cliente y estado";
+include_once "../../configuracion.php";
+$session = new Session();
+$carrito = false;
+$idUsuario = $session->getUsuario()->getId();
+$objAbmCompraEstado = new AbmCompraEstado();
+$objAbmCompra = new AbmCompra();
+$objAbmCompraItem = new AbmCompraItem();
+$dato["idusuario"] = $idUsuario;
+$comprasCliente = $objAbmCompra->buscar($dato);
+$cantCompras = count($comprasCliente);
+$listaObjCompraEstado = []; // Inicializar la variable aquí
+ob_end_clean();
+include_once "../estructura/headPrivado.php";
 ?>
-<div class="container mt-5">
-    <table class="table table-hover  justify-content-center">
-    <thead>
-        <tr>
-        <th scope="col">Número de Compra</th>
-        <th scope="col">Detalles de la compra</th>
-        <th scope="col">Estado de la compra</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php if(count($listaObjCompraEstado)>0){
-            for($i=0;$i<count($listaObjCompraEstado);$i++){?>
-                <tr>
-                <th> <?php echo($listaObjCompraEstado[$i][0]->getObjCompra()->getId()) ?></th>
-                <td><a href="verDetalles.php?idcompra=<?php echo($listaObjCompraEstado[$i][0]->getObjCompra()->getId()) ?>" class="btn btn-info">ver detalles</a></td>
-                <td> <?php echo($listaObjCompraEstado[$i][0]->getObjCompraEstadoTipo()->getDescripcion())?></td>
-                </tr>
-            <?php }
-            }else{?>
-            <td colspan="3">
-                <div class="alert alert-danger" role="alert">
-                    Usted no tiene compras realizadas hasta el momento
+
+<div class="container">
+    <?php if (count($comprasCliente) > 0) { ?>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <table class="table table-striped rounded mt-5 bg-light">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="h6 fw-bold">Número de Compra</th>
+                            <th scope="col" class="h6 fw-bold">Estado</th>
+                            <th scope="col" class="h6 fw-bold">Fecha</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($comprasCliente as $compra) {
+                            $listaObjCompraEstado = $objAbmCompraEstado->buscar(["idcompra" => $compra->getId(), "cefechafin" => "null"]);
+                            foreach ($listaObjCompraEstado as $compraEstado) {
+                                if ($compraEstado->getObjCompraEstadoTipo()->getId() == 1) {
+                                    $carrito = true;
+                                    continue;
+                                }
+                        ?>
+                                <tr>
+                                    <td class="align-middle h6"><?php echo $compraEstado->getObjCompra()->getId(); ?></td>
+                                    <td class="align-middle h6"><?php echo $compraEstado->getObjCompraEstadoTipo()->getDescripcion(); ?></td>
+                                    <td class="align-middle h6"><?php echo $compraEstado->getFechaInicio(); ?></td>
+                                    <td><a href="verDetalles.php?idcompra=<?php echo $compraEstado->getObjCompra()->getId(); ?>" class="btn btn-info" style="width:100%;">Ver detalle</a></td>
+                                </tr>
+                        <?php }
+                        } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <?php if ($carrito) { ?>
+            <div class="row justify-content-center">
+                <div class="col-sm-3">
+                    <div class="alert alert-warning text-center">Tiene productos en el carrito <br>
+                        <a class="btn btn-success mt-3" href="../carrito/carrito.php">Ir al carrito</a>
+                    </div>
                 </div>
-            </td>
-            <?php } ?>
-    </tbody>
-    </table>
+            </div>
+        <?php } ?>
+    <?php } else { ?>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="alert alert-danger">Usted no tiene compras realizadas hasta el momento</div>
+            </div>
+        </div>
+        </div>
+    <?php } ?>
 </div>
+
 <?php
-    include_once "../estructura/footer.php";
+include_once "../estructura/footer.php";
 ?>

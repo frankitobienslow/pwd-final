@@ -137,7 +137,7 @@ class MenuRol{
             $this->setMensaje("Menu ->eliminar ".$baseDatos->getError()); 
 
         }// fin else
-
+  
         return $salida; 
 
 

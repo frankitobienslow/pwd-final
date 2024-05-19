@@ -125,7 +125,7 @@ class AbmMenu{
         $where = " true ";
         if ($param<>NULL){
             if  (isset($param['idmenu'])){
-                $where.=" and id =".$param['idmenu'];
+                $where.=" and idmenu =".$param['idmenu'];
             }// fin if
             if  (isset($param['menombre'])){ 
                  $where.=" and menombre ='".$param['menombre']."'";
@@ -133,8 +133,8 @@ class AbmMenu{
             if(isset($param['idpadre'])){
                 $where.=" and idpadre =".$param['idpadre'];
             }// fin if
-            if(isset($param['medesripcion'])){
-                $where.=" and medesripcion ='".$param['medesripcion']."'";
+            if(isset($param['medescripcion'])){
+                $where.=" and medescripcion ='".$param['medescripcion']."'";
             }// fin if 
             if(array_key_exists('medeshabilitado', $param)){
                 $where.=" and medeshabilitado ='".$param['medeshabilitado']."'";

@@ -1,64 +1,66 @@
 <?php
 
-class AbmCompraEstado{
+class AbmCompraEstado
+{
 
-    
+
     /** METODOS DE LA CLASE */
     // METODO ABM QUE LLAMA A LOS METODOS CORRESPONDIENTES SEGUN SI SE DA DE ALTA
     // BAJA O MODIFICA
     /**@return boolean */
-    public function abmCompraEstado($datos){
+    public function abmCompraEstado($datos)
+    {
         $resp = false;
-        if($datos['accion']=='editar'){
-            if($this->modificacion($datos)){
+        if ($datos['accion'] == 'editar') {
+            if ($this->modificacion($datos)) {
                 $resp = true;
             }
         }
-        if($datos['accion']=='borrar'){
-            if($this->baja($datos)){
-                $resp =true;
+        if ($datos['accion'] == 'borrar') {
+            if ($this->baja($datos)) {
+                $resp = true;
             }
         }
-        if($datos['accion']=='nuevo'){
-            if($this->alta($datos)){
-                $resp =true;
+        if ($datos['accion'] == 'nuevo') {
+            if ($this->alta($datos)) {
+                $resp = true;
             }
-            
         }
         return $resp;
-
-    }// fin metodo abmRol
+    } // fin metodo abmRol
 
     /**
      * Espera un Array asociativo y devuelve el obj de la tabla
      * @param array $datos
      * @return CompraEstado
      */
-    private function cargarObjeto($datos){
-        $obj=null; 
+    private function cargarObjeto($datos)
+    {
+        $obj = null;
         //var_dump($datos);
-        if(array_key_exists('idcompraestado',$datos) && array_key_exists('idcompra',$datos) 
-        && array_key_exists('idcompraestadotipo',$datos) && array_key_exists('cefechaini',$datos) 
-        && array_key_exists('cefechafin',$datos) ){
+        if (
+            array_key_exists('idcompraestado', $datos) && array_key_exists('idcompra', $datos)
+            && array_key_exists('idcompraestadotipo', $datos) && array_key_exists('cefechaini', $datos)
+            && array_key_exists('cefechafin', $datos)
+        ) {
             //echo("entro al cargar obj");    
             // creo al obj compra
-            $objC=new Compra();
-            $objC->setId($datos['idcompra']); 
-            $objC->cargar(); 
-            
+            $objC = new Compra();
+            $objC->setId($datos['idcompra']);
+            $objC->cargar();
+
             // creo el obj compraestadotipo
-            $objCET=new CompraEstadoTipo();
+            $objCET = new CompraEstadoTipo();
             $objCET->setId($datos['idcompraestadotipo']);
             $objCET->cargar();
-        
-            // creo al obj compra 
-            $obj=new CompraEstado();
-            $obj->setear($datos['idcompraestado'],$objC,$objCET,$datos['cefechaini'],$datos['cefechafin']);
-               
-        }// fin if 
 
-        return $obj; 
-    }// fin function 
+            // creo al obj compra 
+            $obj = new CompraEstado();
+            $obj->setear($datos['idcompraestado'], $objC, $objCET, $datos['cefechaini'], $datos['cefechafin']);
+        } // fin if 
+
+        return $obj;
+    } // fin function 
 
 
     /**
@@ -66,145 +68,145 @@ class AbmCompraEstado{
      * @param array $datos
      * @return CompraEstado
      */
-    private function cargarObjetoConClave($datos){
-        $obj=null;
-        if(isset($datos['idcompraestado'])){
+    private function cargarObjetoConClave($datos)
+    {
+        $obj = null;
+        if (isset($datos['idcompraestado'])) {
             // creo al obj compra
-            $objC=new Compra();
-            $objC->setId($datos['idusario']);
+            $objC = new Compra();
+            $objC->setId($datos['idusuario']);
             $objC->cargar();
-            
+
             // creo al obj compraestadotipo
-            $objCET=new CompraEstadoTipo();
+            $objCET = new CompraEstadoTipo();
             $objCET->setId($datos['idcompraestadotipo']);
             $objCET->cargar();
 
             // creo al obj compraEstado
-            $obj=new CompraEstado();
-            $obj->setear($datos['idcompraestado'],$objC,$objCET,$datos['cefechaini'],$datos['cefechafin']);
-
-        }// fin if 
+            $obj = new CompraEstado();
+            $obj->setear($datos['idcompraestado'], $objC, $objCET, $datos['cefechaini'], $datos['cefechafin']);
+        } // fin if 
         return $obj;
-
-    }// fin function 
+    } // fin function 
 
     /**
      * corrobora que dentro del array asociativo estan seteados los campos
      * @param array $datos
      * @return boolean
      */
-    private function setadosCamposClaves($datos){
-        $resp=false;
-        
-        //var_dump(isset($datos['cefechafin'])); // OJO!!!! isset si la variable es null, dará falso 
-        if(array_key_exists('idcompraestado',$datos) && array_key_exists('idcompraestadotipo',$datos)
-        && array_key_exists('idcompra',$datos) && array_key_exists('cefechaini',$datos) && array_key_exists('cefechafin',$datos)){
-            $resp=true; 
-        }
-        
-        return $resp;
+    private function setadosCamposClaves($datos)
+    {
+        $resp = false;
 
-    }// fin function 
+        //var_dump(isset($datos['cefechafin'])); // OJO!!!! isset si la variable es null, dará falso 
+        if (
+            array_key_exists('idcompraestado', $datos) && array_key_exists('idcompraestadotipo', $datos)
+            && array_key_exists('idcompra', $datos) && array_key_exists('cefechaini', $datos) && isset($datos["cefechafin"])
+        ) {
+            $resp = true;
+        }
+
+        return $resp;
+    } // fin function 
 
     /**
      * METODO ALTA
      * @param array $datos
      * @return boolean
      */
-    public function alta($datos){
-        $resp=false;
+    public function alta($datos)
+    {
+        $resp = false;
         //var_dump($datos['cefechafin']);
-        $datos['idcompraestado']=null;
+        $datos['idcompraestado'] = null;
         //var_dump(array_key_exists('cefechafin',$datos));
-        $objCompraEstado=$this->cargarObjeto($datos);
-        
-        if($objCompraEstado!=null && $objCompraEstado->insertar()){
-            $resp=true;
-        }// fin if 
+        $objCompraEstado = $this->cargarObjeto($datos);
+
+        if ($objCompraEstado != null && $objCompraEstado->insertar()) {
+            $resp = true;
+        } // fin if 
         //var_dump($resp);
         return $resp;
-
-    }// fin function 
+    } // fin function 
 
     /**
      * METODO ELIMINAR 
      * @param array $datos
      * @return boolean
      */
-    public function baja($datos){
-        $resp=false;
-        if($this->setadosCamposClaves($datos)){
-            $objCompraEstado=$this->cargarObjetoConClave($datos);
-            if($objCompraEstado!=null && $objCompraEstado->eliminar()){
-                $resp=true;
+    public function baja($datos)
+    {
+        $resp = false;
+        if ($this->setadosCamposClaves($datos)) {
+            $objCompraEstado = $this->cargarObjetoConClave($datos);
+            if ($objCompraEstado != null && $objCompraEstado->eliminar()) {
+                $resp = true;
+            } // fin if 
 
-            }// fin if 
 
+        } // fin if 
 
-        }// fin if 
-
-        return $resp; 
-
-    }// fin function 
+        return $resp;
+    } // fin function 
 
     /**
      * MOFICAR 
      * @param array $datos
      * @return boolean
      */
-    public function modificacion($datos){
-        $resp=false;
+    public function modificacion($datos)
+    {
+        $resp = false;
         var_dump($datos);
-        if($this->setadosCamposClaves($datos)){
-            $objCompraEstado=$this->cargarObjeto($datos);
-            
-            if($objCompraEstado!=null && $objCompraEstado->modificar()){
-                $resp=true; 
+        if ($this->setadosCamposClaves($datos)) {
+            $objCompraEstado = $this->cargarObjeto($datos);
 
-            }// fin if 
+            if ($objCompraEstado != null && $objCompraEstado->modificar()) {
+                $resp = true;
+            } // fin if 
 
-        }// fin if 
+        } // fin if 
 
-        return $resp; 
+        return $resp;
+    } // fin function 
 
-    }// fin function 
-
- /**
+    /**
      * METODO BUSCAR
      * Si el parametro es null, devolverá todos los registros de la tabla auto 
      * si se llena con los campos de la tabla devolverá el registro pedido
      * @param array $param
      * @return array
      */
-    public function buscar ($param){
-        $objCompraEstado=new CompraEstado();
-        $where=" true ";
-        if($param<>null){
+    public function buscar($param)
+    {
+        $objCompraEstado = new CompraEstado();
+        $where = " true ";
+        if ($param <> null) {
             // Va preguntando si existe los campos de la tabla 
-                if(isset($param['idcompraestado'])){ 
-                    $where.=" and idcompraestado=".$param['idcompraestado'];
-                }// fin if 
-                if(isset($param['idcompra'])){// identifica si esta la clave (atributo de la tabla)
-                    $where.=" and idcompra =".$param['idcompra'];
-                }// fin if 
-                if(isset($param['idcompraestadotipo'])){// identifica si esta la clave (atributo de la tabla)
-                    $where.=" and idcompraestadotipo =".$param['idcompraestadotipo'];
-                }// fin if 
-                if(isset($param['cefechaini'])){// identifica si esta la clave (atributo de la tabla)
-                    $where.=" and cefechaini ='".$param['cefechaini']."'";
-                }// fin if 
-                if(isset($param['cefechafin'])){// identifica si esta la clave (atributo de la tabla)
-                    $where.=" and cefechafin ".$param['cefechafin'];
-                }// fin if  
-        }// fin if
-        $arreglo=$objCompraEstado->listar($where);
+            if (isset($param['idcompraestado'])) {
+                $where .= " and idcompraestado=" . $param['idcompraestado'];
+            } // fin if 
+            if (isset($param['idcompra'])) { // identifica si esta la clave (atributo de la tabla)
+                $where .= " and idcompra =" . $param['idcompra'];
+            } // fin if 
+            if (isset($param['idcompraestadotipo'])) { // identifica si esta la clave (atributo de la tabla)
+                $where .= " and idcompraestadotipo =" . $param['idcompraestadotipo'];
+            } // fin if 
+            if (isset($param['cefechaini'])) { // identifica si esta la clave (atributo de la tabla)
+                $where .= " and cefechaini ='" . $param['cefechaini'] . "'";
+            } // fin if 
+            if (isset($param["cefechafin"])) {
+                if ($param['cefechafin'] === "null") {
+                    $where .= " and cefechafin IS NULL";
+                } else {
+                    $where .= " and cefechafin = '" . $param['cefechafin'] . "'";
+                }
+            }
+        } // fin if
+        $arreglo = $objCompraEstado->listar($where);
         //var_dump($where); 
-        return $arreglo; 
+        return $arreglo;
+    } // fin funcion     
 
-    }// fin funcion     
 
-   
-
-}// fin clase 
-
-?>
+} // fin clase 
