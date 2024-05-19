@@ -5,7 +5,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 // CONFIGURACION APP//
 /////////////////////////////
 
-$PROYECTO = 'PWD_2023_TPFinal';
+$PROYECTO = 'pwd-final';
 
 //variable que almacena el directorio del proyecto
 $ROOT = $_SERVER['DOCUMENT_ROOT'] . "/" . $PROYECTO . "/";
