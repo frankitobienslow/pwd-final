@@ -22,7 +22,7 @@ if ($objSession->validar() && $objSession->permisos()) {    //&& $objSession->pe
 <html lang="en">
 
 <head>
-    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="icon" type="image/ico" href="/favicon.ico">
     <?php if ($objSession->getPaginaActual() != null) {
         if ($objSession->getPaginaActual()->getId() == 51) {
             echo "<title>Inicio | wesh wesh</title>";

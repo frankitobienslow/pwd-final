@@ -6,7 +6,7 @@ $objSession = new Session();
 <html lang="en">
 
 <head>
-  <link rel="icon" type="image/png" href="/logo.png">
+<link rel="icon" type="image/ico" href="/favicon.ico">
   <?php if ($objSession->getPaginaActual() != null) { ?>
     <title>
       <?php echo $objSession->getPaginaActual()->getNombre() . " | wesh wesh"; ?>
