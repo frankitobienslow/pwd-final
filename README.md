@@ -39,9 +39,14 @@ Desde la consola ejecuta:
 ```
 composer install
 ```
-### 3. Configurá la base de datos ###
+### 3. Instalá dependencias de node: ###
+Desde la consola ejecuta:
+```
+npm install
+```
+### 4. Configurá la base de datos ###
 - Abre phpMyAdmin desde XAMPP *(normalmente en http://localhost/phpmyadmin)*.
 - Creá una nueva base de datos con el nombre "bdcarritocompras"
 - Importá bdcarritocompras.sql ubicado en /bdcarritocompras.sql para crear las tablas y datos necesarios.
-### 4. Iniciá Apache y MySQL desde el panel de control de XAMPP. ###
-### 5. Accedé al proyecto en tu navegador web en http://localhost/pwd-final/vista/inicio/inicioIndex.php. ###
+### 5. Iniciá Apache y MySQL desde el panel de control de XAMPP. ###
+### 6. Accedé al proyecto en tu navegador web en http://localhost/pwd-final/vista/inicio/inicioIndex.php. ###

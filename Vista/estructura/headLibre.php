@@ -18,7 +18,7 @@ $objSession = new Session();
   <link rel="stylesheet" href="../librerias/bootstrap5/css/bootstrap.min.css">
 
   <!--LINK ICONOS BOOTSTRAP  -->
-  <link rel="stylesheet" href="../librerias/node_modules/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../../node_modules/bootstrap-icons/font/bootstrap-icons.css">
 
   <!-- LINK CSS -->
   <link rel="stylesheet" type="text/css" href="../css/estilos.css">
@@ -27,7 +27,7 @@ $objSession = new Session();
   <script src="../librerias/bootstrap5/js/bootstrap.min.js"></script>
 
   <!--LINK JS - JQUERY-->
-  <script src="../librerias/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 
 </head>
 
