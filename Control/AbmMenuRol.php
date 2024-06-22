@@ -217,4 +217,15 @@ class AbmMenuRol
         }
         return $menu;
     }
+
+    public function listarMenuRol($datos)
+    {
+        $listaMenuRol = $this->buscar(["idrol" => $datos["idrol"]]);
+
+        $respuesta = [];
+        foreach ($listaMenuRol as $menuRol) {
+            $respuesta[] = ["idrol" => $menuRol->getObjRol()->getId(), "idmenu" => $menuRol->getObjMenu()->getId()];
+        }
+        echo json_encode($respuesta);
+    }
 } // fin AbmMenuRol

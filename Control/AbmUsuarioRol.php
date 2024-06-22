@@ -142,5 +142,70 @@ class AbmUsuarioRol
         return $arreglo;
     }
 
+    public function listarRoles($datos){
+        $listaUsuarioRol = $this->buscar(["idusuario" => $datos["idusuario"]]);
+
+        $respuesta = [];
+        foreach ($listaUsuarioRol as $usuarioRol) {
+            $respuesta[] = ["idrol" => $usuarioRol->getObjRol()->getId()];
+        }
+        echo json_encode($respuesta);
+    }
    
+    public function editarRoles($datos){
+        $idusuario = $datos["idusuario"];
+        $arrChecks = $datos["arrChecks"];
+        $rolesAsignados = $this->buscar(["idusuario" => $idusuario]);
+        echo json_encode($rolesAsignados);
+        $exito = true; // Variable para controlar si la operación fue exitosa
+    
+        // Identificar y agregar elementos que faltan
+        foreach ($arrChecks as $check) {
+            $idrol = $check;
+            $encontrado = false;
+    
+            // Verificar si el idrol ya está asignado
+            foreach ($rolesAsignados as $rolAsignado) {
+                if ($rolAsignado->getObjRol()->getId() == $idrol) {
+                    $encontrado = true;
+                    break;
+                }
+            }
+    
+            // Si el idrol no está asignado, agregarlo
+            if (!$encontrado) {
+                // Aquí debes agregar el idusuario correspondiente si es necesario
+                $nuevoAcceso = [
+                    "idusuario" => $idusuario,
+                    "idrol" => $idrol
+                ];
+                // Agregar el nuevo acceso
+                if (!$this->alta($nuevoAcceso)) { //Se asigna el nuevo rol
+                    $exito = false; // Hubo un error, cambiamos el valor de $exito a false
+                }
+            }
+        }
+    
+        // Identificar y eliminar elementos que sobran
+        foreach ($rolesAsignados as $key => $rolAsignado) {
+            $idrol = $rolAsignado->getObjRol()->getId();
+            $encontrado = false;
+    
+            // Verificar si el idrol está presente en arrChecks
+            foreach ($arrChecks as $check) {
+                if ($check == $idrol) {
+                    $encontrado = true;
+                    break;
+                }
+            }
+            // Si el idrol no está en arrChecks, quitarlo de rolesAsignados
+            if (!$encontrado) {
+                if (!$this->baja(["idrol" => $idrol, "idusuario" => $idusuario])) {
+                    $exito = false; // Hubo un error, cambiamos el valor de $exito a false
+                }
+            }
+        }
+        ob_clean();
+        echo json_encode($exito); // Devolvemos el resultado (true/false) como respuesta
+    }
 }// fin clase AbmUsuarioRol
